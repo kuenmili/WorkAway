@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 .next
 node_modules
 package-lock.json
 yarn.lock
+=======
+
+.next
+node_modules
+yarn.lock
+package-lock.json
+>>>>>>> ff4fab84b15dadfd338be37e09730770d2f058f9
