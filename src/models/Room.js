@@ -25,4 +25,3 @@ module.exports = {
     schemaRoom,
      Room
     };
-    
