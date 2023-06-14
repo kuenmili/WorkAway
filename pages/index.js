@@ -34,20 +34,14 @@ const Home = () => {
         <SwiperSlide><Benefits imgPos="right" data={benefitTwo} /></SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
-      
-      </Swiper>
-
-
-      
-      
+      </Swiper> 
       <SectionTitle
         pretitle="Testimonios"
         title="Estas son las opiniones de nuestros clientes">
       </SectionTitle>
       <Testimonials />
       <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
-        Answer your customers possible questions here, it will increase the
-        conversion rate as well as support or chat requests.
+          Tenemos algunas posibles preguntas que te pueden surgir!
       </SectionTitle>
       <Faq />
       <Footer />
@@ -57,18 +51,12 @@ const Home = () => {
 }
 
 <div class="swiper">
-  
   <div class="swiper-wrapper">
-   
     <div class="swiper-slide">Slide 1</div>
     <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
-    
+    <div class="swiper-slide">Slide 3</div>  
   </div>
-  
-  <div class="swiper-pagination"></div>
-
- //navigation buttons
+   //navigation buttons
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
 
