@@ -1,7 +1,7 @@
 {
-  "name": "nextly-template",
+  "name": "work-away",
   "version": "0.1.0",
-  "description": "Nextly Landing Page Template",
+  "description": "",
   "private": true,
   "scripts": {
     "dev": "next dev",

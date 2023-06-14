@@ -35,7 +35,7 @@ const FirstSection = () => {
               src={coworkimg1}
               width="816"
               height="817"
-              className={"object-cover"}
+              className={"object-fill w-full h-full rounded-md"}
               alt=""
               loading="eager"
               placeholder="blur"
