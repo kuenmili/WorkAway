@@ -15,3 +15,4 @@ const Busines = model('Busines', schemaBusiness)
 module.exports = { schemaBusiness,
                     Busines,
                     }
+                    

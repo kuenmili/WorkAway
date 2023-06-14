@@ -9,5 +9,3 @@ mongoose.connect(DB_CONNECTION)
 }).catch(err => {
     console.log(err);
 })
-
-
