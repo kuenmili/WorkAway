@@ -7,7 +7,7 @@ import Benefits from "../components/benefits";
 import Footer from "../components/footer";
 import Testimonials from "../components/testimonials";
 import Faq from "../components/faq";
-import { Swiper, SwiperSlide } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import 'swiper/css';
 import { Navigation } from "swiper";
@@ -28,8 +28,18 @@ const Home = () => {
       </Head>
       <Navbar />
       <FirstSection />
-      <Benefits data={benefitOne} />
-      <Benefits imgPos="right" data={benefitTwo} />
+
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <SwiperSlide><Benefits data={benefitOne}/></SwiperSlide>
+        <SwiperSlide><Benefits imgPos="right" data={benefitTwo} /></SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+      
+      </Swiper>
+
+
+      
+      
       <SectionTitle
         pretitle="Testimonios"
         title="Estas son las opiniones de nuestros clientes">
