@@ -5,14 +5,8 @@ const schemaReserve = new Schema({
     date_from:Date,
     date_to:Date,
     coworkers:Number,
-    room_id:{
-        type: Schema.Types.ObjectId,
-        ref: 'Room'
-    },
-    user_id:{
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    room_id:String,
+    user_name:String,
 });
 
 const Reserve = model('Reserve', schemaReserve)
