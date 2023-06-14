@@ -1,13 +1,13 @@
 require('./db')
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
-const routes = require('./src/routes/index');
 const bodyParser = require('body-parser');
 const express = require('express');
 const morgan = require('morgan');
+const router = require('./src/routes/index');
 const { PORT } = process.env;
-
 const cors = require('cors');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', routes);
+app.use('/', router);
 
 app.listen(PORT, () => {
     console.log('%s listening at 3001'); 
