@@ -1,8 +1,17 @@
 const userRouter = require("express").Router();
 const {
-    createUserHandler
+    createUserHandler,
+    getByIdHandler,
+    getAllUsersHandler,
+    updateUserHandler,
+    deleteUserHandler,
 } = require('../handlers/userHandler');
 
-userRouter.post('/login', createUserHandler)
+userRouter.post('/signup', createUserHandler);
+userRouter.delete('/:id', deleteUserHandler);
+userRouter.put('/:id', updateUserHandler);
+userRouter.get('/', getAllUsersHandler);
+userRouter.get('/:id', getByIdHandler);
+
 
 module.exports = userRouter;

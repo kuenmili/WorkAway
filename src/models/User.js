@@ -8,13 +8,17 @@ const schemaUser = new Schema({
     password:String,
     cellphone_number:Number,
     profile_image:String,
+   // reserve_id:{
+   //     type: Schema.Types.ObjectId,
+   //     ref: 'Reserve'
+   // }
 })
 
 schemaUser.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id
         delete returnedObject._id
-        delete returnedObject._v
+        delete returnedObject.__v
         delete returnedObject.password
     }
 });
