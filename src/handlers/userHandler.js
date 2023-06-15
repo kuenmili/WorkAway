@@ -26,8 +26,9 @@ const createUserHandler = async (req, res) => {
             cellphone_number,
             profile_image,
         });
-        
+        console.log(user);
         res.status(201).json('User successfully created!');
+        
     } catch (error) {     
         console.log(error);   
         res.status(400).send({ error : error.message })

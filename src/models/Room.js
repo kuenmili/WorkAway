@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const { model, Schema } = mongoose;
 
 const schemaRoom = new Schema({
-  //  cowork_id: {
- //       type: Schema.Types.ObjectId,
- //       ref: 'CoworkSpace'
- //   },
+    cowork_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'CoworkSpace'
+    },
     capacity:Number,
     image:String,
     description:String,

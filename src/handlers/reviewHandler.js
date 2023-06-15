@@ -29,14 +29,14 @@ const deleteReviewHandler = async (req, res) => {
 
 const createReviewHandler = async (req, res) => {
     const {
-      //  user_id,
+        user_id,
         score,
         comment,
     } = req.body;
     try {
-        console.log(score, comment);
+        
         const review = await createReview({
-       //     user_id,
+            user_id,
             score,
             comment,
         });

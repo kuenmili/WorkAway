@@ -7,7 +7,7 @@ const {
     deleteReviewHandler,
 } = require("../handlers/reviewHandler");
 
-reviewRouter.post("/", createReviewHandler);
+reviewRouter.post("/post", createReviewHandler);
 reviewRouter.get("/", getAllReviewsHandler);
 reviewRouter.get("/:id", getByIdHandler);
 reviewRouter.put("/:id", updateReviewHandler);

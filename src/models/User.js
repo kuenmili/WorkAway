@@ -8,10 +8,14 @@ const schemaUser = new Schema({
     password:String,
     cellphone_number:Number,
     profile_image:String,
-   // reserve_id:{
-   //     type: Schema.Types.ObjectId,
-   //     ref: 'Reserve'
-   // }
+    reserve_id:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Reserve'
+    }],
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+    }]
 })
 
 schemaUser.set('toJSON', {
