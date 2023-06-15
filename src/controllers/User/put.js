@@ -4,22 +4,33 @@ const { Review } = require('../../models/Review')
 
 const updateUser = async (id, user) => {
 
-    const reserve = await Reserve.findById(user.reserve_id);
-    const review = await Review.findById(user.review_id);
-
+    const {
+        first_name,
+        last_name,
+        email,
+        password,
+        cellphone_number,
+        profile_image,
+        reserve_id,
+        review_id,
+    } = user
+    
+    const reserve = reserve_id ? await Reserve.findById(user.reserve_id) : [];
+    const review = review_id ? await Review.findById(user.review_id) : [];
+    
     const newUserInfo = {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        password: user.password,
-        cellphone_number: user.cellphone_number,
-        profile_image: user.profile_image,
+        first_name,
+        last_name,
+        email,
+        password,
+        cellphone_number,
+        profile_image,
+        reserve_id: reserve.length > 0 ? reserve._id : [],
+        review_id: review.length > 0 ? review._id : [],
     }
 
     const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true });
-    updateUser.reserve_id = [...updateUser.reserve_id, reserve._id],
-    updateUser.reviews= [...updateUser.reviews, review._id];
-    
+      
     return updatedUser;
 };
 
