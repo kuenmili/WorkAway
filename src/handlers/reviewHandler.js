@@ -33,8 +33,7 @@ const createReviewHandler = async (req, res) => {
         score,
         comment,
     } = req.body;
-    try {
-        
+    try {        
         const review = await createReview({
             user_id,
             score,

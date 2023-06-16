@@ -18,7 +18,8 @@ const createReview = async (
         
         const savedReview = await review.save();
 
-        user.reviews = [...user.reviews, savedReview._id];
+        user.reviews = [...user.reviews, review];
+        user.save();
 
         return savedReview;
 };

@@ -35,17 +35,12 @@ const createRoomHandler = async (req, res) => {
         description,
     } = req.body; 
     try {
-        const cowork = await CoworkSpace.findById(cowork_id);
-
         const room = await createRoom({
-            cowork,
+            cowork_id,
             capacity,
             image,
             description,
         });
-
-        cowork.rooms = [...cowork.rooms, room._id];
-
         res.status(201).json('Room successfully created!');
     } catch (error) {     
         console.log(error);   
