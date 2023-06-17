@@ -1,4 +1,4 @@
-const { CoworkSpace } = require('../../models/Cowork-space');
+const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const modifyCoworkSpace = async (id, name, about, services, images) => {
     const coworkSpaceModified = await CoworkSpace.findByIdAndUpdate({
