@@ -7,11 +7,17 @@ const schemaBusiness = new Schema({
     email:String,
     password:String,
     address:String,
-    spaceCowork_id:String,
+    cowork_spaces: [{
+        type: Schema.Types.ObjectId,
+        ref: "CoworkSpace"
+    }],
+}, {
+    strictPopulate: false,
 });
 
-const Busines = model('Busines', schemaBusiness)
+const Business = model('Business', schemaBusiness)
 
-module.exports = { schemaBusiness,
-                    Busines,
-                    }
+module.exports = {
+    schemaBusiness,
+    Business,
+};
