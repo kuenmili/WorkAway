@@ -4,18 +4,23 @@ import React from "react";
 import Container from "./container";
 
 export default function Footer() {
-  const navigation = [
+  const links = [
+    {
+      label: `FAQ - Frequently Asked Questions`,
+      href: `/faq`,
+    },
  
   ];
   const legal = ["Terms", "Privacy", "Legal"];
   return (
     <div className="relative">
-      <Container>
-        <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
-          <div className="lg:col-span-2">
+      <Container className = " bg-indigo-700 rounded-tl-full rounded-tr-full pb-1 ">
+        <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 
+                        border-gray-100 dark:border-trueGray-800 lg:grid-cols-5 mr-1 text-indigo-200" >
+          <div className="lg:col-span-1">
             <div>
               {" "}
-              <Link href="/" className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
+              <Link href="/home" className="flex items-center space-x-2 text-2xl font-medium text-indigo-200 dark:text-gray-100">
                     <Image
                       src="/img/logo2.svg"
                       alt="N"
@@ -30,9 +35,11 @@ export default function Footer() {
 
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {navigation.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
-                    {item}
+              {links.map((link) => (
+                <Link key={link.label} href="/faq" 
+                  className="w-full px-4 py-2 text-gray-100 rounded-md dark:text-gray-300 hover:text-indigo-500 
+                              focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
+                    {link.label}
                 </Link>
               ))}
             </div>
@@ -40,14 +47,14 @@ export default function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {legal.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">      
+                <Link key={index} href="/" className="w-full px-4 py-2 text-gray-100 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">      
                     {item}
                 </Link>
               ))}
             </div>
           </div>
           <div className="">
-            <div>Follow us</div>
+            <div>Seguinos en nuestras redes</div>
             <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
               <a
                 href="https://twitter.com/"
@@ -81,21 +88,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
-          Copyright © 
-          <a
-            href=""
-            target="_blank"
-            rel="noopener">
-            
-          </a>{" "}
-       
-          <a
-            href=""
-            target="_blank"
-            rel="noopener ">
-            ""
-          </a>
+        <div className="my-10 text-sm text-center text-gray-200 dark:text-gray-400">
+          Designed And Developed By {" Nicolas Fucci - Milagros Kuen - Dalma Nicolau - Ricardo Rico - Camilo Diaz - Lucio Campos"} 
+     
         </div>
       </Container>
      
