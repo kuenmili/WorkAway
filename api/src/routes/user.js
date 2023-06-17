@@ -1,4 +1,11 @@
 const userRouter = require("express").Router();
+const createUser = require('../controllers/user/post');
+const {
+    getById,
+    getAllUsers,
+} = require('../controllers/user/get');
+const updateUser = require('../controllers/user/put');
+const deleteUser = require('../controllers/user/delete');
 
 userRouter.get('/', async (req, res) => {
     try {

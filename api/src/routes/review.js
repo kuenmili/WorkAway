@@ -1,4 +1,11 @@
 const reviewRouter = require("express").Router();
+const updateReview = require('../controllers/review/put');
+const deleteReview = require('../controllers/review/delete');
+const createReview = require('../controllers/review/post');
+const {
+    getById,
+    getAllReviews,
+} = require('../controllers/review/get');
 
 reviewRouter.get("/", async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const { CoworkSpace } = require('../../models/Cowork-space');
+const { CoworkSpace } = require('../../models/CoworkSpace');
 const { Room } = require('../../models/Room');
 
 

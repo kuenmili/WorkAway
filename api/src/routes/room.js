@@ -1,4 +1,11 @@
 const roomRouter = require("express").Router();
+const updateRoom = require('../controllers/room/put');
+const deleteRoom = require('../controllers/room/delete');
+const createRoom = require('../controllers/room/post');
+const {
+    getById,
+    getAllRooms,
+} = require('../controllers/room/get');
 
 roomRouter.get('/', async (req, res) => {
     try {

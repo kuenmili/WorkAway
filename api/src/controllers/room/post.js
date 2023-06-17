@@ -1,5 +1,5 @@
 const { Room } = require('../../models/Room');
-const { CoworkSpace } = require('../../models/Cowork-space');
+const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const createRoom = async ( 
     {
