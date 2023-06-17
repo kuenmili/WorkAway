@@ -5,6 +5,7 @@ const { Room } = require('../../models/Room');
 const updateRoom = async (id, room) => {
 
     const { 
+        price,
         capacity,
         image,
         description,
@@ -12,6 +13,7 @@ const updateRoom = async (id, room) => {
     const cowork = await CoworkSpace.findById(coworkId);
 
     const newRoomInfo = {
+        price,
         cowork_id: cowork._id,
         capacity,
         image,

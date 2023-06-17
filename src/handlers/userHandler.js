@@ -9,6 +9,7 @@ const deleteUser = require('../controllers/User/delete');
 
 const createUserHandler = async (req, res) => {   
     const {
+        username,
         first_name,
         last_name,
         email,
@@ -19,6 +20,7 @@ const createUserHandler = async (req, res) => {
     
     try {
         const user = await createUser({
+            username,
             first_name,
             last_name,
             email,

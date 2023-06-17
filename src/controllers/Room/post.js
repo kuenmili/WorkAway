@@ -3,6 +3,7 @@ const { CoworkSpace } = require('../../models/Cowork-space');
 
 const createRoom = async ( 
     {
+        price,
         cowork_id,
         capacity,
         image,
@@ -12,6 +13,7 @@ const createRoom = async (
         const cowork = await CoworkSpace.findById(cowork_id);
 
         const room =  new Room({
+            price,
             cowork: cowork._id,
             capacity,
             image,

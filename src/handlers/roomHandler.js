@@ -29,6 +29,7 @@ const deleteRoomHandler = async (req, res) => {
 
 const createRoomHandler = async (req, res) => {   
     const {
+        price,
         cowork_id,
         capacity,
         image,
@@ -36,6 +37,7 @@ const createRoomHandler = async (req, res) => {
     } = req.body; 
     try {
         const room = await createRoom({
+            price,
             cowork_id,
             capacity,
             image,

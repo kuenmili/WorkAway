@@ -9,6 +9,7 @@ const schemaRoom = new Schema({
     capacity:Number,
     image:String,
     description:String,
+    price: String
 })
 
 schemaRoom.set('toJSON', {
