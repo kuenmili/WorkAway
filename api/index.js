@@ -27,5 +27,5 @@ app.use((req, res, next) => {
 app.use('/', router);
 
 app.listen(PORT, () => {
-    console.log('%s listening at 3001'); 
+    console.log('%s listening at', "server", PORT); 
   });
