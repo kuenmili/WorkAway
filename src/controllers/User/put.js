@@ -5,7 +5,6 @@ const { Review } = require('../../models/Review')
 const updateUser = async (id, user) => {
 
     const {
-        username,
         first_name,
         last_name,
         email,
@@ -20,7 +19,6 @@ const updateUser = async (id, user) => {
     const review =  await Review.findById(user.review_id);
     
     const newUserInfo = {
-        username,
         first_name,
         last_name,
         email,
