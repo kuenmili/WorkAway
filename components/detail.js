@@ -1,8 +1,9 @@
 import coworkimg1 from "../public/img/cowork1.jpg";
 
-import { useRouter } from 'next/router';
 import Image from 'next/image'
-//import { benefitOne, benefitTwo } from "../components/data";
+import Link from "next/link";
+
+//import { benefitOne, benefitTwo } from "../pages/data";
 //import { Swiper, SwiperSlide } from "swiper/react";
 //import "swiper/css/navigation";
 //import 'swiper/css';
@@ -10,26 +11,13 @@ import Image from 'next/image'
 
 
 
-const Detail = ({ imagen, precio, servicios, ubicacion, mapa, telefono, email, reseñas }) => {
-  const router = useRouter();
+const Detail = ({ id, imagen, precio, servicios, ubicacion, mapa, telefono, email, reseñas }) => {
 
-//   if (router.isFallback) {
-//     return <div>CARGANDO...</div>
-
-  
-
-  const handleReservarClick = () => {
-    router.push('/booking'); 
-  };
-
-  const handleVolverClick = () => {
-    router.push('/'); 
-  };
 
   return (
     <div className="max-w-lg mx-auto p-4">
       <h1 className="text-3xl font-bold mb-2">Nombre del Espacio</h1>
-      <p className="text-gray-600 mb-4">Descripción del Espacio</p>
+      <h5 className="text-gray-600 mb-4">Descripción del Espacio : </h5>
       <div className="mb-4">
         <Image src={coworkimg1}
               width="816"
@@ -40,50 +28,23 @@ const Detail = ({ imagen, precio, servicios, ubicacion, mapa, telefono, email, r
               placeholder="blur" />
       </div>
       <h2 className="text-2xl font-bold mb-2">Información</h2>
-      <p className="mb-2">Precio por día: {precio}</p>
-      <p className="mb-2">Servicios: {servicios}</p>
-      <p className="mb-4">Ubicación: {ubicacion}</p>
+      <h3 className="mb-2">Precio por día: {precio}</h3>
+      <h3 className="mb-2">Servicios: {servicios}</h3>
+      <h3 className="mb-4">Ubicación: {ubicacion}</h3>
       <div className="mb-4">{mapa}</div>
       <h2 className="text-2xl font-bold mb-2">Información de Contacto</h2>
-      <p className="mb-2">Teléfono: {telefono}</p>
-      <p className="mb-4">E-mail: {email}</p>
-      <h2 className="text-2xl font-bold mb-2">Valoraciones</h2>
-      <p className="mb-4">{reseñas}</p>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleReservarClick}>
+      <h3 className="mb-2">Teléfono: {telefono}</h3>
+      <h3 className="mb-4">E-mail: {email}</h3>
+      <h3 className="text-2xl font-bold mb-2">Valoraciones</h3>
+      <h3 className="mb-4">{reseñas}</h3>
+      <Link href={`/booking`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
         Reservar
-      </button>
-      <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2 mt-2 md:mt-0" onClick={handleVolverClick}>
+      </Link>
+      <Link href={`/home`} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2 mt-2 md:mt-0" >
         Volver a Home
-      </button>
+      </Link>
     </div>
   );
 }
 
 export default Detail;
-
-// export async function getStaticPaths() {
-//     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-//     const users = await res.json();
-  
-//     const paths = users.map(user => {
-//       return {
-//         params: { id: `${user.id}` }
-//       }
-//     });
-    
-//     return {
-//       paths,
-//       fallback: true
-//     }
-//   }
-  
-//   export async function getStaticProps({ params }) {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`);
-//     const user = await res.json();
-  
-//     return {
-//       props: {
-//         user
-//       }
-//     }
-//   }
