@@ -1,5 +1,5 @@
 const { Business } = require('../../models/Business');
-const { CoworkSpace } = require('../../models/Cowork-space');
+const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const createSpaceCowork = async ({ business, name, price, about, services, images }) => {
     const coworkSpaceCreated = await CoworkSpace.create({

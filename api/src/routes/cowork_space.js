@@ -14,6 +14,7 @@ router.get('/', async (req,res) => {
         const allCoworkSpaces = await getAllCoworkSpaces();
         res.status(200).json(allCoworkSpaces);
     } catch (error) {
+        console.log(error)
         res.status(500).json(error);
     }
 });

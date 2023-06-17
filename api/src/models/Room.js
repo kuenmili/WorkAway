@@ -9,13 +9,14 @@ const schemaRoom = new Schema({
     capacity:Number,
     image:String,
     description:String,
+    price: String
 })
 
 schemaRoom.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id
         delete returnedObject._id
-        delete returnedObject._v
+        delete returnedObject.__v
     }
 })
 
@@ -23,5 +24,5 @@ const Room = model('Room', schemaRoom)
 
 module.exports = {
     schemaRoom,
-     Room
-    };
+    Room
+};
