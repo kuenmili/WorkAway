@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import Container from "./container";
-import userOneImg from "../public/img/user1.jpg";
-import userTwoImg from "../public/img/user2.jpg";
+import userOneImg from "../public/img/user3.jpg";
+import userTwoImg from "../public/img/user3.jpg";
 import userThreeImg from "../public/img/user3.jpg";
-import userFourImg from "../public/img/mili.jpg";
-import userFiveImg from "../public/img/dalma.jpg";
-import userSixImg from "../public/img/ricardo.jpg";
+import userFourImg from "../public/img/user3.jpg";
+import userFiveImg from "../public/img/user3.jpg";
+import userSixImg from "../public/img/user3.jpg";
 
 const Testimonials  = () => {
   return (
