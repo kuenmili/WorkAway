@@ -2,6 +2,7 @@ import Image from 'next/image'
 import cardList from "./datalist"
 import Container from "./container";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 import "swiper/css/navigation";
 import 'swiper/css';
 
@@ -9,12 +10,13 @@ export default function cardsSection() {
     
     return (
     <div>
-        <Container className="container mx auto py-10 px-2">
-          <div className="grid lg:grid-cols-3 gap-6">
+        <div className="container py-5 flex">
+          <div className="grid lg:grid-cols-3 gap-6 ">
               {cardList.map((card) => (
                 
-            <div className ="shadow-lg rounded-lg">
-              <img className = "rounded-t-2xl"  src={card.img} alt="" />
+            <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300">
+              <Link href="/detail">
+              <img className = "rounded-t-2xl "  src={card.img} alt="" /></Link>
               <div className='p-5'>
                 <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.title}</h3>
                 <p className='text-lg font-normal text-gray-600 dark:text-white'>{card.text}</p>
@@ -24,7 +26,7 @@ export default function cardsSection() {
             </div>
         ))}
           </div>
-        </Container>
+        </div>
           
     </div>
     )} 
