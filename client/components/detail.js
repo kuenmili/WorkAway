@@ -1,50 +1,76 @@
-import coworkimg1 from "../public/img/cowork1.jpg";
+import Image from 'next/image';
+import Link from 'next/link';
+import Container from './container';
 
-import Image from 'next/image'
-import Link from "next/link";
-
-//import { benefitOne, benefitTwo } from "../pages/data";
-//import { Swiper, SwiperSlide } from "swiper/react";
-//import "swiper/css/navigation";
-//import 'swiper/css';
-//import { Navigation } from "swiper";
-
-
-
-const Detail = ({ id, imagen, precio, servicios, ubicacion, mapa, telefono, email, reseñas }) => {
-
-
+const Detail = ({ id, img, title, price, rating, location, text }) => {
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-2">Nombre del Espacio</h1>
-      <h5 className="text-gray-600 mb-4">Descripción del Espacio : </h5>
-      <div className="mb-4">
-        <Image src={coworkimg1}
-              width="816"
-              height="817"
-              className={"object-fill w-full h-full rounded-md"}
+    <div>
+      <Container className="container mx-auto py-10 px-2">
+        <div className="flex gap-6">
+          <div className="shadow-lg rounded-lg w-2/3">
+            <Image
+              className="rounded-t-2xl"
+              src={img}
               alt=""
+              width={800}
+              height={800}
               loading="eager"
-              placeholder="blur" />
-      </div>
-      <h2 className="text-2xl font-bold mb-2">Información</h2>
-      <h3 className="mb-2">Precio por día: {precio}</h3>
-      <h3 className="mb-2">Servicios: {servicios}</h3>
-      <h3 className="mb-4">Ubicación: {ubicacion}</h3>
-      <div className="mb-4">{mapa}</div>
-      <h2 className="text-2xl font-bold mb-2">Información de Contacto</h2>
-      <h3 className="mb-2">Teléfono: {telefono}</h3>
-      <h3 className="mb-4">E-mail: {email}</h3>
-      <h3 className="text-2xl font-bold mb-2">Valoraciones</h3>
-      <h3 className="mb-4">{reseñas}</h3>
-      <Link href={`/booking`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
-        Reservar
-      </Link>
-      <Link href={`/home`} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2 mt-2 md:mt-0" >
-        Volver a Home
-      </Link>
+            />
+            <div className="p-5">
+              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">{title}</h1>
+              <p className="text-lg font-normal text-gray-600 dark:text-white">{text}</p>
+              <Rating stars={Array(5).fill(rating)} />
+              <p className="text-lg font-bold text-gray-800 dark:text-white">Price: {price}</p>
+            </div>
+          </div>
+          <div className="flex-1">
+            <div className="p-4">
+              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">Información</h1>
+              <div className="text-lg mb-4">
+                <p className="text-black">Precio por día: {price}</p>
+                <p className="text-black">Rating: {rating}</p>
+                <p className="text-black">Ubicación: {location}</p>
+                <p className="text-black">Mail: correo@example.com</p>
+                <p className="text-black">Teléfono: 123456789</p>
+              </div>
+            </div>
+            <div className="p-4 flex justify-center">
+              <Link href={`/booking`} className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
+                Reservar
+              </Link>
+              <Link href={`/home`} className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
+                Volver a Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
     </div>
   );
-}
+};
 
 export default Detail;
+
+const Rating = ({ stars }) => {
+  return (
+    <div className="flex items-center">
+      {stars.map((star, idx) => (
+        <svg
+          key={idx}
+          aria-hidden="true"
+          className={`w-5 h-5 ${star <= idx ? 'text-gray-300' : 'bg-yellow-300'}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0,0.054V20h21V0.054H0z M15.422,18.129l-5.264-2.768l-5.265,2.768l1.006-5.863L1.64,8.114l5.887-0.855 l2.632-5.334l2.633,5.334l5.885,0.855l-4.258,4.152L15.422,18.129z"></path>
+        </svg>
+      ))}
+    </div>
+  );
+};
+
+
+
+
+
