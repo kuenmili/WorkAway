@@ -177,7 +177,7 @@ export default function Signup() {
             </div>
 
             {/* footer */}
-            <div className="mt-8">
+            <div className="mt-4">
                 <Footer />
             </div>
         </>

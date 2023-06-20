@@ -7,8 +7,8 @@ export default function Login() {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto px-4">
-                <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
+            <div className="container mx-auto px-4 ">
+                <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl dark:bg-gray-200">
                     <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">Log in</h2>
                     <p className="mb-6 text-center text-gray-400 ">Access your WorkAway account</p>
 
@@ -63,7 +63,7 @@ export default function Login() {
                 </div>
             </div>
 
-            <div className="mt-8">
+            <div className="absolute inset-x-0 bottom-0 ">
                 <Footer />
             </div>
         </>
