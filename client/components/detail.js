@@ -26,12 +26,13 @@ const Detail = ({ id, img, title, price, rating, location, text }) => {
           <div className="flex-1">
             <div className="p-4">
               <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">Información</h1>
+              <></>
               <div className="text-lg mb-4">
-                <p className="text-black">Precio por día: {price}</p>
-                <p className="text-black">Rating: {rating}</p>
-                <p className="text-black">Ubicación: {location}</p>
-                <p className="text-black">Mail: correo@example.com</p>
-                <p className="text-black">Teléfono: 123456789</p>
+                <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Precio por día: {price}</p>
+                <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Rating: {rating}</p>
+                <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Ubicación: {location}</p>
+                <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Mail: correo@example.com</p>
+                <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Teléfono: 123456789</p>
               </div>
             </div>
             <div className="p-4 flex justify-center">
