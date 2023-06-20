@@ -8,7 +8,7 @@ export default function Navhome() {
 
     const links = [
       {
-        label: `About Us`,
+        label: `About`,
         href: `/about`,
       },
     ];
@@ -23,7 +23,7 @@ export default function Navhome() {
                       font-bold text-indigo-800 dark:text-gray-100 ">
                         <span>
                           <Image
-                            src="/img/logo2.svg"
+                            src="/img/logo2.svg"  
                             alt=""
                             width="50"
                             height="40"
@@ -37,20 +37,20 @@ export default function Navhome() {
                   
             {/* menu  */}
             <div className="relative inset-y-0 -left-80 hidden text-center lg:flex lg:items-center">
-              <ul className="items-center  flex-1 pt-6 list-none lg:pt-0 lg:flex">
+              <li className="items-center  flex-1 pt-6 list-none lg:pt-0 lg:flex">
                 {links.map((link) => (
                   <div className="mr-3 nav__item" >
-                    <li className=" px-4 py-2 text-lg font-medium 
+                    <ul className=" px-4 py-2 text-lg font-medium 
                                     text-gray-800 no-underline rounded-md dark:text-gray-200 
                                     hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 
                                     focus:outline-none dark:focus:bg-gray-300 hover:bg-indigo-100 dark:hover:bg-indigo-500">
                         <Link href={link.href} key={link.label}>  
                         {link.label}
                         </Link>
-                    </li>
+                    </ul>
                   </div>
                 ))}
-              </ul>
+              </li>
             </div>
             {/* botones  */}
           <div className="hidden mr-3 space-x-4 lg:flex nav__item">

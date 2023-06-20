@@ -9,11 +9,11 @@ export default function Filters() {
 <form className="p-2 space-y-32 > * + * mt-8 ">
         <div class=" ">
                 <label for="score" className="p-2 font-bold text-base  dark:text-white text-black ">
-                  Puntuacion
+                  Rating
                  </label>
                 <select class="w-24 px-2 border-2 cursor-pointer rounded-full shadow-lg duration-300 active:outline-none focus:outline-none focus:ring dark:text-white">
                     <option value></option>
-                    <option value>1</option>
+                    <option value>1 <ion-icon name="star"></ion-icon></option>
                     <option value>2</option>
                     <option value>3</option>
                     <option value>4</option>

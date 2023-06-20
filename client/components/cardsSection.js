@@ -9,14 +9,20 @@ import 'swiper/css';
 export default function cardsSection() {
     
     return (
-    <div>
-        <div className="container py-5 flex">
-          <div className="grid lg:grid-cols-3 gap-6 ">
+      <div>
+
+        <div className="container py-12 flex">
+          <div className="grid lg:grid-cols-3 gap-12 ">
               {cardList.map((card) => (
                 
-            <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300">
-              <Link href="/detail">
-              <img className = "rounded-t-2xl "  src={card.img} alt="" /></Link>
+                <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300 " key={card.id}>
+              <Link href={`/detail/${card.id}`}>
+              <Image className = "rounded-t-2xl h-80 object-cover"  
+                width={450} 
+                height={500} 
+                loading='eager'
+                src={card.img} 
+                alt="" /></Link>
               <div className='p-5'>
                 <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.title}</h3>
                 <p className='text-lg font-normal text-gray-600 dark:text-white'>{card.text}</p>
@@ -40,7 +46,7 @@ const Rating = ({ stars }) => {
         <svg 
           key = {idx}
           aria-hidden = "true"
-          className = {`w-5 h-5 ${star <= idx ?  'text-gray-300' : 'bg-yellow-300'}`}
+          className = {`w-5 h-5 ${star <= idx ?  'text-gray-300' : 'bg-yellow-300'} `}
           fill = "currentColor"
           viewBox='0 0 20 20'
           xlmns = "http://www.w3.org/2000/svg">
@@ -51,4 +57,3 @@ const Rating = ({ stars }) => {
       </div>
     )
   }
-
