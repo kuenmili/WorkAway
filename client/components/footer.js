@@ -13,8 +13,8 @@ export default function Footer() {
   ];
   const legal = ["Terms", "Privacy", "Legal"];
   return (
-    <div className="relative">
-      <Container className = " bg-indigo-700 rounded-tl-full rounded-tr-full pb-1 ">
+    <div className="">
+      <Container className = " bg-indigo-700 rounded-tl-full rounded-tr-full pb-1 mt-10 ">
         <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 
                         border-gray-100 dark:border-trueGray-800 lg:grid-cols-5 mr-1 text-indigo-200" >
           <div className="lg:col-span-1">
@@ -94,7 +94,7 @@ export default function Footer() {
         </div>
       </Container>
      
-      <Backlink />
+     
     </div>
   );
 }
@@ -154,7 +154,7 @@ const Linkedin = ({ size = 24 }) => (
   </svg>
 );
 
-const Backlink = () => {
+/*const Backlink = () => {
   return (
     <a
       href=""
@@ -183,4 +183,4 @@ const Backlink = () => {
 
     </a>
   );
-};
+};*/
