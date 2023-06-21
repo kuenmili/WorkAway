@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      'newprofilepic2.photo-cdn.net'
+      'newprofilepic2.photo-cdn.net', 'i.postimg.cc'
     ],
   },
 };

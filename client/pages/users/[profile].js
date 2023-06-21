@@ -1,9 +1,10 @@
-import { useRouter } from 'next/router';
 import Profile from '../../components/userProfile';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
+import { useRouter } from 'next/router';
 
 const ProfilePage = ({ item }) => {
+
   const router = useRouter();
 
   if (router.isFallback) {
@@ -35,6 +36,7 @@ export async function getStaticProps({params}) {
     console.log(item);
     return { props: { item } };
 };
+
     // export default withAuth(ProfilePage);
 export default ProfilePage;
 
