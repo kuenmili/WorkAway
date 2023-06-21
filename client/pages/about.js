@@ -38,7 +38,7 @@ export default function About () {
               src={dalma}
               alt="Foto de perfil 1"/>
               <h3 className="text-xl font-semibold mt-4">Dalma Nicolau</h3>
-              <p className="text-gray-600">Descripción breve de la persona 1.</p>
+              <p className="text-gray-600">Full stack developer</p>
             </div>
             <div class="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
@@ -47,7 +47,7 @@ export default function About () {
               width="100"
               height="90"/>
               <h3 class="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p class="text-gray-600">Descripción breve de la persona 2.</p>
+              <p class="text-gray-600">Full stack developer</p>
             </div>
             <div class="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
@@ -55,8 +55,8 @@ export default function About () {
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p class="text-gray-600">Descripción breve de la persona 2.</p>
+              <h3 class="text-xl font-semibold mt-4">Camilo Acosta</h3>
+              <p class="text-gray-600">Full stack developer</p>
             </div>
             <div class="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
@@ -64,8 +64,8 @@ export default function About () {
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p class="text-gray-600">Descripción breve de la persona 2.</p>
+              <h3 class="text-xl font-semibold mt-4">Milagros Kuen</h3>
+              <p class="text-gray-600">Full stack developer</p>
             </div>
             <div class="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
@@ -73,16 +73,16 @@ export default function About () {
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 className="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p className="text-gray-600">Descripción breve de la persona 2.</p>
+              <h3 className="text-xl font-semibold mt-4">Lucio Campos</h3>
+              <p className="text-gray-600">Full stack developer</p>
             </div>  <div class="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={nico} 
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p class="text-gray-600">Descripción breve de la persona 2.</p>
+              <h3 class="text-xl font-semibold mt-4">Nicolas Fucci</h3>
+              <p class="text-gray-600">Full stack developer</p>
             </div>
           </div>
       </div>    
