@@ -6,41 +6,57 @@ import axios from "axios";
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
 export default function Signup() {
+    const router = useRouter();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cellphoneNumber, setCellphoneNumber] = useState("");
-
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const router = useRouter();
+    const [firstNameError, setFirstNameError] = useState(false);
+    const [lastNameError, setLastNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [cellphoneNumberError, setCellphoneNumberError] = useState(false)
+
 
 
     const handleFirstNameChange = (e) => {
         setFirstName(e.target.value);
+        setFirstNameError(false);// Reiniciamos el estado de error al cambiar el valor del campo
     };
 
     const handleLastNameChange = (e) => {
         setLastName(e.target.value);
+        setLastNameError(false);
     };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
+        setEmailError(false);
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+        setPasswordError(false);
     };
 
     const handleCellphoneNumberChange = (e) => {
         setCellphoneNumber(e.target.value);
+        setCellphoneNumberError(false);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if(!firstName || !lastName || !email || !password || !cellphoneNumber){
-            alert("Todos los campos son obligatorios")
+            //alert("Todos los campos son obligatorios")
+            if (!firstName) setFirstNameError(true); // Establecemos el estado de error para el campo de "First Name"
+            if (!lastName) setLastNameError(true);
+            if (!email) setEmailError(true);
+            if (!password) setPasswordError(true);
+            if (!cellphoneNumber) setCellphoneNumberError(true);
+
             return;
         }
         try {
@@ -79,8 +95,13 @@ export default function Signup() {
                                     value={firstName}
                                     placeholder="First Name"
                                     onChange={handleFirstNameChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${
+                                        firstNameError ? "border-red-500" : "border-indigo-300"
+                                    } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {firstNameError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es obligatorio</p>
+                                )}
                             </div>
                         </div>
 
@@ -92,8 +113,13 @@ export default function Signup() {
                                     value={lastName}
                                     placeholder="Last Name"
                                     onChange={handleLastNameChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${
+                                        lastNameError ? "border-red-500" : "border-indigo-300"
+                                    } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {lastNameError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es obligatorio</p>
+                                )}
                             </div>
                         </div>
 
@@ -105,8 +131,13 @@ export default function Signup() {
                                     value={email}
                                     placeholder="name@address.com"
                                     onChange={handleEmailChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${
+                                        emailError ? "border-red-500" : "border-indigo-300"
+                                    } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {emailError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es obligatorio</p>
+                                )}
                             </div>
                         </div>
 
@@ -118,8 +149,13 @@ export default function Signup() {
                                     value={password}
                                     placeholder="Enter your password"
                                     onChange={handlePasswordChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${
+                                        passwordError ? "border-red-500" : "border-indigo-300"
+                                    } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {passwordError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es obligatorio</p>
+                                )}
                             </div>
                         </div>
 
@@ -131,8 +167,13 @@ export default function Signup() {
                                     value={cellphoneNumber}
                                     placeholder="Enter your cellphone Number"
                                     onChange={handleCellphoneNumberChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${
+                                        cellphoneNumberError ? "border-red-500" : "border-indigo-300"
+                                    } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {cellphoneNumberError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es obligatorio</p>
+                                )}
                             </div>
                         </div>
 
