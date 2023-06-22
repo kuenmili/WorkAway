@@ -1,67 +1,97 @@
-import React, { useState } from "react";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import axios from "axios";
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import Modal from "../components/modal";
 
 export default function Signup() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const router = useRouter();
+    const [first_name, setFirst_Name] = useState("");
+    const [last_name, setLast_Name] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [cellphoneNumber, setCellphoneNumber] = useState("");
+    const [cellphone_number, setCellphoneNumber] = useState("");
+    const [modalContent, setModalContent] = useState("");
+    const [profileImage, setProfileImage] = useState("https://i.postimg.cc/0y1QcxnQ/avatar.png");
+    const [firstNameError, setFirstNameError] = useState(false);
+    const [lastNameError, setLastNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [cellphoneNumberError, setCellphoneNumberError] = useState(false);
+    const [showModal, setShowModal] = useState(false); // Controlamos el estado del modal.
+    const [isChecked, setIsChecked] = useState(false); // controlamos el estado del checkbox.
+    const [showCheckboxError, setShowCheckboxError] = useState(false);
 
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const router = useRouter();
 
 
     const handleFirstNameChange = (e) => {
-        setFirstName(e.target.value);
+        setFirst_Name(e.target.value);
+        setFirstNameError(false);// Reiniciamos el estado de error al cambiar el valor del campo
     };
 
     const handleLastNameChange = (e) => {
-        setLastName(e.target.value);
+        setLast_Name(e.target.value);
+        setLastNameError(false);
     };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
+        setEmailError(false);
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+        setPasswordError(false);
     };
 
     const handleCellphoneNumberChange = (e) => {
         setCellphoneNumber(e.target.value);
+        setCellphoneNumberError(false);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!firstName || !lastName || !email || !password || !cellphoneNumber){
-            alert("Todos los campos son obligatorios")
+        if (!first_name || !last_name || !email || !password || !cellphone_number || !isChecked) {
+            //alert("Todos los campos son obligatorios")
+            if (!first_name) setFirstNameError(true); // Establecemos el estado de error para el campo de "First Name"
+            if (!last_name) setLastNameError(true);
+            if (!email) setEmailError(true);
+            if (!password) setPasswordError(true);
+            if (!cellphone_number) setCellphoneNumberError(true);
+            if (!isChecked) setShowCheckboxError(true);            
+
             return;
         }
         try {
             // Enviar los datos del formulario a la base de datos
             const response = await axios.post("http://localhost:3001/users/signup", {
-                firstName,
-                lastName,
+                first_name,
+                last_name,
                 email,
                 password,
-                cellphoneNumber,
+                cellphone_number,
+                profile_image: profileImage,
             });
 
-            console.log("Formulario enviado exitosamente");
-            console.log("Respuesta del servidor:", response.data);
-
-            // Redireccionar a otra página después de enviar el formulario exitosamente
-            router.push('/login');
+            // console.log("Formulario enviado exitosamente");
+            // console.log("Respuesta del servidor:", response.data);
+            setModalContent("Registration successfully completed!");
+            setShowModal(true);
         } catch (error) {
-            console.log("Ocurrió un error al enviar el formulario:", error.message);
+            // console.log("Ocurrió un error al enviar el formulario:", error.message);
+            setModalContent("An error occurred while submitting the form", error.message);
+            setShowModal(true);
         }
     };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        router.push("/login");
+    }
+
 
     return (
         <>
@@ -76,11 +106,15 @@ export default function Signup() {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    value={firstName}
+                                    value={first_name}
                                     placeholder="First Name"
                                     onChange={handleFirstNameChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${firstNameError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {firstNameError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                )}
                             </div>
                         </div>
 
@@ -89,11 +123,15 @@ export default function Signup() {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    value={lastName}
+                                    value={last_name}
                                     placeholder="Last Name"
                                     onChange={handleLastNameChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${lastNameError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {lastNameError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                )}
                             </div>
                         </div>
 
@@ -105,8 +143,12 @@ export default function Signup() {
                                     value={email}
                                     placeholder="name@address.com"
                                     onChange={handleEmailChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${emailError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {emailError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                )}
                             </div>
                         </div>
 
@@ -118,8 +160,12 @@ export default function Signup() {
                                     value={password}
                                     placeholder="Enter your password"
                                     onChange={handlePasswordChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${passwordError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {passwordError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                )}
                             </div>
                         </div>
 
@@ -128,25 +174,42 @@ export default function Signup() {
                             <div className="flex flex-col">
                                 <input
                                     type="tel"
-                                    value={cellphoneNumber}
+                                    value={cellphone_number}
                                     placeholder="Enter your cellphone Number"
                                     onChange={handleCellphoneNumberChange}
-                                    className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                                    className={`w-3/4 mx-auto bg-white border ${cellphoneNumberError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
+                                {cellphoneNumberError && (
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                )}
                             </div>
                         </div>
+                        {/* Renderizado del modal */}
+                        {showModal && (
+                            <Modal onClose={handleCloseModal} content={modalContent} />
+                        )}
 
-                        <div className="mb-6 flex justify-center">
-                            <div className="flex items-center">
-                                <input type="checkbox" className="form-checkbox text-indigo-600" />
-                                <p className="ml-2 text-gray-500">
-                                    I agree to WorkAway's{" "}
-                                    <a href="#" className="text-indigo-600 underline">
-                                        privacy policy and terms of service
-                                    </a>
-                                    .
+                        <div className="mb-6" >
+                            <label className="flex justify-center items-center">
+                                <input
+                                    type="checkbox"
+                                    className="form-checkbox text-indigo-600"
+                                    checked={isChecked}
+                                    onChange={(e) => {
+                                        setIsChecked(e.target.checked);
+                                        setShowCheckboxError(false);
+                                    }}
+                                />
+                                <span className="ml-2 text-gray-500">
+                                    I agree to the terms and conditions.
+                                </span>
+                            </label>
+                            {showCheckboxError && (
+                                <p className="text-red-500 text-center ml-8">
+                                    This checkbox is required.
                                 </p>
-                            </div>
+                            )}
                         </div>
 
                         <div className="mb-6 flex justify-center">
