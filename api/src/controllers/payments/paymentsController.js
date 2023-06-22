@@ -5,7 +5,7 @@ const {
   PAYPAL_API_SECRET,
 } = require("../../config");
 
-const createOrderController = async (req, res) => {
+const createOrderController = async (_req, res) => {
   try {
     const order = {
       intent: "CAPTURE",
@@ -22,8 +22,8 @@ const createOrderController = async (req, res) => {
         brand_name: "WorkAway",
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
-        return_url: "http://localhost:3001/capture",
-        cancel_url: "http://localhost:3001/cancel",
+        return_url: "http://localhost:3001/payments/capture",
+        cancel_url: "http://localhost:3000/booking",
       },
     };
 
@@ -56,8 +56,7 @@ const captureOrderController = async (req, res) => {
       },
     }
   );
-  console.log(response.data);
-  res.send("capturing order"); //aquí redirecciona a la pagina pagado
+  res.send(response.data); //aquí redirecciona a la pagina pagado
 };
 
 const cancelOrderController = (req, res) => {
