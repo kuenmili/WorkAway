@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
-import SearchIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
+
 
 export default function Navhome() {
   const links = [
@@ -12,7 +12,7 @@ export default function Navhome() {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full" >
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
         {/* Logo  */}
         <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
@@ -57,10 +57,10 @@ export default function Navhome() {
             Sign in or register
           </Link>
           <Link
-            href="/add"
+            href="/business-login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Añade tu Coworking
+            Regístrate como proveedor
           </Link>
           <ThemeChanger />
         </div>

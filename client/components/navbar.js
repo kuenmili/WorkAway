@@ -72,10 +72,10 @@ function Navbar() {
             Sign in or register
           </Link>
           <Link
-            href="/add"
+            href="/business-login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Become a provider
+            Regístrate como proveedor
           </Link>
 
           <ThemeChanger />
