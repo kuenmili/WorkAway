@@ -1,12 +1,8 @@
 import Container from './container';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_number, reviews, reserve_id }) => {
-
-  const router = useRouter();
-  const {profile} = router.query;
 
     return(
         <div>
@@ -37,7 +33,7 @@ const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_nu
                   </div>
 
                   <div className='md:flex justify-center'>
-                <Link href= {`/users/${profile}/edit`} className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
+                <Link href= {`/users/${id}/edit`} className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
                   Edit
                 </Link>               
             </div> 
@@ -49,7 +45,7 @@ const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_nu
                             <h2>Reviews:</h2>
                             <p>Score: {review.score}</p>
                             <p>Comments: {review.comment}</p>
-                            </div>
+                          </div>
                         )
                     }) 
                     : 

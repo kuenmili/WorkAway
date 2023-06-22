@@ -1,6 +1,6 @@
-import Profile from '../../components/userProfile';
-import Navbar from '../../components/navbar';
-import Footer from '../../components/footer';
+import Profile from '../../../components/userProfile';
+import Navbar from '../../../components/navbar';
+import Footer from '../../../components/footer';
 import { useRouter } from 'next/router';
 
 const ProfilePage = ({ item }) => {

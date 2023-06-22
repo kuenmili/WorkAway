@@ -1,15 +1,15 @@
+import { CldImage } from 'next-cloudinary';
+import { NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME } from '../env';
 import Container from './container';
-import Image from 'next/image';
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from 'next/router';
 
 
 const UpdateProfile = () => {
-debugger;
+
     const router = useRouter();
     const {profile} = router.query;
-    console.log(profile);
 
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
@@ -75,6 +75,11 @@ debugger;
            <label>
             <input type="text" name="last_name" />
            </label>
+           <CldImage
+                width="600"
+                height="600"
+                src={`${NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}`}
+            />
 
            <label>
             Email: 
