@@ -12,7 +12,7 @@ function page() {
             añadir un coworking
           </h2>
           <form>
-            <label></label>
+            <label className="mb-6"></label>
           </form>
           <div className="absolute inset-x-0 bottom-0 ">
             <Footer />
