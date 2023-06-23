@@ -12,16 +12,21 @@ const loginBusiness = () => {
         <p className="mb-6 text-center text-gray-400 ">
           Gestiona tu cuenta WorkAway
         </p>
+
+        {/*Login form */}
         <form>
+          {/*Email input */}
           <div className="mb-6">
             <div className="flex flex-col">
               <input
                 type="email"
                 id="email"
-                placeholder="name@address.com"
+                placeholder="nombre@direccion.com"
                 className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
               />
             </div>
+
+            {/*Password input */}
             <div className="mt-6">
               <div className="flex flex-col">
                 <input
@@ -32,13 +37,20 @@ const loginBusiness = () => {
                 />
               </div>
             </div>
+
+            {/*Log in button */}
             <div className="flex justify-center">
-              <button className="w-3/4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none">
-                Log in
+              <button
+                type="submit"
+                className="w-3/4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none"
+              >
+                Ingresa
               </button>
             </div>
+
+            {/*Redirect to Signup form */}
             <p className="mt-4 text-center text-gray-500">
-              ¿No tienes cuenta aún?
+              ¿No tienes cuenta aún?{" "}
               <a href="/business-signup" className="text-indigo-600">
                 Regístrate
               </a>
@@ -46,6 +58,7 @@ const loginBusiness = () => {
             </p>
           </div>
         </form>
+
         <div className="absolute inset-x-0 bottom-0 ">
           <Footer />
         </div>
