@@ -35,11 +35,12 @@ const links = [
                   <span className="flex items-center space-x-2 text-4xl 
                   font-bold text-indigo-800 dark:text-gray-100 ">
                     <span>
-                      <Image
-                        src="/img/logo2.svg"
+                      <Image 
+                        src="/img/WORK.svg"
                         alt=""
                         width="50"
                         height="40"
+                        className="text-dark-100 rounded-full"
                         />
                     </span>
                     <span>WorkAway</span>

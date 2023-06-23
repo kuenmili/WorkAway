@@ -1,6 +1,6 @@
 const {
     getAllCoworkSpaces,
-    getCoworkSpacesByName,
+    getCoworkSpacesBySearch,
     getCoworkSpaceByID,
 } = require("./get");
 const { createSpaceCowork } = require('./post');
@@ -9,7 +9,7 @@ const { deleteCoworkSpace } = require('./delete');
 
 module.exports = {
     getAllCoworkSpaces,
-    getCoworkSpacesByName,
+    getCoworkSpacesBySearch,
     getCoworkSpaceByID,
     createSpaceCowork,
     modifyCoworkSpace,

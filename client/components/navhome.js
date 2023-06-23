@@ -23,7 +23,7 @@ export default function Navhome() {
                       font-bold text-indigo-800 dark:text-gray-100 ">
                         <span>
                           <Image
-                            src="/img/logo2.svg"  
+                            src="/img/WORK.svg"  
                             alt=""
                             width="50"
                             height="40"
@@ -38,8 +38,8 @@ export default function Navhome() {
             {/* menu  */}
             <div className="relative inset-y-0 -left-80 hidden text-center lg:flex lg:items-center">
               <li className="items-center  flex-1 pt-6 list-none lg:pt-0 lg:flex">
-                {links.map((link) => (
-                  <div className="mr-3 nav__item" >
+                {links.map((link, index) => (
+                  <div className="mr-3 nav__item" key={index} >
                     <ul className=" px-4 py-2 text-lg font-medium 
                                     text-gray-800 no-underline rounded-md dark:text-gray-200 
                                     hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 

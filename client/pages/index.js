@@ -39,7 +39,6 @@ const Landing = () => {
         title="Estas son las opiniones de nuestros clientes">
       </SectionTitle>
       <Testimonials />
-    
       <Footer />
       
       
@@ -47,16 +46,6 @@ const Landing = () => {
   );
 }
 
-<div class="swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>  
-  </div>
-   //navigation buttons
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-</div>
 
 
 export default Landing;

@@ -14,7 +14,7 @@ export default function Login() {
 
                     {/* Input email */}
                     <div className="mb-6 ">
-                        {/* <label htmlFor="email" className="text-black mb-2 block">Email</label> */}
+                        {/* <label htmlhtmlFor="email" className="text-black mb-2 block">Email</label> */}
                         <div className="flex flex-col">
                             <input
                                 type="email"
@@ -27,7 +27,7 @@ export default function Login() {
 
                     {/* Input password */}
                     <div className="mb-6">
-                        {/* <label htmlFor="email" className="text-black mb-2 block">Email</label> */}
+                        {/* <label htmlhtmlFor="email" className="text-black mb-2 block">Email</label> */}
                         <div className="flex flex-col">
                             <input
                                 type="password"
