@@ -12,12 +12,7 @@ export default function Navhome() {
   ];
 
 
-    const links = [
-      {
-        label: `About`,
-        href: `/about`,
-      },
-    ];
+
     
       return (
         <div className="w-full">
