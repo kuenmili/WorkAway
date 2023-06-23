@@ -3,6 +3,7 @@ import Detail from '../../components/detail';
 import cardList from "../../components/datalist";
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
+import MapComponent from '../../components/Map';
 
 export default function DetailPage({ item }) {
   const router = useRouter();
@@ -11,16 +12,17 @@ export default function DetailPage({ item }) {
     return <div>Loading...</div>;
   }
 
+  const { location } = item;
+
   return (
     <div>
       <Navbar />
-      <Detail {...item} />
+      <Detail key={item.id} {...item} />
+      <MapComponent key={item.id} address={location} />
       <Footer />
     </div>
   );
 }
-
-
 
 export async function getStaticPaths() {
   const paths = cardList.map((item) => ({
