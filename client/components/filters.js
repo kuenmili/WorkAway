@@ -1,17 +1,7 @@
-"use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setValueFilter} from "../action/index";
 
-export default function Filters () {
 
-    const valueFilter = useSelector((state) => state.valueFilter);
-    const dispatch = useDispatch();
-
-const handleRatingOrder = (event) => {
-    const valueF = parseInt(event.target.value);
-    dispatch(setValueFilter(valueF));
-}
+export default function Filters() {
 
     return (
 
@@ -19,17 +9,17 @@ const handleRatingOrder = (event) => {
 <form className="p-2 space-y-32 > * + * mt-8 ">
         <div class=" ">
                 <label for="score" className="p-2 font-bold text-base  dark:text-white text-black ">
-                Puntuacion
-                </label>
-                <select onChange={ handleRatingOrder}class="w-24 px-2 border-2 cursor-pointer rounded-full shadow-lg duration-300 active:outline-none focus:outline-none focus:ring dark:text-white">
-                    <option key={0} value={0}>-</option>
-                    <option key={1} value={1}>1</option>
-                    <option key={2} value={2}>2</option>
-                    <option key={3} value={3}>3</option>
-                    <option key={4} value={4}>4</option>
-                    <option key={5} value={5}>5</option>
-                </select>
-            </div>
+                  Rating
+                 </label>
+                <select class="w-24 px-2 border-2 cursor-pointer rounded-full shadow-lg duration-300 active:outline-none focus:outline-none focus:ring dark:text-white">
+                    <option value></option>
+                    <option value>1 <ion-icon name="star"></ion-icon></option>
+                    <option value>2</option>
+                    <option value>3</option>
+                    <option value>4</option>
+                    <option value>5</option>
+                 </select>
+             </div>
             <div class="flex items-baseline ">
                     <label for="score" className="p-2 font-bold text-base  dark:text-white text-black ">
                     Ubicacion
