@@ -18,8 +18,12 @@ export default function DetailPage({ item }) {
     <div>
       <Navbar />
       <Detail key={item.id} {...item} />
+      <h1 className="text-3xl font-bold mb-3">¿Dónde vas a estar?{location}</h1>
       <MapComponent key={item.id} address={location} />
+      <div className="mt-4">
       <Footer />
+      </div>
+     
     </div>
   );
 }
@@ -45,4 +49,6 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+
+
 

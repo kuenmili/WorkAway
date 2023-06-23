@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import "swiper/css/navigation";
 import 'swiper/css';
-import Link from 'next/link';
+
 
 export default function cardsSection() {
     

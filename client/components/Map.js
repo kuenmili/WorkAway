@@ -39,23 +39,29 @@ const MapComponent = ({ address }) => {
   };
 
   return (
-    <div style={mapStyles}>
+    <div style={mapStyles} className="my-8">
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={10}
-          center={coordinates || defaultCenter}
-        >
-          {coordinates && <Marker position={coordinates} />}
-        </GoogleMap>
+        <><div className="text-center mb-4">
+            <h3 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">¿DONDE VAS A ESTAR?</h3>
+            <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">{address}</p>
+          </div><GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={10}
+            center={coordinates || defaultCenter}
+          >
+              {coordinates && <Marker position={coordinates} />}
+            </GoogleMap></>
       )}
     </div>
   );
 };
 
 export default MapComponent;
+
+
+
 
 
 
