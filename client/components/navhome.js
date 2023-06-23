@@ -1,10 +1,16 @@
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
-import Image from "next/image"
-import SearchIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon';
+import Image from "next/image";
 
 
 export default function Navhome() {
+  const links = [
+    {
+      label: `About`,
+      href: `/about`,
+    },
+  ];
+
 
     const links = [
       {
@@ -41,30 +47,36 @@ export default function Navhome() {
                 {links.map((link, index) => (
                   <div className="mr-3 nav__item" key={index} >
                     <ul className=" px-4 py-2 text-lg font-medium 
+
                                     text-gray-800 no-underline rounded-md dark:text-gray-200 
                                     hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 
-                                    focus:outline-none dark:focus:bg-gray-300 hover:bg-indigo-100 dark:hover:bg-indigo-500">
-                        <Link href={link.href} key={link.label}>  
-                        {link.label}
-                        </Link>
-                    </ul>
-                  </div>
-                ))}
-              </li>
-            </div>
-            {/* botones  */}
-          <div className="hidden mr-3 space-x-4 lg:flex nav__item">
-               <Link href="/login" className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
-                  Sign in or register
-               </Link>
-                <Link href="/booking" className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
-                  Añade tu Coworking
-               </Link>
-              <ThemeChanger />
-            </div>
-          </nav>
+                                    focus:outline-none dark:focus:bg-gray-300 hover:bg-indigo-100 dark:hover:bg-indigo-500"
+                >
+                  <Link href={link.href} key={link.label}>
+                    {link.label}
+                  </Link>
+                </ul>
+              </div>
+            ))}
+          </li>
         </div>
-      );
-    }
-    
-    
+        {/* botones  */}
+        <div className="hidden mr-3 space-x-4 lg:flex nav__item">
+          <Link
+            href="/login"
+            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
+          >
+            Sign in or register
+          </Link>
+          <Link
+            href="/business-login"
+            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
+          >
+            Ingresa como proveedor
+          </Link>
+          <ThemeChanger />
+        </div>
+      </nav>
+    </div>
+  );
+}
