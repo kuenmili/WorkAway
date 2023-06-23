@@ -60,7 +60,7 @@ export default function Navhome() {
             href="/business-login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Regístrate como proveedor
+            Ingresa como proveedor
           </Link>
           <ThemeChanger />
         </div>
