@@ -2,6 +2,7 @@ import Image from 'next/image'
 import cardList from "./datalist"
 import Container from "./container";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 import "swiper/css/navigation";
 import 'swiper/css';
 import Link from 'next/link';
@@ -9,24 +10,20 @@ import Link from 'next/link';
 export default function cardsSection() {
     
     return (
-    <div>
-        <Container className="container mx auto py-10 px-2">
-          <div className="grid lg:grid-cols-3 gap-6">
+      <div>
+
+        <div className="container py-12 flex">
+          <div className="grid lg:grid-cols-3 gap-12 ">
               {cardList.map((card) => (
                 
-                <div className="shadow-lg rounded-lg" key={card.id}>
-                <Link href={`/home/${card.id}`}>
-                  
-                    <Image
-                      src={card.img}
-                      width={816}
-                      height={817}
-                      className="rounded-t-2xl"
-                      alt=""
-                      loading="eager"
-                    />
-                  
-                </Link>
+                <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300 " key={card.id}>
+              <Link href={`/detail/${card.id}`}>
+              <Image className = "rounded-t-2xl h-80 object-cover"  
+                width={450} 
+                height={500} 
+                loading='eager'
+                src={card.img} 
+                alt="" /></Link>
               <div className='p-5'>
                 <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.title}</h3>
                 <p className='text-lg font-normal text-gray-600 dark:text-white'>{card.text}</p>
@@ -36,7 +33,7 @@ export default function cardsSection() {
             </div>
         ))}
           </div>
-        </Container>
+        </div>
           
     </div>
     )} 
@@ -50,7 +47,7 @@ const Rating = ({ stars }) => {
         <svg 
           key = {idx}
           aria-hidden = "true"
-          className = {`w-5 h-5 ${star <= idx ?  'text-gray-300' : 'bg-yellow-300'}`}
+          className = {`w-5 h-5 ${star <= idx ?  'text-gray-300' : 'bg-yellow-300'} `}
           fill = "currentColor"
           viewBox='0 0 20 20'
           xlmns = "http://www.w3.org/2000/svg">
@@ -61,4 +58,3 @@ const Rating = ({ stars }) => {
       </div>
     )
   }
-
