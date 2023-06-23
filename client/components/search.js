@@ -5,7 +5,7 @@ export default function Search () {
 return (
     <form className="flex justify-center">
             <input
-                onChange=""
+                
                 type="text"
                 className="rounded border 2 p-2 text-sm focus:ring-0 w-80 dark:text-white text-black"
                 placeholder="Search coworking spaces"/>

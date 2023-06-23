@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
     getAllCoworkSpaces,
-    getCoworkSpacesByName,
+    getCoworkSpacesBySearch,
     getCoworkSpaceByID,
     createSpaceCowork,
     modifyCoworkSpace,
@@ -21,11 +21,12 @@ router.get('/', async (req,res) => {
 
 //This route will retrieve a cowork space in DB searched by name
 router.get('/search', async (req, res) => {
-    const { name } = req.query;
+    const { name, score, location, capacity, services, price } = req.query;
     try {
-        const coworkSpaceByName = await getCoworkSpacesByName(name);
+        const coworkSpaceByName = await getCoworkSpacesBySearch(name, score, location, capacity, services, price);
         res.status(200).json(coworkSpaceByName);
     } catch (error) {
+        console.log("DATA: ", error)
         res.status(500).json(error);
     }
 });

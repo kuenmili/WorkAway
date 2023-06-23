@@ -17,7 +17,7 @@ const FirstSection = () => {
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
               <a
-                href="https://www.google.com/"
+                href="/home"
                 target="_blank"
                 rel="noopener"
                 className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-800 rounded-md ">
@@ -51,7 +51,7 @@ function Mark(props) {
     <>
       {" "}
       <mark className="   
-          text-decoration: yellow-underline">
+          text-decoration: bg-transparent underline decoration-yellow-300 decoration-double dark:text-white">
         {props.children}
       </mark>{" "}
     </>

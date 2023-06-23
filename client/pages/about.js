@@ -30,8 +30,8 @@ export default function About () {
                       </div>
                     </nav>
                     <div className="container mx-auto mt-8">
-    <div class="grid grid-cols-2 gap-8">
-            <div class="text-center">
+    <div className="grid grid-cols-2 gap-8">
+            <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               width="100"
               height="90"
@@ -40,34 +40,34 @@ export default function About () {
               <h3 className="text-xl font-semibold mt-4">Dalma Nicolau</h3>
               <p className="text-gray-600">Full stack developer</p>
             </div>
-            <div class="text-center">
+            <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={ricardo} 
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Ricardo Rico</h3>
-              <p class="text-gray-600">Full stack developer</p>
+              <h3 className="text-xl font-semibold mt-4">Ricardo Rico</h3>
+              <p className="text-gray-600">Full stack developer</p>
             </div>
-            <div class="text-center">
+            <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={camilo} 
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Camilo Acosta</h3>
-              <p class="text-gray-600">Full stack developer</p>
+              <h3 className="text-xl font-semibold mt-4">Camilo Acosta</h3>
+              <p className="text-gray-600">Full stack developer</p>
             </div>
-            <div class="text-center">
+            <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={mili} 
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Milagros Kuen</h3>
-              <p class="text-gray-600">Full stack developer</p>
+              <h3 className="text-xl font-semibold mt-4">Milagros Kuen</h3>
+              <p className="text-gray-600">Full stack developer</p>
             </div>
-            <div class="text-center">
+            <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={lucio} 
               alt="Foto de perfil 2"
@@ -75,14 +75,14 @@ export default function About () {
               height="90"/>
               <h3 className="text-xl font-semibold mt-4">Lucio Campos</h3>
               <p className="text-gray-600">Full stack developer</p>
-            </div>  <div class="text-center">
+            </div>  <div className="text-center">
               <Image className="rounded-full w-48 h-48 mx-auto hover:scale-125 transition duration-300" 
               src={nico} 
               alt="Foto de perfil 2"
               width="100"
               height="90"/>
-              <h3 class="text-xl font-semibold mt-4">Nicolas Fucci</h3>
-              <p class="text-gray-600">Full stack developer</p>
+              <h3 className="text-xl font-semibold mt-4">Nicolas Fucci</h3>
+              <p className="text-gray-600">Full stack developer</p>
             </div>
           </div>
       </div>    
