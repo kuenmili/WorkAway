@@ -10,6 +10,7 @@ const schemaReview = new Schema({
     comment:String,
     cowork_space: { 
         type:Schema.Types.ObjectId,
+        ref: 'CoworkSpace',
         require: true,
     }
 });

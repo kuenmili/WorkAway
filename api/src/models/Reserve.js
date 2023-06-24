@@ -2,23 +2,20 @@ const mongoose = require('mongoose')
 const { model, Schema } = mongoose;
 
 const schemaReserve = new Schema({
-    date: {
+    date_from: {
         type: Date,
         required: true,
     },
-    duration: {
-        type: String,
-        enum: ["full-day", "half-day"],
+    date_to:{
+        type: Date,
         required: true,
     },
-    time_slot: {
-        type: String,
-        enum: ["morning", "afternoon"],
-        required: true,
-    },
-    room: {
-        type: Schema.Types.ObjectId,
-        ref: 'Room',
+    occupants:Number,
+    cowork_space: { 
+        type:Schema.Types.ObjectId,
+        ref: 'CoworkSpace',
+        require: true,
+
     },
     user: {
         type: Schema.Types.ObjectId,

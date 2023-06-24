@@ -1,14 +1,12 @@
 const { Reserve } = require("../../models/Reserve");
 
-const modifyReserve = async (id, date, duration, time_slot, room, user) => {
+const modifyReserve = async (id, date_from, date_to, occupants, coworkspace, user) => {
     const reserveModified = await Reserve.findByIdAndUpdate({
-        id: id,
+        _id: id,
     }, {
-        date,
-        duration,
-        time_slot,
-        room,
-        user,
+        date_from,
+        date_to,
+        occupants,
     });
 
     return reserveModified;

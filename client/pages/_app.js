@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes";
 import "../css/tailwind.css";
 import { Provider } from 'react-redux';
-import {store} from "../store/index";
+import store from "../redux/store/index";
 
 function MyApp({ Component, pageProps }) {
   return (

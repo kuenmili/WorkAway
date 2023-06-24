@@ -54,9 +54,10 @@ router.post('/', async (req, res) => {
 
 //This route will modify a reserve in our DB
 router.put('/:id', async (req, res) => {
-    const { date_from, date_to, room_id, coworkers } = req.body;
+    const { id } = req.params; 
+    const { date_from, date_to, occupants } = req.body;
     try {
-        const reserveModified = await modifyReserve(date_from, date_to, room_id, coworkers);
+        const reserveModified = await modifyReserve(id, date_from, date_to, occupants);
         res.status(202).json(reserveModified);
     } catch (error) {
         res.status(406).json(error);

@@ -16,10 +16,14 @@ const schemaSpaceCowork = new Schema({
     services: [String],
     images: [String],
     price: Number,
-    reviews: {
+    reviews: [{
         type:Schema.Types.ObjectId,
         ref: "Review"
-    }
+    }],
+    reserves: [{
+        type:Schema.Types.ObjectId,
+        ref: "Reserve"
+    }]
 });
 
 const CoworkSpace = model('CoworkSpace', schemaSpaceCowork)
