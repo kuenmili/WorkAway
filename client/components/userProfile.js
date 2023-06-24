@@ -1,84 +1,71 @@
-import Container from './container';
-
+import React from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
-const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_number, reviews, reserve_id }) => {
+const Profile = ({
+  profile_image,
+  first_name,
+  last_name,
+  email,
+  cellphone_number,
+  id,
+}) => {
 
-    return(
-        <div>
-          <Container className="container mx-auto py-10 px-2 ">
-            <div className=" flex">
-              <div className="shadow-lg rounded-lg flex w-1/2 justify-center text-center">
-                <div className="p-5">
-                <img
-                  className="rounded-t-2xl w-16 md:w-32 lg:w-48"
-                  src={profile_image}
-                  alt=""
-                  width={200}
-                  height={200}
-                  loading="eager"
-                  />
-                  <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">{first_name}</h1>
-                  <h2 className="text-lg font-normal text-gray-600 dark:text-white">{last_name}</h2>
-                </div>
-              </div>
-              <div className="flex w-1/2 justify-center text-center">
-                
-                  <div className="text-lg mb-4 ">
-                    <p className="text-lg font-bold text-gray-800 dark:text-white">Mail: {email}</p>
-                    <p className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">Cellphone: {cellphone_number}</p>
-                    
-                  </div>                    
-                  </div>                  
-                  </div>
-
-                  <div className='md:flex justify-center'>
-                <Link href= {`/users/${id}/edit`} className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5">
-                  Edit
-                </Link>               
-            </div> 
-                  <div className=' md:flex justify-evenly'>
-                    <div className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">{
-                      reviews.length > 0 ? reviews.map(review => {
-                        return (
-                          <div key={review.id}>
-                            <h2>Reviews:</h2>
-                            <p>Score: {review.score}</p>
-                            <p>Comments: {review.comment}</p>
-                          </div>
-                        )
-                    }) 
-                    : 
-                    <div>
-                        <p>No hay reviews</p>
-                    </div>
-                    }</div>
-                    <div className="text-1xl font-bold text-slate-700 mb-3 dark:text-white">
-                        {
-                        reserve_id.length > 0 ? reserve_id.map(reserve => {
-                          return (
-                            <div key={reserve.id}>
-                              <h2>Reserves</h2>
-                            <p>Date: {reserve.date}</p>
-                            <p>Duration: {reserve.duration}</p>
-                            <p>Room:{reserve.room}</p>
-                            </div>
-                        )
-                      }) 
-                    : <div>
-                        <p>No hay reservas</p>
-                    </div>
-                    }
-                    </div>
-                    </div>
-            
-            <div className='md:flex justify-center'>
-            </div>
-          </Container>
-           
+  return (
+    <div className="flex flex-col items-center justify-center mx-auto py-10 px-2">
+      <div className="bg-white rounded-lg shadow-md w-full md:w-2/3 lg:w-1/2 xl:w-1/3 p-8">
+        <div className="relative flex justify-center">
+          <div className="rounded-full overflow-hidden w-32 h-32 md:w-48 md:h-48 xl:w-56 xl:h-56">
+            <img
+              className="w-full h-full object-cover"
+              src={profile_image}
+              alt=""
+              loading="eager"
+            />
+          </div>
         </div>
-      );
+        <div className="flex flex-col items-center mt-8">
+          <h1 className="text-3xl text-slate-700 mb-3 dark:text-white">
+            {first_name}
+          </h1>
+          <h2 className="text-xl text-gray-600 dark:text-white">
+            {last_name}
+          </h2>
+        </div>
+        <div className="mt-4">
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faEnvelope} className="text-gray-800 mr-2" />
+            <input
+              type="text"
+              value={email}
+              className="block w-full bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-indigo-600 dark:text-black"
+              readOnly
+            />
+          </div>
+        </div>
+        <div className="mt-4">
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={faPhone} className="text-gray-800 mr-2" />
+            <input
+              type="text"
+              value={cellphone_number}
+              className="block w-full bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 focus:outline-none focus:border-indigo-600 dark:text-black"
+              readOnly
+            />
+          </div>
+        </div>
+      </div>
 
+      <div className="mt-4">
+        <Link href={`/users/${id}/edit`}  className="px-6 py-2 text-white bg-indigo-800 rounded-md">
+          
+            Editar Perfil
+          
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Profile;

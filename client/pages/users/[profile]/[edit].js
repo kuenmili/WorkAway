@@ -17,7 +17,9 @@ const UpdateProfilePage = () => {
         <div>
           <Navbar />
           <UpdateProfile />
-          <Footer />
+          <div className="mt-4">
+                <Footer />
+            </div>
         </div>
       );
 

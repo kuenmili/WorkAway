@@ -15,7 +15,9 @@ const ProfilePage = ({ item }) => {
     <div>
       <Navbar />
       <Profile {...item} />
-      <Footer />
+      <div className="mt-4">
+                <Footer />
+            </div>
     </div>
   );
 };
