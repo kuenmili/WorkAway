@@ -1,16 +1,10 @@
-const nextConfig = {
+module.exports = {
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
   },
   output: "standalone",
-  reactStrictMode: true,
-  images: {
-    domains: [
-      'newprofilepic2.photo-cdn.net', 'i.postimg.cc', 'firebasestorage.googleapis.com'
-    ],
+  images: {    
+    domains: ['<http://cd.sanity.io|cd.sanity.io>'],  
   },
 };
-
-
-module.exports = nextConfig;
