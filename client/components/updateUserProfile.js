@@ -102,6 +102,7 @@ const UpdateProfile = () => {
               alt="Profile"
             />
           </div>
+        <div className="mr-9">
           <button
             type="button"
             onClick={handleUpdateImage}
@@ -117,21 +118,24 @@ const UpdateProfile = () => {
             onChange={handleUploadImage}
           />
         </div>
+        </div>
+          {/* Resto del formulario */}
+
         <div className="flex-1">
-          <div className="bg-white rounded-lg shadow-2xl p-6">
+          <div className="bg-white rounded-lg shadow-2xl p-6 dark:bg-[#26272c] shadow-[rgba(0, 0, 0, 0.16)]">
             <div className="mb-4">
-              <label className="block mb-1">First Name:</label>
+              <label className="block mb-1 dark:text-white">First Name:</label>
               <input
                 type="text"
                 name="first_name"
                 placeholder="Nombre"
                 value={data.first_name}
                 onChange={handleInputChange}
-                className="w-full bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
+                className="w-full  bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-white"
               />
             </div>
 
-            {/* Resto del formulario */}
+          
             <div className="mb-4">
               <label className="block mb-1">Last Name:</label>
               <input
