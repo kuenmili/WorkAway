@@ -81,11 +81,11 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       await axios.put(
-        'http://localhost:3001/users/648b9db994bb688e0ba6d9df',
+        'http://localhost:3001/users/648b9db994bb688e0ba6d9df', //ESTA HARDCODEADO. NECESITO A USER DE AUTH
         data
       );
       alert('User updated successfully');
-      router.push('http://localhost:3000/users/648b9db994bb688e0ba6d9df')
+      router.push('http://localhost:3000/users/648b9db994bb688e0ba6d9df') //ESTA HARDCODEADO. NECESITO A USER DE AUTH
     } catch (error) {
       console.log(error);
     }
