@@ -34,6 +34,7 @@ function add() {
                   className="w-3/4 mx-auto bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
                 />
               </div>
+
               {/*add rooms*/}
               <div className="mt-6">
                 <div className="flex flex-col">
@@ -45,6 +46,7 @@ function add() {
                   />
                 </div>
               </div>
+
               {/*Add about */}
               <div className="mt-6">
                 <div className="flex flex-col">
