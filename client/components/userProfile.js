@@ -1,5 +1,5 @@
 import Container from './container';
-import Image from 'next/image';
+
 import Link from 'next/link';
 
 const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_number, reviews, reserve_id }) => {
@@ -10,7 +10,7 @@ const Profile = ({ id, first_name, last_name, profile_image, email, cellphone_nu
             <div className=" flex">
               <div className="shadow-lg rounded-lg flex w-1/2 justify-center text-center">
                 <div className="p-5">
-                <Image
+                <img
                   className="rounded-t-2xl w-16 md:w-32 lg:w-48"
                   src={profile_image}
                   alt=""
