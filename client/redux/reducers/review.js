@@ -1,4 +1,4 @@
-import { GET_ALL_REVIEW, CREATE_REVIEW, UPDATE_REVIEW } from "../action/review";
+import { GET_ALL_REVIEW, CREATE_REVIEW, UPDATE_REVIEW } from "../actions/review";
 
 const InitialState = {
     reviews: [],

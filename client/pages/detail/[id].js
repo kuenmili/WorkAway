@@ -1,16 +1,21 @@
+
 import { useRouter } from 'next/router';
 import Detail from '../../components/detail';
-import cardList from "../../components/datalist";
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import MapComponent from '../../components/Map';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCoworkSpace } from '../../redux/actions/coworkSpaces';
+import { useEffect } from 'react';
 
-export default function DetailPage({ item }) {
-  const router = useRouter();
+export default function DetailPage() {
+  const dispatch = useDispatch();
+  const { id } = useRouter().query;
+  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    id && dispatch(getCoworkSpace(id));
+  }, [dispatch, id]);
 
   const { location } = item;
 
@@ -19,30 +24,15 @@ export default function DetailPage({ item }) {
       <Navbar />
       <Detail key={item.id} {...item} />
       <MapComponent key={item.id} address={location} />
+  return coworkSpace ? (
+    <div>
+      <Navbar />
+      <Detail {...coworkSpace} />
       <Footer />
     </div>
-  );
-}
-
-export async function getStaticPaths() {
-  const paths = cardList.map((item) => ({
-    params: { id: item.id.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const { id } = params;
-  const item = cardList.find((item) => item.id === Number(id));
-
-  return {
-    props: {
-      item,
-    },
-  };
-}
+  ) : (
+    <div>Loading...</div>
+    </div>
+    );
+  }
 

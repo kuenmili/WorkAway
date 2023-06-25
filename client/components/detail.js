@@ -2,24 +2,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Container from './container';
 
-const Detail = ({ id, img, title, price, rating, location, text }) => {
+
+const Detail = ({ about, address, business, images, location, name, price, services, rooms }) => {
+  
+  
   return (
     <div>
       <Container className="container mx-auto py-10 px-2">
         <div className="flex gap-6">
           <div className="shadow-lg rounded-lg w-2/3">
-            <Image
+            <img
               className="rounded-t-2xl"
-              src={img}
+              src={images && images[0]}
               alt=""
-              width={900}
-              height={800}
-              loading="eager"
             />
             <div className="p-5">
-              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">{title}</h1>
-              <p className="text-lg font-normal text-gray-600 dark:text-white">{text}</p>
-              <Rating stars={Array(5).fill(rating)} />
+              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">{name}</h1>
+              <p className="text-lg font-normal text-gray-600 dark:text-white">{about}</p>
+              <Rating stars={Array(5).fill(0)} />
               <p className="text-lg font-bold text-gray-800 dark:text-white">Price: {price}</p>
             </div>
           </div>
@@ -27,11 +27,11 @@ const Detail = ({ id, img, title, price, rating, location, text }) => {
             <div className="p-4">
               <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">Información</h1>
               <div className="text-lg mb-4">
-                <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">Precio por día: {price}</p>
-                <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">Rating: {rating}</p>
-                <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">Ubicación: {location}</p>
-                <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">Mail: correo@example.com</p>
-                <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">Teléfono: 123456789</p>
+                <p className="text-black">Precio por día: {price}</p>
+                <p className="text-black">Rating: {0}</p>
+                <p className="text-black">Ubicación: {location}</p>
+                <p className="text-black">Mail: correo@example.com</p>
+                <p className="text-black">Teléfono: 123456789</p>
               </div>
             </div>
             <div className="p-4 flex justify-center">
@@ -46,7 +46,7 @@ const Detail = ({ id, img, title, price, rating, location, text }) => {
         </div>
       </Container>
     </div>
-  );
+  )
 };
 
 export default Detail;
