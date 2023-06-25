@@ -25,7 +25,7 @@ export default function cardsSection() {
           <div className="grid lg:grid-cols-3 gap-12 ">
             {coworkSpaces?.map((card) => (
                 <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300" key={card._id}>
-                  <Link href={`/detail/${card.id}`}>
+                  <Link href={`/detail/${card._id}`}>
                   
                   <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                     {

@@ -33,6 +33,15 @@ const MapComponent = ({ address }) => {
     width: '100%'
   };
 
+  const textStyles = {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginLeft: '20px',
+    marginTop: '10px',
+    marginBottom: '5px'
+  };
+
   const defaultCenter = {
     lat: 0,
     lng: 0
@@ -43,22 +52,26 @@ const MapComponent = ({ address }) => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <><div className="text-center mb-4">
-            <h3 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">¿DONDE VAS A ESTAR?</h3>
-            <p className="text-2xl font-bold text-slate-700 mb-3 dark:text-white">{address}</p>
-          </div><GoogleMap
+        <>
+          <div style={textStyles}>
+            <h3>¿Dónde vas a estar?</h3>
+            <p className="text-lg font-normal text-gray-600 dark:text-white my-4">{address}</p>
+          </div>
+          <GoogleMap
             mapContainerStyle={mapStyles}
             zoom={10}
             center={coordinates || defaultCenter}
           >
-              {coordinates && <Marker position={coordinates} />}
-            </GoogleMap></>
+            {coordinates && <Marker position={coordinates} />}
+          </GoogleMap>
+        </>
       )}
     </div>
   );
 };
 
 export default MapComponent;
+
 
 
 
