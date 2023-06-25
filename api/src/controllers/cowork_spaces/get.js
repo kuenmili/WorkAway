@@ -2,9 +2,10 @@ const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const getAllCoworkSpaces = async () => {
     const allCoworkSpaces = await CoworkSpace.find()
-        .populate("rooms");
+
     return allCoworkSpaces;
 }
+
 
 const getCoworkSpacesBySearch = async (name, score, location, capacity, services, price) => {
     const [gte, lte] = price.split('-');
@@ -20,12 +21,13 @@ const getCoworkSpacesBySearch = async (name, score, location, capacity, services
     console.log(filters)
     const coworkSpaceByName = await CoworkSpace.find(filters)
 
+
     return coworkSpaceByName;
 }
 
 const getCoworkSpaceByID = async (id) => {
     const coworkSpaceByID = await CoworkSpace.findById(id)
-        .populate("rooms");
+
 
     if (!coworkSpaceByID) throw new Error("cowork space not found");
 

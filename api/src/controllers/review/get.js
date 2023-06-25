@@ -12,7 +12,7 @@ const getById = async (id) => {
 };
 
 const getAllReviews = async () => {
-    const review = await Review.find({}).populate("user_id");
+    const review = await Review.find({}).populate("user_id").populate("cowork_space");
     return review;
 };
 

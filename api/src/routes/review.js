@@ -31,12 +31,14 @@ reviewRouter.post("/post", async (req, res) => {
         user_id,
         score,
         comment,
+        coworkspace
     } = req.body;
     try {        
         const review = await createReview({
             user_id,
             score,
             comment,
+            coworkspace
         });
 
         res.status(201).json('Review successfully created!');
