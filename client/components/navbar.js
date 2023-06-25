@@ -28,19 +28,25 @@ function Navbar() {
     <div className="w-full">
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
         {/* Logo  */}
-        <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-          <Link href="/home">
-            <span
-              className="flex items-center space-x-2 text-4xl 
-                  font-bold text-indigo-800 dark:text-gray-100 "
-            >
-              <span>
-                <Image src="/img/logo2.svg" alt="" width="50" height="40" />
-              </span>
-              <span>WorkAway</span>
-            </span>
-          </Link>
-        </div>
+              <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+                <Link href="/home">
+                  <span className="flex items-center space-x-2 text-4xl 
+                  font-bold text-indigo-800 dark:text-gray-100 ">
+                    <span>
+                      <Image 
+                        src="/img/WORK.svg"
+                        alt=""
+                        width="50"
+                        height="40"
+                        className="text-dark-100 rounded-full"
+                        />
+                    </span>
+                    <span>WorkAway</span>
+                  </span>
+                </Link>
+              </div>
+       
+
 
         {/* menu  */}
         <div className="hidden text-center lg:flex lg:items-center">
@@ -72,10 +78,10 @@ function Navbar() {
             Sign in or register
           </Link>
           <Link
-            href="/add"
+            href="/business-login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Become a provider
+            Ingresa como proveedor
           </Link>
 
           <ThemeChanger />

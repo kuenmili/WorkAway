@@ -6,13 +6,21 @@ const getAllCoworkSpaces = async () => {
     return allCoworkSpaces;
 }
 
-const getCoworkSpacesByName = async (name) =>{
-    const coworkSpaceByName = await CoworkSpace.find({
-        name: {
-            $regex: name,
-            $options: 'i'
-        }
-    })
+
+const getCoworkSpacesBySearch = async (name, score, location, capacity, services, price) => {
+    const [gte, lte] = price.split('-');
+    // we need to fix reviews model to use score filter
+
+    const filters = {};
+    
+    if (name) filters.name = { $regex: name, $options: 'i' };
+    if (location) filters.location = { $regex: location, $options: 'i' };
+    if (capacity) filters.capacity = { $gte: capacity };
+    if (services) filters.services = { $in: [services] };
+    if (price) filters.price = { $lte: parseInt(lte), $gte: parseInt(gte) };
+    console.log(filters)
+    const coworkSpaceByName = await CoworkSpace.find(filters)
+
 
     return coworkSpaceByName;
 }
@@ -28,6 +36,6 @@ const getCoworkSpaceByID = async (id) => {
 
 module.exports = {
     getAllCoworkSpaces,
-    getCoworkSpacesByName,
+    getCoworkSpacesBySearch,
     getCoworkSpaceByID,
 }

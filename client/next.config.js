@@ -4,5 +4,8 @@ module.exports = {
       defaultLocale: "en",
     },
     output: "standalone",
+    images: {    
+      domains: ['<http://cd.sanity.io|cd.sanity.io>'],  
+    },
   };
   
