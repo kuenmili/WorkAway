@@ -1,4 +1,4 @@
-import { CREATE_USER, PUT_USER, GET_USER_BY_ID } from "../action/users";
+import { CREATE_USER, PUT_USER, GET_USER_BY_ID } from "../actions/users";
 
 const InitialState = {
     user: {},

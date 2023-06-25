@@ -68,9 +68,9 @@ const Home = () => {
           className="mySwiper"
           >
             <SwiperSlide>
-            <main className="flex space-x-28 > * + *">
-            <Filters filters={filters} setFilters={setFilters} handleInputChange={handleInputChange} />
-            <CardsSection cardList={cards}/>
+            <main className=" flex space-x-28 > * + * sticky top-0">
+            <Filters filters={filters} setFilters={setFilters} handleInputChange={handleInputChange} className="sticky top-0" />
+            <CardsSection className="sticky top-0"/>
             </main>
             </SwiperSlide>
         </Swiper>   

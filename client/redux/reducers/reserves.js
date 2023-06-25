@@ -1,4 +1,4 @@
-import { GET_RESERVE_BY_ID, CREATE_RESERVE, UPDATE_RESERVE } from "../action/reserves";
+import { GET_RESERVE_BY_ID, CREATE_RESERVE, UPDATE_RESERVE } from "../actions/reserves";
 
 const InitialState = {
     reserves: [],

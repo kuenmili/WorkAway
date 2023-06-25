@@ -1,4 +1,4 @@
-import { GET_BUSINESS_BY_ID, CREATE_BUSINESS, UPDATE_BUSINESS  } from "../action/business";
+import { GET_BUSINESS_BY_ID, CREATE_BUSINESS, UPDATE_BUSINESS  } from "../actions/business";
 
 const InitialState = {
     business: {},
