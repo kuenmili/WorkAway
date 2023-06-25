@@ -16,7 +16,7 @@ const Detail = ({
   rating,
 }) => {
   return (
-    <div className="w-screen bg-gray-100">
+    <div className="w-screen bg-gray-100 dark:bg-gray-900">
       <Container className="mx-auto py-10 px-2 max-w-full">
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="md:w-1/2">
@@ -31,7 +31,7 @@ const Detail = ({
               {images &&
                 images.map((image, index) => (
                   <SwiperSlide key={index}>
-                    <div className="ml-4"> {/* Agrega un margen izquierdo personalizado */}
+                    <div className="ml-4">
                       <img
                         src={image}
                         alt={`Slide ${index + 1}`}
@@ -46,7 +46,7 @@ const Detail = ({
           <div className="md:w-1/2">
             <div className="p-5">
               <div className="flex flex-col">
-                <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white my-4">
+                <h1 className="text-3xl font-bold text-slate-700 dark:text-white mb-3 my-4">
                   {name}
                 </h1>
                 <p className="text-lg font-normal text-gray-600 dark:text-white my-4">
@@ -76,15 +76,15 @@ const Detail = ({
                   </p>
                 </div>
                 <div className="flex-1">
-                  <div className="p-4 flex justify-start items-center mb-6"> {/* Aumenta el margen inferior */}
+                  <div className="p-4 flex justify-start items-center mb-6">
                     <Link
-                      href="/login"
-                      className="px-6 py-2 text-black bg-white border border-black rounded-md md:ml-0 mt-8 inline-block mr-4" // Añade un margen derecho
+                      href={"/login"}
+                      className="px-6 py-2 text-black bg-white border border-black rounded-md md:ml-0 mt-8 inline-block mr-4"
                     >
                       Contacta al anfitrión
                     </Link>
                   </div>
-                  <div className="p-4 flex justify-start items-center space-x-4"> {/* Alinea los botones y ajusta el espacio */}
+                  <div className="p-4 flex justify-start items-center space-x-4">
                     <Link href={`/booking`} className="px-6 py-2 text-white bg-indigo-800 rounded-md">
                       Reservar
                     </Link>

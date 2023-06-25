@@ -18,17 +18,19 @@ export default function DetailPage() {
   }, [dispatch, id]);
 
   return coworkSpace ? (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div style={{ marginTop: '2rem' }}>
+      <div className="mt-8">
         <Detail {...coworkSpace} />
       </div>
-      <div style={{ marginLeft: '1rem', marginRight: '1rem', marginTop: '4rem' }}>
-        <div style={{ marginBottom: '8rem' }}>
+      <div className="mx-4 mt-16">
+        <div className="mb-32">
           <MapComponent address={coworkSpace.location} />
         </div>
-        <div style={{ marginTop: '8rem' }}>
-          <OfficeRules />
+        <div className="flex">
+          <div className="flex-1">
+            <OfficeRules />
+          </div>
         </div>
       </div>
       <Footer />

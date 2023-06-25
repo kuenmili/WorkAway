@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const MapComponent = ({ address }) => {
@@ -33,14 +33,8 @@ const MapComponent = ({ address }) => {
     width: '100%'
   };
 
-  const textStyles = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#1f2937',
-    marginLeft: '20px',
-    marginTop: '10px',
-    marginBottom: '5px'
-  };
+  const textStyles = 'text-xl font-bold text-gray-800 mb-4';
+  const darkTextStyles = 'text-white'; // Aplica el color blanco al texto en modo oscuro
 
   const defaultCenter = {
     lat: 0,
@@ -53,9 +47,9 @@ const MapComponent = ({ address }) => {
         <div>Loading...</div>
       ) : (
         <>
-          <div style={textStyles}>
-            <h3>¿Dónde vas a estar?</h3>
-            <p className="text-lg font-normal text-gray-600 dark:text-white my-4">{address}</p>
+          <div className={textStyles}>
+            <h3 className={darkTextStyles}>¿Dónde vas a estar?</h3> {/* Aplica los estilos de texto oscuro */}
+            <p  className={`text-lg font-normal my-4 ${darkTextStyles}`}>{address}</p>
           </div>
           <GoogleMap
             mapContainerStyle={mapStyles}
@@ -71,6 +65,7 @@ const MapComponent = ({ address }) => {
 };
 
 export default MapComponent;
+
 
 
 
