@@ -15,7 +15,7 @@ const getCoworkSpacesBySearch = async (name, score, location, capacity, services
     
     if (name) filters.name = { $regex: name, $options: 'i' };
     if (location) filters.location = { $regex: location, $options: 'i' };
-    if (capacity) filters.capacity = { $gte: capacity };
+   
     if (services) filters.services = { $in: [services] };
     if (price) filters.price = { $lte: parseInt(lte), $gte: parseInt(gte) };
     console.log(filters)
