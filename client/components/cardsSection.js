@@ -47,7 +47,7 @@ export default function cardsSection() {
                     <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.name}</h3>
                     <p className='text-lg font-bold text-gray-700 dark:text-white mb-1'>{card.location}</p>
                     <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'>{card.about} </p><Link href={`/detail/${card._id}`}>Ver mas</Link>
-                    <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'>{card.services} </p>
+                     
                     <Rating stars={Array(5).fill(card.score)} className=""/>
                     <p className='text-2xl font-bold text-gray-800 text-center dark:text-white mt-2'>{`${card.price}usd`}/dia</p>
                   </div>
