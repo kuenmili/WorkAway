@@ -102,7 +102,6 @@ const UpdateProfile = () => {
               alt="Profile"
             />
           </div>
-        <div className="mr-9">
           <button
             type="button"
             onClick={handleUpdateImage}
@@ -117,7 +116,6 @@ const UpdateProfile = () => {
             name="avatar"
             onChange={handleUploadImage}
           />
-        </div>
         </div>
           {/* Resto del formulario */}
 
