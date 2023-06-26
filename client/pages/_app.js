@@ -1,5 +1,6 @@
 import { ThemeProvider } from "next-themes";
 import "../css/tailwind.css";
+
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "../redux/store";
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
       strategy="beforeInteractive"
     />
     <ThemeProvider attribute="class">
+
       <Component {...pageProps} />
     </ThemeProvider>
     </Provider>

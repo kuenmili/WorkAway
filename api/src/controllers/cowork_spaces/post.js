@@ -1,13 +1,17 @@
 const { Business } = require('../../models/Business');
 const { CoworkSpace } = require('../../models/CoworkSpace');
 
-const createSpaceCowork = async ({ business, name, price, about, services, images }) => {
+const createSpaceCowork = async ({ location, address,business, name, price, about, services, images, review }) => {
     const coworkSpaceCreated = await CoworkSpace.create({
+        location,
+        address,
         business,
         name,
         about,
         services,
         images,
+        review,
+        price
     });
 
     await Business.findByIdAndUpdate(

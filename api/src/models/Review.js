@@ -8,7 +8,13 @@ const schemaReview = new Schema({
     },
     score:Number,
     comment:String,
+    cowork_space: { 
+        type:Schema.Types.ObjectId,
+        ref: 'CoworkSpace',
+        require: true,
+    }
 });
+
 
 schemaReview.set('toJSON', {
     transform: (document, returnedObject) => {

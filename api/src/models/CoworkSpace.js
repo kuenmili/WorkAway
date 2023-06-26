@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const { model, Schema } = mongoose;
 
 const schemaSpaceCowork = new Schema({
+    location: String,
+    address: String,
     business: {
         type: Schema.Types.ObjectId,
         ref: "Business"
@@ -13,12 +15,15 @@ const schemaSpaceCowork = new Schema({
     about: String,
     services: [String],
     images: [String],
-    rooms: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Room',
+    price: Number,
+    reviews: [{
+        type:Schema.Types.ObjectId,
+        ref: "Review"
+    }],
+    reserves: [{
+        type:Schema.Types.ObjectId,
+        ref: "Reserve"
     }]
-}, {
-    strictPopulate: false,
 });
 
 const CoworkSpace = model('CoworkSpace', schemaSpaceCowork)

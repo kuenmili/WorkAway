@@ -34,7 +34,7 @@ const MapComponent = ({ address }) => {
   };
 
   const textStyles = 'text-xl font-bold text-gray-800 mb-4';
-  const darkTextStyles = 'text-white'; // Aplica el color blanco al texto en modo oscuro
+  const darkTextStyles = 'text-white'; 
 
   const defaultCenter = {
     lat: 0,
@@ -48,7 +48,7 @@ const MapComponent = ({ address }) => {
       ) : (
         <>
           <div className={textStyles}>
-            <h3 className={darkTextStyles}>¿Dónde vas a estar?</h3> {/* Aplica los estilos de texto oscuro */}
+            <h3 className={darkTextStyles}>¿Dónde vas a estar?</h3> 
             <p  className={`text-lg font-normal my-4 ${darkTextStyles}`}>{address}</p>
           </div>
           <GoogleMap
