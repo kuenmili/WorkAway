@@ -5,7 +5,6 @@ import "swiper/css";
 import { Navigation } from "swiper";
 import Container from "./container";
 
-<<<<<<< HEAD
 const Detail = ({
   location,
   address,
@@ -94,45 +93,13 @@ const Detail = ({
                     </Link>
                   </div>
                 </div>
-=======
-
-const Detail = ({ about, address, business, images, location, name, price, services, rooms }) => {
-  
-  
-  return (
-    <div>
-      <Container className="container mx-auto py-10 px-2">
-        <div className="flex gap-6">
-          <div className="shadow-lg rounded-lg w-2/3">
-            <img
-              className="rounded-t-2xl"
-              src={images && images[0]}
-              alt=""
-            />
-            <div className="p-5">
-              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">{name}</h1>
-              <p className="text-lg font-normal text-gray-600 dark:text-white">{about}</p>
-              <Rating stars={Array(5).fill(0)} />
-              <p className="text-lg font-bold text-gray-800 dark:text-white">Price: {price}</p>
-            </div>
-          </div>
-          <div className="flex-1">
-            <div className="p-4">
-              <h1 className="text-3xl font-bold text-slate-700 mb-3 dark:text-white">Información</h1>
-              <div className="text-lg mb-4">
-                <p className="text-black">Precio por día: {price}</p>
-                <p className="text-black">Rating: {0}</p>
-                <p className="text-black">Ubicación: {location}</p>
-                <p className="text-black">Mail: correo@example.com</p>
-                <p className="text-black">Teléfono: 123456789</p>
->>>>>>> ae3575a16eafce89aa6d259592f6af065da14607
               </div>
             </div>
           </div>
         </div>
       </Container>
     </div>
-  )
+  );
 };
 
 const Rating = ({ stars }) => {
