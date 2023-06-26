@@ -1,8 +1,15 @@
 import { combineReducers } from 'redux';
-import coworkSpaces from './coworkSpaces';
+import coworkSpaces from '../reducers/coworkSpaces';
+import users from '../reducers/users';
+import reserves from '../reducers/reserves';
+import review from '../reducers/review';
+import business from '../reducers/business';
 
 const rootReducer = combineReducers({
-    // add reducers here
+    users,
+    reserves,
+    review,
+    business,
     coworkSpaces,
 });
 

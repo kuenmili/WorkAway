@@ -11,7 +11,7 @@ const router = Router();
 
 router.use("/business", businessRouter);
 router.use("/cowork_spaces", coworkSpaceRouter);
-router.use("/reserve", reserveRouter);
+router.use("/reserves", reserveRouter);
 router.use("/users", userRouter);
 router.use("/rooms", roomRouter);
 router.use("/reviews", reviewRouter);

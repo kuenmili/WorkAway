@@ -18,7 +18,7 @@ export const getCoworkSpaces = () => async dispatch => {
             type: GET_COWORKSPACES,
             payload: data
         });
-        console.log("DATA: ", data);
+        
     } catch ({ response: { data } }) {
         dispatch({
             type: COWORKSPACE_ERROR,

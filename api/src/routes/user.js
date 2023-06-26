@@ -57,6 +57,7 @@ userRouter.post('/signup', async (req, res) => {
 userRouter.put('/:id', async (req, res) => {
     const { id } = req.params;
     const user = req.body;
+    
     try {
         const updatedUser = await updateUser(id, user);
         res.json(updatedUser);

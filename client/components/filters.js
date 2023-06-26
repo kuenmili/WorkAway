@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCoworkSpacesBySearch } from '../redux/actions/coworkSpaces';
@@ -9,7 +8,6 @@ export default function Filters() {
     const [filters, setFilters] = useState({
         score: '',
         location: '',
-        capacity: '',
         services: '',
         price: '',
     });
@@ -26,7 +24,7 @@ export default function Filters() {
     return (
 
 <div className="">
-<form className="p-2 space-y-32 > * + * mt-8 ">
+<form className="p-2 space-y-32 > * + * mt-12 ">
         <div className=" ">
                 <label htmlFor="score" className="p-2 font-bold text-base  dark:text-white text-black ">
                   Rating
