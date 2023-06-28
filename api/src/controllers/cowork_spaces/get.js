@@ -45,7 +45,7 @@ const getCoworkSpacesBySearch = async (name, score, location, services, price) =
 }
 
 const getCoworkSpaceByID = async (id) => {
-    let coworkSpaceByID = await CoworkSpace.findById(id).populate("reviews").("score").("comment")
+    let coworkSpaceByID = await CoworkSpace.findById(id).populate("reviews").populate("score").populate("comment")
     coworkSpaceByID = coworkSpaceByID.map((cowork) => {
         let newCoworkByID = cowork.toObject();
 
