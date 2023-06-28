@@ -16,7 +16,9 @@ const UpdateProfilePage = () => {
     return(
         <div>
           <Navbar />
-          <UpdateProfile />
+          <div className="mx-auto max-w-2xl justify-between ">
+            <UpdateProfile />
+          </div>
           <div className="mt-4">
                 <Footer />
             </div>
