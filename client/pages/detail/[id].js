@@ -7,6 +7,8 @@ import Detail from '../../components/detail';
 import { getCoworkSpace } from '../../redux/actions/coworkSpaces';
 import MapComponent from '../../components/Map';
 
+import OfficeRules from '../../components/OfficeRules';
+
 
 export default function DetailPage() {
   const dispatch = useDispatch();
@@ -29,7 +31,9 @@ export default function DetailPage() {
         </div>
         <div className="flex">
           <div className="flex-1">
-            
+
+            <OfficeRules />
+
           </div>
         </div>
       </div>
@@ -39,4 +43,5 @@ export default function DetailPage() {
     <div>Loading...</div>
   );
 }
+
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
+import DropdownMenu from "./navBarLogin";
 import { IsDarkMode } from "./DarkSwitch";
 import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclousure, no se usa por ahora
 
@@ -23,6 +24,8 @@ function Navbar() {
       href: `/about`,
     },
   ];
+  const user = false;
+  const image = ''
 
   return (
     <div className="w-full">
@@ -70,6 +73,9 @@ function Navbar() {
 
         {/* botones  */}
 
+        { user
+        ? <DropdownMenu profileImage={image} />
+        :
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
           <Link
             href="/login"
@@ -83,10 +89,10 @@ function Navbar() {
           >
             Ingresa como proveedor
           </Link>
-
-          <ThemeChanger />
         </div>
-      </nav>
+        }
+        <ThemeChanger />
+        </nav>
     </div>
   );
 }

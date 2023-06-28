@@ -13,7 +13,10 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import Filters from "../components/filters";
 import Search from "../components/search";
+
 import Chatbot from "../components/chatbot";
+
+
 
 const Home = () => {
   const [cards, setCards] = useState(cardList);
@@ -73,8 +76,10 @@ const Home = () => {
             <CardsSection className=""/>
             </main>
             </SwiperSlide>
-        </Swiper>
-        <Chatbot/>   
+
+        </Swiper>   
+        <Chatbot/>
+
       <Footer />
      </>
   )}
