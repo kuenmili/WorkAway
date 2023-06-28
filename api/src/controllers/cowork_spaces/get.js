@@ -45,21 +45,10 @@ const getCoworkSpacesBySearch = async (name, score, location, services, price) =
 }
 
 const getCoworkSpaceByID = async (id) => {
-    let coworkSpaceByID = await CoworkSpace.findById(id).populate("reviews", "score", "comment")
-    coworkSpaceByID = coworkSpaceByID.map((cowork) => {
-        let newCoworkByID = cowork.toObject();
+    let coworkSpaceByID = await CoworkSpace.findById(id)
 
-        newCoworkByID.score = newCoworkByID.reviews.length ? newCoworkByID.reviews.reduce((acc, review) => {
-            return acc + review.score 
-        }, 0) / newCoworkByID.reviews.length || 1 : 0;
 
-        return newCoworkByID;
-    });
-
-    if (score) [
-        coworkSpaceByID = coworkSpaceByID.filter((cowork) => cowork.score === parseInt(score))
-    ]
-
+    
     if (!coworkSpaceByID) throw new Error("cowork space not found");
 
     return coworkSpaceByID;

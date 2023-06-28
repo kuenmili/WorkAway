@@ -14,6 +14,7 @@ const Detail = ({
   images,
   price,
   rating,
+  reviews
 }) => {
   return (
     <div className="w-screen bg-gray-100 dark:bg-gray-900">
@@ -42,6 +43,8 @@ const Detail = ({
                 ))}
             </Swiper>
           </div>
+
+        
           
           <div className="md:w-1/2">
             <div className="p-5">
