@@ -34,8 +34,8 @@
 -   Tailwind CSS: Framework de CSS altamente personalizable utilizado para crear interfaces modernas y receptivas.
 -   MongoDB: Base de datos NoSQL utilizada para almacenar y recuperar datos relacionados con los espacios de trabajo y las reservas.
 
-![nodeLogo](https://img.icons8.com/color/48/000000/nodejs.png) ![express](https://img.icons8.com/color/48/000000/express.png) ![next](https://img.icons8.com/color/48/000000/next.png) ![redux](https://img.icons8.com/color/48/000000/redux.png)
-![Alt text](/client/public/img/![tailwind](https://))
+![nodeLogo](https://img.icons8.com/color/48/000000/nodejs.png) ![express](https://img.icons8.com/?size=48&id=2ZOaTclOqD4q&format=png) ![next](https://img.icons8.com/color/48/000000/next.png) ![redux](https://img.icons8.com/color/48/000000/redux.png)
+![tailwind](https://img.icons8.com/?size=48&id=x7XMNGh2vdqA&format=png)
 ![mongo](https://img.icons8.com/color/48/000000/mongodb.png)
 
 </br >
