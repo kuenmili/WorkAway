@@ -35,7 +35,7 @@
 -   MongoDB: Base de datos NoSQL utilizada para almacenar y recuperar datos relacionados con los espacios de trabajo y las reservas.
 
 ![nodeLogo](https://img.icons8.com/color/48/000000/nodejs.png) ![express](https://img.icons8.com/color/48/000000/express.png) ![next](https://img.icons8.com/color/48/000000/next.png) ![redux](https://img.icons8.com/color/48/000000/redux.png)
-![Alt text](image-1.png)
+![Alt text](/client/public/img/![tailwind](https://))
 ![mongo](https://img.icons8.com/color/48/000000/mongodb.png)
 
 </br >
