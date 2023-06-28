@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Modal from "../components/modal";
-import Link from "next/link";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { createReserve } from "../redux/actions/reserves";
 
-export default function Signup() {
+export default function booking() {
   const router = useRouter();
-  const [user, setUser] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
+  const dispatch = useDispatch();
+
+  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
+
+  useEffect(() => {
+    if (coworkSpace) {
+      const { name, price } = coworkSpace;
+      setCoworkSpace(`${name} - ${price}`);
+    }
+  }, [coworkSpace]);
+
+  const [date_from, setDateFrom] = useState("");
+  const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
-  const [coworkSpace, setCoworkSpace] = useState("");
-  const [modalContent, setModalContent] = useState("");
-  const [userError, setUserError] = useState(false);
+  const [cowork_space, setCoworkSpace] = useState("");
+
   const [dateFromError, setDateFromError] = useState(false);
   const [dateToError, setDateToError] = useState(false);
   const [occupantsError, setOccupantsError] = useState(false);
   const [coworkSpaceError, setCoworkSpaceError] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
-
-  const handleUserChange = (e) => {
-    setUser(e.target.value);
-    setUserError(false);
-  };
 
   const handleDateFromChange = (e) => {
     setDateFrom(e.target.value);
@@ -52,163 +55,83 @@ export default function Signup() {
     setCoworkSpaceError(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCheckBox = (e) => {
+    setIsChecked(e.target.value);
+    setShowCheckboxError(false);
+  };
 
+  const handleReserveClick = () => {
     if (
-      !user ||
-      !dateFrom ||
-      !dateTo ||
-      !occupants ||
-      !coworkSpace ||
-      !isChecked
+      date_from === "" ||
+      date_to === "" ||
+      occupants === "" ||
+      cowork_space === "" ||
+      isChecked === ""
     ) {
-      if (!user) setUserError(true);
-      if (!dateFrom) setDateFromError(true);
-      if (!dateTo) setDateToError(true);
-      if (!occupants) setOccupantsError(true);
-      if (!coworkSpace) setCoworkSpaceError(true);
-      if (!isChecked) setShowCheckboxError(true);
-
+      alert("Por favor complete todos los campos.");
       return;
     }
 
-    try {
-      const response = await axios.post("http://localhost:3001/users/reserve", {
-        user,
-        dateFrom,
-        dateTo,
-        occupants,
-        coworkSpace,
-      });
+    dispatch(
+      createReserve({
+        date_from: date_from,
+        date_to: date_to,
+        occupants: occupants,
+        cowork_space: cowork_space,
+      })
+    );
 
-      setModalContent("Registration successfully completed!");
-      setShowModal(true);
-    } catch (error) {
-      setModalContent(
-        "An error occurred while submitting the form",
-        error.message
-      );
-      setShowModal(true);
-    }
+    alert("Reserva confirmada");
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    router.push("/login");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (date_from === "") {
+      setDateFromError(true);
+    }
+    if (date_to === "") {
+      setDateToError(true);
+    }
+    if (occupants === "") {
+      setOccupantsError(true);
+    }
+    if (cowork_space === "") {
+      setCoworkSpaceError(true);
+    }
+
+    if (
+      !dateFromError &&
+      !dateToError &&
+      !occupantsError &&
+      !coworkSpaceError
+    ) {
+      handleReserveClick();
+    }
   };
 
   return (
     <>
       <Navbar />
+
       <div className="container mx-auto px-4 ">
         <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
           <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">
             Reserva tu espacio
           </h2>
           <p className="mb-6 text-center text-gray-400 ">
-            ¿ya tienes una cuenta?{" "}
+            ¿Ya tienes una cuenta?{" "}
             <Link className="text-indigo-600 " href="/login">
-              Inicia sesion
+              Inicia sesión
             </Link>
           </p>
-
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <div className="flex flex-col">
                 <input
                   type="text"
-                  value={user}
-                  placeholder="Nombre completo"
-                  onChange={handleUserChange}
-                  className={`w-3/4 mx-auto bg-white border ${
-                    userError ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
-                />
-                {userError && (
-                  <p
-                    className="text-red-500 mt-2"
-                    style={{ marginLeft: "92px" }}
-                  >
-                    This field is required.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <div className="flex flex-col">
-                <input
-                  type="date"
-                  value={dateFrom}
-                  onChange={handleDateFromChange}
-                  className={`w-3/4 mx-auto bg-white bg-opacity-50 border ${
-                    dateFromError ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black `}
-                />
-                {dateFromError && (
-                  <p
-                    className="text-red-500 mt-2"
-                    style={{ marginLeft: "92px" }}
-                  >
-                    This field is required.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <div className="flex flex-col">
-                <input
-                  type="date"
-                  value={dateTo}
-                  onChange={handleDateToChange}
-                  className={`w-3/4 mx-auto bg-white border ${
-                    dateToError ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
-                />
-
-                {dateToError && (
-                  <p
-                    className="text-red-500 mt-2"
-                    style={{ marginLeft: "92px" }}
-                  >
-                    This field is required.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <div className="flex flex-col">
-                <input
-                  type="number"
-                  value={occupants}
-                  placeholder="Número de ocupantes"
-                  onChange={handleOccupantsChange}
-                  className={`w-3/4 mx-auto bg-white border ${
-                    occupantsError ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
-                  min="1"
-                  max="20"
-                />
-                {occupantsError && (
-                  <p
-                    className="text-red-500 mt-2"
-                    style={{ marginLeft: "92px" }}
-                  >
-                    This field is required.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <div className="flex flex-col">
-                <input
-                  type="text"
-                  value={coworkSpace}
-                  placeholder="Espacio de trabajo"
+                  value={`Espacio a reservar: ${coworkSpace?.name} - Precio: ${coworkSpace?.price} usd /dia`}
+                  placeholder="Espacio de coworking"
                   onChange={handleCoworkSpaceChange}
                   className={`w-3/4 mx-auto bg-white border ${
                     coworkSpaceError ? "border-red-500" : "border-indigo-300"
@@ -219,58 +142,111 @@ export default function Signup() {
                     className="text-red-500 mt-2"
                     style={{ marginLeft: "92px" }}
                   >
-                    This field is required.
+                    Este campo es requerido.
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="mb-6">
+              <div className="flex flex-col">
+                <input
+                  type="date"
+                  value={date_from}
+                  placeholder="Fecha desde"
+                  onChange={handleDateFromChange}
+                  className={`w-3/4 mx-auto bg-white border ${
+                    dateFromError ? "border-red-500" : "border-indigo-300"
+                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                />
+                {dateFromError && (
+                  <p
+                    className="text-red-500 mt-2"
+                    style={{ marginLeft: "92px" }}
+                  >
+                    Este campo es requerido.
                   </p>
                 )}
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="inline-flex items-center">
+              <div className="flex flex-col">
+                <input
+                  type="date"
+                  value={date_to}
+                  placeholder="Fecha hasta"
+                  onChange={handleDateToChange}
+                  className={`w-3/4 mx-auto bg-white border ${
+                    dateToError ? "border-red-500" : "border-indigo-300"
+                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                />
+                {dateToError && (
+                  <p
+                    className="text-red-500 mt-2"
+                    style={{ marginLeft: "92px" }}
+                  >
+                    Este campo es requerido.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex flex-col">
+                <input
+                  type="number"
+                  value={occupants}
+                  placeholder="Cantidad de ocupantes"
+                  onChange={handleOccupantsChange}
+                  className={`w-3/4 mx-auto bg-white border ${
+                    occupantsError ? "border-red-500" : "border-indigo-300"
+                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                />
+                {occupantsError && (
+                  <p
+                    className="text-red-500 mt-2"
+                    style={{ marginLeft: "92px" }}
+                  >
+                    La cantidad de ocupantes debe ser entre 1 y 20.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-center">
                 <input
                   type="checkbox"
-                  className="form-checkbox h-4 w-4"
                   checked={isChecked}
-                  onChange={() => {
-                    setIsChecked(!isChecked);
-                    setShowCheckboxError(false);
-                  }}
+                  onChange={() => setIsChecked(!isChecked)}
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded ml-14"
                 />
-                <span className="ml-2 dark:text-black">Confirmar reserva</span>
-              </label>
+                <label
+                  htmlFor="checkbox"
+                  className="ml-2 block text-sm text-gray-900 dark:text-black"
+                >
+                  Confirmar reserva
+                </label>
+              </div>
               {showCheckboxError && (
                 <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>
                   Por favor confirme su reserva
                 </p>
               )}
             </div>
-
-            <PayPalScriptProvider>
-              <PayPalButtons
-                style={{
-                  layout: "horizontal",
-                  color: "silver",
-                  shape: "pill",
-                  label: "checkout",
-                }}
-              />
-            </PayPalScriptProvider>
+            <div className="mb-6 flex justify-center mt-8">
+              <button
+                type="submit"
+                className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
+              >
+                Reservar
+              </button>
+            </div>
           </form>
         </div>
       </div>
-      <Footer />
 
-      {showModal && (
-        <Modal onClose={handleCloseModal}>
-          <h2 className="text-2xl font-bold mb-4">{modalContent}</h2>
-          <button
-            onClick={handleCloseModal}
-            className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
-          >
-            Close
-          </button>
-        </Modal>
-      )}
+      <Footer />
     </>
   );
 }
