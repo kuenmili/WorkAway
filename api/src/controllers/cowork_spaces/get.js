@@ -25,7 +25,8 @@ const getCoworkSpacesBySearch = async (name, score, location, capacity, services
 }
 
 const getCoworkSpaceByID = async (id) => {
-    const coworkSpaceByID = await CoworkSpace.findById(id)
+    let coworkSpaceByID = await CoworkSpace.findById(id)
+
 
 
     if (!coworkSpaceByID) throw new Error("cowork space not found");
