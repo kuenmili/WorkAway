@@ -21,9 +21,9 @@ router.get('/', async (req,res) => {
 
 //This route will retrieve a cowork space in DB searched by name
 router.get('/search', async (req, res) => {
-    const { name, score, location, capacity, services, price } = req.query;
+    const { name, score, location, services, price } = req.query;
     try {
-        const coworkSpaceByName = await getCoworkSpacesBySearch(name, score, location, capacity, services, price);
+        const coworkSpaceByName = await getCoworkSpacesBySearch(name, score, location, services, price);
         res.status(200).json(coworkSpaceByName);
     } catch (error) {
         console.log("DATA: ", error)

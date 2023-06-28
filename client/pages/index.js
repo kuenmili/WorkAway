@@ -15,6 +15,7 @@ import { Navigation } from "swiper";
 
 
 
+
 const Landing = () => {
   return (
     <>
@@ -38,8 +39,9 @@ const Landing = () => {
         pretitle="Testimonios"
         title="Estas son las opiniones de nuestros clientes">
       </SectionTitle>
-      <Testimonials />
-      <Footer />
+      <Testimonials/>
+      
+      <Footer/>
       
       
     </>

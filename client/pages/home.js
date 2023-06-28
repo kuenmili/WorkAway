@@ -13,6 +13,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import Filters from "../components/filters";
 import Search from "../components/search";
+import Chatbot from "../components/chatbot";
 
 const Home = () => {
   const [cards, setCards] = useState(cardList);
@@ -36,9 +37,6 @@ const Home = () => {
           return setCards(cardList);
       }
 
-      console.log("NAME", name);
-      console.log("VALUE", value);
-      
       if (name === "price") {
           const [min, max] = value.split('-');
           setCards(cardList.filter(card => card.price >= min && card.price <= max));
@@ -68,12 +66,15 @@ const Home = () => {
           className="mySwiper"
           >
             <SwiperSlide>
-            <main className=" flex space-x-28 > * + * sticky top-0">
-            <Filters filters={filters} setFilters={setFilters} handleInputChange={handleInputChange} className="sticky top-0" />
-            <CardsSection className="sticky top-0"/>
+            <main className=" flex space-x-28 > * + * ">
+              <div className="">
+            <Filters filters={filters} setFilters={setFilters} handleInputChange={handleInputChange} className="" />
+              </div>
+            <CardsSection className=""/>
             </main>
             </SwiperSlide>
-        </Swiper>   
+        </Swiper>
+        <Chatbot/>   
       <Footer />
      </>
   )}
