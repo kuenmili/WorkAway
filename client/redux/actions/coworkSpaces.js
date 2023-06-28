@@ -27,13 +27,14 @@ export const getCoworkSpaces = () => async dispatch => {
     }
 }
 
-export const getCoworkSpacesBySearch = ({ score, location, capacity, services, price }) => async dispatch => {
-    console.log("PRICE: ", price)
-    const query = `?score=${score}&location=${location}&capacity=${capacity}&services=${services}&price=${price}`
+export const getCoworkSpacesBySearch = ({ name, score, location, services, price }) => async dispatch => {
+    console.log(score, location, services, price);
+    const query = `?name=${name || ""}&score=${score || ""}&location=${location || ""}&services=${services || ""}&price=${price || ""}`
     
     try {
         const { data } = await axios.get(`${baseCoworkSpacesURL}/search${query}`);
-        console.log("DATA: ", data)
+      
+
         dispatch({
             type: GET_COWORKSPACES_BY_NAME,
             payload: data
