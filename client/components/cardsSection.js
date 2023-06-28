@@ -18,27 +18,27 @@ export default function cardsSection() {
         dispatch(getCoworkSpaces())
       }, [dispatch]);
 
-  return (
-      <div>
-
+      
+      return (
+        <div>
         <div className="container py-12 flex ">
           <div className="grid lg:grid-cols-3 gap-12 ">
-            {coworkSpaces?.map((card) => (
-                <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300" key={card._id}>
+            {coworkSpaces.map((card) => ( 
+              <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300" key={card._id}>
                   <Link href={`/detail/${card._id}`}>
-                  
                   <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                     {
-                      card.images.map((image, index) => (
+                      card.images?.map((image, index) => (
                         <SwiperSlide key={index}>
                           {/* <Image className = "rounded-t-2xl h-80 object-cover"  
                             width={450} 
                             height={500} 
                             loading='eager'
                             src={image} 
-                            alt="" /> */}
+                          alt="" /> */}
                             <img className = "rounded-t-2xl h-80 object-cover" src={image} alt="" />
                         </SwiperSlide>
+                 
                       ))
                     }
                   </Swiper>
@@ -46,10 +46,12 @@ export default function cardsSection() {
                    <div className='p-5'>
                     <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.name}</h3>
                     <p className='text-lg font-bold text-gray-700 dark:text-white mb-1'>{card.location}</p>
-                    <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'>{card.about} </p><Link href={`/detail/${card._id}`}>Ver mas</Link>
+                    <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'>{card.about} </p><Link href={`/detail/${card._id}`}>Ver mas</Link> 
+                    <p className='text-lg font-bold text-gray-600 dark:text-white  '>{card.services  + ".."} </p>
                      
                     <Rating stars={Array(5).fill(card.score)} className=""/>
                     <p className='text-2xl font-bold text-gray-800 text-center dark:text-white mt-2'>{`${card.price}usd`}/dia</p>
+                    
                   </div>
                 </div>
             ))}
