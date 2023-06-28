@@ -49,7 +49,7 @@ userRouter.post('/signup', async (req, res) => {
         res.status(201).json('User successfully created!');
         
     } catch (error) {     
-        console.log(error);   
+        console.log(error.message);   
         res.status(400).send({ error : error.message })
     }
 });
