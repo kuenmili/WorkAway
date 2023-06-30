@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { Link } from "next/link";
 
-const DropdownMenu = ({ profileImage }) => {
+const DropdownMenu = ({  user }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  console.log(user);
+ 
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -16,6 +19,10 @@ const DropdownMenu = ({ profileImage }) => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogOut = () => {
+    console.log("logout");
+  }
+
   return (
     <div className="relative">
       <button
@@ -25,7 +32,7 @@ const DropdownMenu = ({ profileImage }) => {
         onMouseLeave={handleMouseLeave}
       >
         <img
-          src={profileImage}
+          src={user.profile_image}
           alt="Profile"
           className="w-16 h-16 rounded-full mr-2 transition duration-300 ease-in-out transform hover:scale-110"
         />
@@ -38,13 +45,13 @@ const DropdownMenu = ({ profileImage }) => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href="#">Perfil</a>
+              <Link  href={`/users/${user.id}`}>Perfil</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href="#">Cuenta</a>
+              <Link href={`/users/${user.id}/cuenta`}>Cuenta</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href="#">Cerrar sesión</a>
+              <button onClick={handleLogOut}>Cerrar sesión</button>
             </li>
           </ul>
         </div>

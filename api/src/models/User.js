@@ -12,22 +12,24 @@ const schemaUser = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Reserve",
+      autopopulate: true
     },
   ],
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
+      autopopulate: true
     },
   ],
 });
-
+schemaUser.plugin(require('mongoose-autopopulate'))
 schemaUser.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id;
-    delete returnedObject._id;
+  //  delete returnedObject._id;
     delete returnedObject.__v;
-    delete returnedObject.password;
+   // delete returnedObject.password;
   },
 });
 

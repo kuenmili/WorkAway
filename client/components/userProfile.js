@@ -1,5 +1,6 @@
 import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from './useUser';
 import Link from 'next/link';
 import React from 'react';
 
@@ -13,6 +14,8 @@ const Profile = ({
   reserve_id,
   id,
 }) => {
+
+  
 
   const renderStars = (score) => {
     const stars = [];

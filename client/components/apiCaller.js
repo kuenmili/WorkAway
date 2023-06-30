@@ -2,8 +2,8 @@ import axios from "axios";
 
 const ApiCaller = async () => {
   try {
-    // const response = await axios.get("http://localhost:3001/users");
-    const response = await axios.get("https://apimocha.com/workaway/users");
+     const response = await axios.get("http://localhost:3001/users");
+    //const response = await axios.get("https://apimocha.com/workaway/users");
     console.log(response.data)
     return response.data;
     // console.log(response.data.map(item => item.email));

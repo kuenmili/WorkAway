@@ -4,6 +4,9 @@ import Image from "next/image";
 import DropdownMenu from "./navBarLogin";
 import { IsDarkMode } from "./DarkSwitch";
 import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclousure, no se usa por ahora
+import { auth } from "../components/firebase/firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useUser } from './hooks/useUser';
 
 function Navbar() {
   const links = [
@@ -24,8 +27,8 @@ function Navbar() {
       href: `/about`,
     },
   ];
-  const user = false;
-  const image = ''
+  
+  const user = useUser();
 
   return (
     <div className="w-full">
@@ -74,7 +77,7 @@ function Navbar() {
         {/* botones  */}
 
         { user
-        ? <DropdownMenu profileImage={image} />
+        ? <DropdownMenu user={user}/>
         :
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
           <Link

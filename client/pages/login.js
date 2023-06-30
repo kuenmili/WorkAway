@@ -1,17 +1,18 @@
-import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
-import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import { auth } from "../components/firebase/firebase-config";
+import React, { useState, useEffect, useRef } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import ApiCaller from "../components/apiCaller";
+import ModalAuth from "../components/modalAuth";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import ApiCaller from "../components/apiCaller";
+import { useRouter } from "next/router";
 import Modal from "../components/modal";
-import { auth } from "../components/firebase/firebase-config";
-import { useAuthState } from "react-firebase-hooks/auth";
-import ModalAuth from "../components/modalAuth";
 
 
 export default function Login() {
+  
   const [emailData, setEmailData] = useState([]);
   const [inputEmail, setInputEmail] = useState("");
   const [modalContent, setModalContent] = useState("");// Estado del modal
