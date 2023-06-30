@@ -124,7 +124,7 @@ export default function booking() {
             <div className="container mx-auto px-4 ">
                 <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
                     <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">Reserva tu espacio</h2>
-                    <p className="mb-6 text-center text-gray-400 ">¿Ya tienes una cuenta? <Link className="text-indigo-600 " href="/login">Inicia sesión</Link></p>
+                   
                       <form onSubmit={handleSubmit}>
                       <div className="mb-6">
                             <div className="flex flex-col">
@@ -226,4 +226,3 @@ export default function booking() {
         </>
     );
 }
-
