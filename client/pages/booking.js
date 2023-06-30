@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
+import axios from "axios";
 
 export default function booking() {
     const router = useRouter();
