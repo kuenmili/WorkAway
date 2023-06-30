@@ -107,7 +107,7 @@ export default function TopBar({ showNav, setShowNav }) {
             <Menu.Button className="inline-flex w-full justify-center items-center">
               <picture>
                 <img
-                  src="/man-smiling.jpg"
+                  src="/img/nico.jpg"
                   className="rounded-full h-8 md:mr-4 border-2 border-white shadow-sm"
                   alt="profile picture"
                 />
@@ -135,7 +135,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <PencilIcon className="h-4 w-4 mr-2" />
-                    Edit
+                    Titulo 1
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
@@ -144,7 +144,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <CreditCardIcon className="h-4 w-4 mr-2" />
-                    Billing
+                    Titulo 2
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
@@ -153,7 +153,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <Cog8ToothIcon className="h-4 w-4 mr-2" />
-                    Settings
+                    Titulo 3
                   </Link>
                 </Menu.Item>
               </div>

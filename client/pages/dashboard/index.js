@@ -9,7 +9,7 @@ function Dashboard() {
     <>
     <Layout>
       <div>
-        <h1>Dashboard</h1>
+        <h1>aca es el dashboard</h1>
       </div>   
       </Layout>
     </>

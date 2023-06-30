@@ -33,7 +33,6 @@
         "@paypal/react-paypal-js": "^8.0.0",
         "@react-google-maps/api": "^2.18.1",
         "@tailwindcss/aspect-ratio": "^0.4.2",
-
         "@windmill/react-ui": "^0.6.0",
         "axios": "^1.4.0",
         "dotenv": "^16.3.1",
