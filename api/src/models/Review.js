@@ -12,10 +12,11 @@ const schemaReview = new Schema({
         type:Schema.Types.ObjectId,
         ref: 'CoworkSpace',
         require: true,
+        autopopulate: true
     }
 });
 
-
+schemaReview.plugin(require('mongoose-autopopulate'))
 schemaReview.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id

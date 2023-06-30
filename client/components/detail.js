@@ -1,9 +1,13 @@
-import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/navigation";
-import "swiper/css";
-import { Navigation } from "swiper";
-import Container from "./container";
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
+import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
+import 'swiper/css/navigation';
+import 'swiper/css';
+
+import Container from './container';
 
 const Detail = ({
   location,
@@ -16,36 +20,85 @@ const Detail = ({
   rating,
   reviews
 }) => {
+  const renderStars = (score) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const starClass = i <= score ? 'text-yellow-500' : 'text-gray-300';
+      stars.push(
+        <FontAwesomeIcon
+          key={i}
+          icon={faStar}
+          className={`text-2xl ${starClass} mr-1`}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <div className="w-screen bg-gray-100 dark:bg-gray-900">
-      <Container className="mx-auto py-10 px-2 max-w-full">
-        <div className="flex flex-col gap-6 md:flex-row">
-          <div className="md:w-1/2">
-            <Swiper
-              spaceBetween={10}
-              slidesPerView={1}
-              navigation={true}
-              modules={[Navigation]}
-              className="mySwiper"
-              loop
-            >
-              {images &&
-                images.map((image, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="ml-4">
-                      <img
-                        src={image}
-                        alt={`Slide ${index + 1}`}
-                        className="rounded-t-2xl object-cover h-96 w-full"
-                      />
+    <Container className="mx-auto py-10 px-2 max-w-full">
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="md:w-1/2">
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={1}
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+            loop
+          >
+            {images &&
+              images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="ml-4">
+                    <img
+                      src={image}
+                      alt={`Slide ${index + 1}`}
+                      className="rounded-t-2xl object-cover h-96 w-full"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+          <div className="ml-4 mt-4">
+                      {reviews && reviews.length > 0 ? (
+                        reviews.map((review, index) => (
+                          <div key={index}>
+                            <div className="flex justify-start mb-4">
+                              <FontAwesomeIcon
+                                icon={faQuoteLeft}
+                                className="text-indigo-700 mr-2 fa-lg dark:text-white"
+                              />
+                              <h2 className=" text ml-0" >Reseña</h2>
+                            </div>
+                            <div className="leading-9">
+                              <p>{review.user_id}</p>
+                              <p>Comentario: {review.comment}</p>
+                              <p>Puntaje: {renderStars(review.score)}</p>
+                            </div>
+                            {index !== reviews.length - 1 && (
+                              <FontAwesomeIcon
+                                icon={faMinus}
+                                className="text-gray-500 mx-2"
+                              />
+                            )}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center items-center">
+                          <div className="flex justify-center mb-4">
+                            <FontAwesomeIcon
+                              icon={faQuoteLeft}
+                              className="text-indigo-700 mr-2 fa-lg dark:text-white"
+                            />
+                          </div>
+                          <p>No se han hecho reseñas</p>
+                        </div>
+                      )}
                     </div>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
+        </div>
 
-        
-          
           <div className="md:w-1/2">
             <div className="p-5">
               <div className="flex flex-col">
@@ -81,17 +134,23 @@ const Detail = ({
                 <div className="flex-1">
                   <div className="p-4 flex justify-start items-center mb-6">
                     <Link
-                      href={"/login"}
+                      href="/login"
                       className="px-6 py-2 text-black bg-white border border-black rounded-md md:ml-0 mt-8 inline-block mr-4"
                     >
                       Contacta al anfitrión
                     </Link>
                   </div>
                   <div className="p-4 flex justify-start items-center space-x-4">
-                    <Link href={`/booking`} className="px-6 py-2 text-white bg-indigo-800 rounded-md">
+                    <Link
+                      href="/booking"
+                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                    >
                       Reservar
                     </Link>
-                    <Link href={`/home`} className="px-6 py-2 text-white bg-indigo-800 rounded-md">
+                    <Link
+                      href="/home"
+                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                    >
                       Volver a Home
                     </Link>
                   </div>
@@ -113,7 +172,7 @@ const Rating = ({ stars }) => {
           key={idx}
           aria-hidden="true"
           className={`w-5 h-5 ${
-            star <= idx ? "text-gray-300" : "text-yellow-400"
+            star <= idx ? 'text-gray-300' : 'text-yellow-400'
           } mr-2 mb-2 mt-3`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -127,15 +186,3 @@ const Rating = ({ stars }) => {
 };
 
 export default Detail;
-
-
-
-
-
-
-
-
-
-
-
-
