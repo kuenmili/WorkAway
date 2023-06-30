@@ -116,6 +116,17 @@ export default function booking() {
             handleReserveClick();
         } 
     };
+  
+    const checkout = async () => {
+    const response = await axios("http://localhost:3001/payments/create", {
+      method: "POST",
+    });
+    router.push(response.data);
+  };
+
+  const handleCheckoutClick = (e) => {
+    checkout(e);
+  };
 
     return (
         <>
@@ -210,6 +221,7 @@ export default function booking() {
                         </div>
                         <div className="mb-6 flex justify-center mt-8">
                             <button
+                             onClick={handleCheckoutClick}
                                 type="submit"
                                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
                             >
@@ -223,6 +235,6 @@ export default function booking() {
 
             <Footer />
 
-        </>
-    );
+        </>
+    );
 }

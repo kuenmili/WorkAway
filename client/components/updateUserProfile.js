@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { updateUserValidation } from './validations';
 
 const UpdateProfile = () => {
 
@@ -23,11 +24,20 @@ const UpdateProfile = () => {
   );
   const [errorImage, setErrorImage] = useState('');
 
+  const [errors, setErrors] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    cellphone_number: '',
+});
+
   const handleInputChange = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
+    setErrors(updateUserValidation({ ...data, [event.target.name]: event.target.value}));
   };
 
   const handleUploadImage = async (e) => {
@@ -132,6 +142,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
+                {errors.first_name ? <p>{errors.first_name}</p>:''}
             </div>
 
             <div className="mb-4">
@@ -144,6 +155,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
+                {errors.last_name ? <p>{errors.last_name}</p>:''}
             </div>
             <div className="mb-4">
               <label className="block mb-1">Teléfono:</label>
@@ -155,6 +167,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
+                {errors.cellphone_number ? <p>{errors.cellphone_number}</p>:''}
             </div>
 
             <div className="mb-4">
@@ -167,6 +180,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
+              {errors.email ? <p>{errors.email}</p>:''}
             </div>
 
             <div className="mb-4">
@@ -179,6 +193,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
+                {errors.password ? <p>{errors.password}</p>:''}
             </div>
 
             <div className="flex justify-center">
@@ -187,6 +202,7 @@ const UpdateProfile = () => {
               </Link>
 
               <button
+                disabled={errors.email || errors.password || errors.first_name || errors.last_name || errors.cellphone_number}
                 type="submit"
                 className="my-2 mx-2  px-6 py-3 text-center inline-block text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700"
               >
