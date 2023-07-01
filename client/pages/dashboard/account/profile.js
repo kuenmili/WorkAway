@@ -1,11 +1,12 @@
 import Layout from "../../../components/layout";
+import Profile from "../../../components/business/BussinesProfile";
 
-export default function Profile() {
+export default function BussinesProfile() {
   return (
     <div>
       <Layout>
         <div>
-          <h1>aca es el Perfil</h1>
+          <Profile />
         </div>
       </Layout>
     </div>
