@@ -56,7 +56,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
         <Link href="/dashboard/account">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "dashboard/account"
                 ? "bg-indigo-100 text-indigo-500"
                 : "text-gray-800 hover:bg-indigo-100 hover:text-indigo-500"
             }`}
@@ -70,11 +70,11 @@ const sideBar = forwardRef(({ showNav }, ref) => {
           </div>
         </Link>
         <hr className="mx-auto w-20 border-black"></hr>
-        <Link href="/add">
+        <Link href="/dashboard/add">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/add"
-                ? "bg-orange-100 text-orange-500"
+              router.pathname == "dashboard/add"
+                ? "bg-indigo-100 text-indigo-500"
                 : "text-gray-800 hover:bg-indigo-100 hover:text-indigo-500"
             }`}
           >
