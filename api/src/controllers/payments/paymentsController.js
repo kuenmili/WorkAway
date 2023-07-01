@@ -5,7 +5,8 @@ const {
   PAYPAL_API_SECRET,
 } = require("../../config");
 
-const createOrderController = async (_req, res) => {
+const createOrderController = async (req, res) => {
+  const { detail, amount } = req.body;
   try {
     const order = {
       intent: "CAPTURE",
@@ -13,9 +14,9 @@ const createOrderController = async (_req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: "100.20",
+            value: amount,
           },
-          description: "object", //necessary
+          description: detail,
         },
       ],
       application_context: {
@@ -23,7 +24,7 @@ const createOrderController = async (_req, res) => {
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
         return_url: "http://localhost:3001/payments/capture",
-        cancel_url: "http://localhost:3000/booking",
+        cancel_url: "http://localhost:3000/home",
       },
     };
 

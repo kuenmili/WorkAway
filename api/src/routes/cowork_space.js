@@ -44,7 +44,7 @@ router.get('/:id', async (req, res) => {
 
 //This route will create a cowork space in our DB
 router.post('/', async (req, res) => {
-    const { coworkSpaceToCreate } = req.body;
+    const  coworkSpaceToCreate  = req.body;
     try {
         const spaceCoworkCreated = await createSpaceCowork(coworkSpaceToCreate);
         res.status(201).json(spaceCoworkCreated);

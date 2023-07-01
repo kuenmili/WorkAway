@@ -64,7 +64,9 @@ const getCoworkSpaceByID = async (id) => {
 };
 
 module.exports = {
-  getAllCoworkSpaces,
-  getCoworkSpacesBySearch,
-  getCoworkSpaceByID,
+    getAllCoworkSpaces,
+    getCoworkSpacesBySearch,
+    getCoworkSpaceByID,
 };
+
+

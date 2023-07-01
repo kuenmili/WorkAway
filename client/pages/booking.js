@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Router, useRouter } from "next/router";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { createReserve } from "../redux/actions/reserves";
@@ -24,7 +23,6 @@ export default function booking() {
   const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
   const [cowork_space, setCoworkSpace] = useState("");
-  const [createPayment, setCreatePayment] = useState("");
 
   const [dateFromError, setDateFromError] = useState(false);
   const [dateToError, setDateToError] = useState(false);
@@ -61,18 +59,7 @@ export default function booking() {
     setShowCheckboxError(false);
   };
 
-  const checkout = async () => {
-    const response = await axios("http://localhost:3001/payments/create", {
-      method: "POST",
-    });
-    router.push(response.data);
-  };
-
-  const handleCheckoutClick = (e) => {
-    checkout(e);
-  };
-
-  const handleReserveClick = async () => {
+  const handleReserveClick = () => {
     if (
       date_from === "" ||
       date_to === "" ||
@@ -122,21 +109,31 @@ export default function booking() {
     }
   };
 
+  const checkout = async () => {
+    const paymentInfo = {
+      detail: coworkSpace.name,
+      amount: coworkSpace.price,
+    };
+    const response = await axios.post(
+      "http://localhost:3001/payments/create",
+      paymentInfo
+    );
+    router.push(response.data);
+  };
+
+  const handleCheckoutClick = (e) => {
+    checkout(e);
+  };
+
   return (
     <>
       <Navbar />
-
       <div className="container mx-auto px-4 ">
         <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
           <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">
             Reserva tu espacio
           </h2>
-          <p className="mb-6 text-center text-gray-400 ">
-            ¿Ya tienes una cuenta?{" "}
-            <Link className="text-indigo-600 " href="/login">
-              Inicia sesión
-            </Link>
-          </p>
+
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <div className="flex flex-col">

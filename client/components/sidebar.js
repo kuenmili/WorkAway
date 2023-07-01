@@ -1,4 +1,3 @@
-
 import { forwardRef } from "react";
 import Link from "next/link";
 import { HomeIcon, CreditCardIcon, UserIcon } from "@heroicons/react/24/solid";
@@ -36,11 +35,11 @@ const sideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="">
+        <Link href="/dashboard/account/profile">
           <hr className="mx-auto w-20 border-black"></hr>
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "/profile"
                 ? "bg-indigo-100 text-indigo-500"
                 : "text-black hover:bg-indigo-100 hover:text-indigo-500"
             }`}
@@ -54,10 +53,10 @@ const sideBar = forwardRef(({ showNav }, ref) => {
           </div>
         </Link>
 
-        <Link href="/dashboard/account"> 
+        <Link href="/dashboard/account">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
+              router.pathname == "dashboard/account"
                 ? "bg-indigo-100 text-indigo-500"
                 : "text-black hover:bg-indigo-100 hover:text-indigo-500"
             }`}
@@ -71,12 +70,14 @@ const sideBar = forwardRef(({ showNav }, ref) => {
           </div>
         </Link>
         <hr className="mx-auto w-20 border-black"></hr>
-        <Link href="/billing">
+        <Link href="/dashboard/add">
           <div
+
             className={`pl-6 py-3 mx-2 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
                 ? "bg-orange-100 text-orange-500"
                 : "text-black hover:bg-indigo-100 hover:text-indigo-500"
+
             }`}
           >
             <div className="mr-3">
@@ -96,4 +97,3 @@ const sideBar = forwardRef(({ showNav }, ref) => {
 sideBar.displayName = "SideBar";
 
 export default sideBar;
-
