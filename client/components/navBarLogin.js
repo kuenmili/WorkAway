@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { Link } from "next/link";
+import { signOut } from './firebase/client';
 
-const DropdownMenu = ({  user }) => {
+const DropdownMenu = (  user ) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(user);
+  
+ console.log(user);
+ console.log(user.uid);
+ console.log('esto es user de navbarlogin');
  
 
   const handleMouseEnter = () => {
@@ -20,7 +24,7 @@ const DropdownMenu = ({  user }) => {
   };
 
   const handleLogOut = () => {
-    console.log("logout");
+    signOut()
   }
 
   return (
@@ -32,7 +36,7 @@ const DropdownMenu = ({  user }) => {
         onMouseLeave={handleMouseLeave}
       >
         <img
-          src={user.profile_image}
+          src={""}
           alt="Profile"
           className="w-16 h-16 rounded-full mr-2 transition duration-300 ease-in-out transform hover:scale-110"
         />
@@ -45,10 +49,10 @@ const DropdownMenu = ({  user }) => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <Link  href={`/users/${user.id}`}>Perfil</Link>
+              <Link  href={`/users/${user.uid}`}>Perfil</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <Link href={`/users/${user.id}/cuenta`}>Cuenta</Link>
+              <Link href={`/users/${user.uid}`}>Cuenta</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
               <button onClick={handleLogOut}>Cerrar sesión</button>

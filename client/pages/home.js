@@ -52,7 +52,7 @@ const Home = () => {
       });
       setCards(cardList.filter(card => card[name] === value));
   }
-debugger
+
   return (
     <>
       <header>

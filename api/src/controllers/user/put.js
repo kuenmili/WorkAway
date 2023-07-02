@@ -5,6 +5,7 @@ const { Review } = require('../../models/Review')
 const updateUser = async (id, user) => {
 
     const {
+        uid,
         first_name,
         last_name,
         email,
@@ -15,8 +16,8 @@ const updateUser = async (id, user) => {
         review_id,
     } = user
     
-    const reserve =  await Reserve.findById(user.reserve_id);
-    const review =  await Review.findById(user.review_id);
+    const reserve =  await Reserve.findOne(user.reserve_id);
+    const review =  await Review.findOne(user.review_id);
     
     const newUserInfo = {
         first_name,
@@ -25,18 +26,18 @@ const updateUser = async (id, user) => {
         password,
         cellphone_number,
         profile_image,
-        reserve_id: reserve ? [...reserve_id, reserve._id] : [],
-        review_id: review ? [...review_id, review._id] : [],
+        reserve_id: reserve ? [...reserve_id, reserve.uid] : [],
+        review_id: review ? [...review_id, review.uid] : [],
     }
 
-    const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true });
+    const updatedUser = await User.findOneAndUpdate(uid, newUserInfo, { new: true });
     
     if (review) {
-        review.user_id = updateUser._id;
+        review.user_id = updateUser.uid;
         review.save();
     };
     if (reserve) {
-        reserve.user_id = updateUser._id;
+        reserve.user_id = updateUser.uid;
         reserve.save();
     };
     

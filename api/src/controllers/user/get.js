@@ -1,14 +1,13 @@
 const { User } = require('../../models/User');
 
-const getById = async (id) => {   
+const getById = async (uid) => {
+    console.log(uid)  
     
-    if (!id) throw new Error(`Id required`);
+    if (!uid) throw new Error(`Id required`);
 
-    const user = await User.findById(id)   
+    const user = await User.findOne({uid})     
     
-    if (!user) return;   
-    
-    return { ...user.toJSON()};
+    return user
 };
 
 const getAllUsers = async () => {

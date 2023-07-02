@@ -4,11 +4,14 @@ import Image from "next/image";
 import DropdownMenu from "./navBarLogin";
 import { IsDarkMode } from "./DarkSwitch";
 import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclousure, no se usa por ahora
-import { auth } from "../components/firebase/firebase-config";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useUser } from './hooks/useUser';
+import { useEffect } from "react";
+import  useUser  from './hooks/useUser';
 
 function Navbar() {
+
+  const user = useUser();
+  console.log(user);
+  
   const links = [
     {
       label: `Home`,
@@ -27,8 +30,11 @@ function Navbar() {
       href: `/about`,
     },
   ];
-  
-  const user = useUser();
+
+  useEffect(() => {
+    user && console.log(user)
+    
+  }, [user]);
 
   return (
     <div className="w-full">
@@ -76,24 +82,7 @@ function Navbar() {
 
         {/* botones  */}
 
-        { user
-        ? <DropdownMenu user={user}/>
-        :
-        <div className="hidden mr-3 space-x-4 lg:flex nav__item">
-          <Link
-            href="/login"
-            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
-          >
-            Sign in or register
-          </Link>
-          <Link
-            href="/business-login"
-            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
-          >
-            Ingresa como proveedor
-          </Link>
-        </div>
-        }
+       
         <ThemeChanger />
         </nav>
     </div>

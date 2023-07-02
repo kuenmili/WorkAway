@@ -23,16 +23,13 @@ const ProfilePage = ({ item }) => {
 };
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:3001/users');
- 
-    const users = await res.json();
-    
-    
+    const res = await fetch('http://localhost:3001/users'); 
+    const users = await res.json(); 
+       
     const paths = users.map((user) => ({
         params: { profile: user.id.toString() },
-    }));
-
-    
+    }));   
+    console.log(paths); 
     return { paths, fallback: true };
 };
 export async function getStaticProps({params}) {

@@ -1,9 +1,17 @@
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
+import { useEffect } from "react";
+import  useUser  from './hooks/useUser';
+import DropdownMenu from "./navBarLogin";
 
 
 export default function Navhome() {
+
+  const user = useUser();
+  console.log(user);
+  
+
   const links = [
     {
       label: `About`,
@@ -11,6 +19,9 @@ export default function Navhome() {
     },
   ];
 
+  useEffect(() => {
+    user && console.log(user);
+  }, [user]);
 
 
     
@@ -56,6 +67,9 @@ export default function Navhome() {
           </li>
         </div>
         {/* botones  */}
+        { user
+        ? <DropdownMenu {...user}/>
+        :
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
           <Link
             href="/login"
@@ -69,8 +83,10 @@ export default function Navhome() {
           >
             Ingresa como proveedor
           </Link>
-          <ThemeChanger />
         </div>
+        }
+          <ThemeChanger />
+     
       </nav>
     </div>
   );

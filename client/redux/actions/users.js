@@ -7,6 +7,7 @@ export const PUT_USER = "PUT_USER"
 
 export const getUserByID = (id) => {
     return async (dispatch) => {
+        if (user === null) return
         const json = await axios.get(`http://localhost:3001/users/${id}`);
 
         return dispatch({

@@ -1,25 +1,25 @@
 import { useState, useEffect, useContext } from 'react';
 import { onAuthStateChanged } from '../firebase/client';
 import { getUserByID } from '../../redux/actions/users';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const USER_STATES = {
+const USER_STATES = {
     NOT_LOGGED: null,
     NOT_KNOWN: undefined
 };
 
 export default function useUser() {
     const [user, setUser] = useState(USER_STATES.NOT_KNOWN);
-    const localUser = useSelector((state) => state.user);
+    const localUser = useSelector((state) => state.userAuth);
   
     useEffect(() => {
-      if (localUser?.id) {
+      if (localUser?._id) {
         setUser(localUser);
       }
-      onAuthStateChanged((user) => {
+      onAuthStateChanged(user => {
         if (user) {
+          console.log(user);
           setUser(user);
-          dispatchEvent(getUserByID(user.id));
         } else {
           setUser(USER_STATES.NOT_LOGGED);
         }

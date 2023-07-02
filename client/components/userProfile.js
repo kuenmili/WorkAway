@@ -1,8 +1,10 @@
 import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useUser } from './useUser';
+import { useUser } from '../components/hooks/useUser';
 import Link from 'next/link';
 import React from 'react';
+import { useEffect } from "react";
+
 
 const Profile = ({
   profile_image,
@@ -13,9 +15,11 @@ const Profile = ({
   reviews,
   reserve_id,
   id,
+  uid
 }) => {
 
-  
+  const user = useUser();
+  console.log(user);
 
   const renderStars = (score) => {
     const stars = [];
@@ -29,6 +33,13 @@ const Profile = ({
         />
       );
     }
+
+
+
+    useEffect(() => {
+      user && console.log(user);
+    }, [user]);
+  
     return stars;
   };
 
@@ -49,9 +60,14 @@ const Profile = ({
           <h1 className="text-3xl text-slate-700 mb-3 dark:text-white">
             {first_name}
           </h1>
+      { 
+        last_name &&
+
           <h2 className="text-xl text-gray-600 dark:text-white">
             {last_name}
           </h2>
+
+}
         </div>
         <div className="mt-4">
           <div className="flex items-center">
@@ -64,6 +80,7 @@ const Profile = ({
             />
           </div>
         </div>
+    {cellphone_number &&
         <div className="mt-4">
           <div className="flex items-center">
             <FontAwesomeIcon icon={faPhone} className="text-indigo-700 mr-2 dark:text-white" />
@@ -74,8 +91,9 @@ const Profile = ({
             />
           </div>
         </div>
+}
         <div className="mt-4 flex justify-center pt-3">
-          <Link href={`/users/${id}/edit`} className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700">           
+          <Link href={`/users/${user.uid}/edit`} className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700">           
               Editar          
           </Link>
         </div>
