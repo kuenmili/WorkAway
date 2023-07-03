@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { model, Schema } = mongoose;
+const bcrypt = require("bcrypt");
 
 
 const schemaBusiness = new Schema({
@@ -21,6 +22,18 @@ const schemaBusiness = new Schema({
     strictPopulate: false,
   }
 );
+
+schemaBusiness.pre("save", function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
+});
+
+schemaBusiness.methods.isValidPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 const Business = model("Business", schemaBusiness);
 

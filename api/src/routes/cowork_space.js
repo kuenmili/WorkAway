@@ -7,6 +7,7 @@ const {
     modifyCoworkSpace,
     deleteCoworkSpace,
 } = require("../controllers/cowork_spaces");
+const { isAdmin, isAdminMiddleware } = require('../middlewares/auth');
 
 //This route will retrieve all cowork spaces in DB
 router.get('/', async (req,res) => {
@@ -43,8 +44,8 @@ router.get('/:id', async (req, res) => {
 });
 
 //This route will create a cowork space in our DB
-router.post('/', async (req, res) => {
-    const  coworkSpaceToCreate  = req.body;
+router.post('/',isAdminMiddleware, async (req, res) => {
+    const { coworkSpaceToCreate } = req.body;
     try {
         const spaceCoworkCreated = await createSpaceCowork(coworkSpaceToCreate);
         res.status(201).json(spaceCoworkCreated);

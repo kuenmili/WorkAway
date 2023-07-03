@@ -6,6 +6,8 @@ const {
 } = require('../controllers/user/get');
 const updateUser = require('../controllers/user/put');
 const deleteUser = require('../controllers/user/delete');
+const passport = require("passport");
+const { generateToken } = require('../middlewares/auth');
 
 userRouter.get('/', async (req, res) => {
     try {
