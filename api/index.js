@@ -1,7 +1,5 @@
 require('./db')
 require('dotenv').config();
-require("./src/middlewares/passport");
-require('./src/middlewares/google-auth');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -27,8 +25,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.use('/', router);
 
 

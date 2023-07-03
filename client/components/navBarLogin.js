@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/auth';
-import defaultProfileImage from '../public/img/default.jpg';
 
 const DropdownMenu = ({ profileImage }) => {
-  const { user, loggedIn, isAdmin, error } = useSelector((state) => state.auth);
+  const { user, loggedIn, isAdmin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

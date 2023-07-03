@@ -1,8 +1,8 @@
 const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const getAllCoworkSpaces = async () => {
-    let allCoworkSpaces = await CoworkSpace.find().populate("reviews", "score")
-   
+  let allCoworkSpaces = await CoworkSpace.find()
+  .populate("reviews", "score")
 
     allCoworkSpaces.map((cowork) => {
         cowork.score = cowork.reviews.reduce((acc, review) => acc + review.score, 0) / cowork.reviews.length;
@@ -26,9 +26,11 @@ const getCoworkSpacesBySearch = async (name, score, location, services, price) =
     if (services) filters.services = { $regex: services, $options: 'i' };
     if (price) filters.price = { $lte: parseInt(lte), $gte: parseInt(gte) };
 
-    let coworkSpaceByName = await CoworkSpace.find(filters).populate("reviews", "score")
-    coworkSpaceByName = coworkSpaceByName.map((cowork) => {
-        let newCowork = cowork.toObject();
+  let coworkSpaceByName = await CoworkSpace.find(filters)
+  .populate("reviews", "score")
+
+  coworkSpaceByName = coworkSpaceByName.map((cowork) => {
+    let newCowork = cowork.toObject();
 
         newCowork.score = newCowork.reviews.length ? newCowork.reviews.reduce((acc, review) => {
             return acc + review.score
@@ -45,7 +47,8 @@ const getCoworkSpacesBySearch = async (name, score, location, services, price) =
 }
 
 const getCoworkSpaceByID = async (id) => {
-    let coworkSpaceByID = await CoworkSpace.findById(id)
+  let coworkSpaceByID = await CoworkSpace.findById(id)
+  .populate("reviews")
 
 
     
@@ -55,8 +58,19 @@ const getCoworkSpaceByID = async (id) => {
 }
 
 
-module.exports = {
-    getAllCoworkSpaces,
-    getCoworkSpacesBySearch,
-    getCoworkSpaceByID,
+const getCoworkSpaceWithReserve = async (id) => {
+  let coworkSpaceWithReserve = await CoworkSpace.findById(id)
+  .populate("reviews")
+  .populate("reserve")
+
+  if (!coworkSpaceWithReserve) throw new Error("cowork space not found")
+
+  return coworkSpaceWithReserve
 }
+
+module.exports = {
+  getAllCoworkSpaces,
+  getCoworkSpacesBySearch,
+  getCoworkSpaceByID,
+  getCoworkSpaceWithReserve,
+};

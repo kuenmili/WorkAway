@@ -64,7 +64,11 @@ export const getCoworkSpace = id => async dispatch => {
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, coworkSpaceToCreate);
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, coworkSpaceToCreate);
         dispatch({
             type: ADD_COWORKSPACE,
             payload: data
@@ -79,7 +83,11 @@ export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
 
 export const updateCoworkSpace = coworkSpace => async dispatch => {
     try {
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, coworkSpace);
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, coworkSpace);
         dispatch({
             type: UPDATE_COWORKSPACE,
             payload: data
@@ -94,7 +102,11 @@ export const updateCoworkSpace = coworkSpace => async dispatch => {
 
 export const deleteCoworkSpace = id => async dispatch => {
     try {
-        await axios.delete(`${baseCoworkSpacesURL}/${id}`);
+        await axios.delete(`${baseCoworkSpacesURL}/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        });
         dispatch({
             type: DELETE_COWORKSPACE,
             payload: id

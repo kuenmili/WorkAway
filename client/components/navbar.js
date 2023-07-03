@@ -6,15 +6,9 @@ import defaultProfileImage from '../public/img/default.jpg';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { login } from "../redux/actions/auth";
-import {
-  Bars3CenterLeftIcon,
-  PencilIcon,
-  ChevronDownIcon,
-
-} from "@heroicons/react/24/solid";
 
 function Navbar() {
-  const { user, loggedIn, isAdmin } = useSelector((state) => state.auth);
+  const loggedIn = useSelector((state) => state.auth?.loggedIn);
   const links = [
     {
       label: `Inicio`,

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from 'next/router';
 import axios from "axios";
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
@@ -25,6 +26,8 @@ export default function Signup() {
     const [showCheckboxError, setShowCheckboxError] = useState(false);
 
 
+
+    const dispatch = useDispatch();
 
     const handleFirstNameChange = (e) => {
         setFirst_Name(e.target.value);
@@ -67,22 +70,23 @@ export default function Signup() {
         }
         try {
             // Enviar los datos del formulario a la base de datos
-            const response = await axios.post("http://localhost:3001/users/signup", {
+            dispatch(
+                createUser({
                 first_name,
                 last_name,
                 email,
                 password,
                 cellphone_number,
                 profile_image: profileImage,
-            });
-
+            })
+            )
             // console.log("Formulario enviado exitosamente");
             // console.log("Respuesta del servidor:", response.data);
-            setModalContent("Registration successfully completed!");
+            setModalContent("Registro completado exitosamente!");
             setShowModal(true);
         } catch (error) {
             // console.log("Ocurrió un error al enviar el formulario:", error.message);
-            setModalContent("An error occurred while submitting the form", error.message);
+            setModalContent("Algun error ocurrio", error.message);
             setShowModal(true);
         }
     };

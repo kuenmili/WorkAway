@@ -27,7 +27,7 @@ const generateBusinessToken = (business) => {
         cowork_spaces: business.cowork_spaces
     };
 
-    return jwt.sign(payload, process.env.JWT_SECRET , { expiresIn: '1d' });
+    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
 const isAuthenticated = (req, res, next) => {

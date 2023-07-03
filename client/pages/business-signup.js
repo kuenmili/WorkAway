@@ -2,9 +2,9 @@ import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import { useRouter} from 'next/router';
 import { createBusiness } from '../redux/actions/business';
-import Navbar from "../components/navbar";
+import Navbar from "../components/navBusiness";
 import Footer from "../components/footer";
-import { createBusinessValidation } from "../components/validations"
+import { createBusinessValidation } from "../components/validations";
 
 const signupBusiness = () => {
   const dispatch = useDispatch()

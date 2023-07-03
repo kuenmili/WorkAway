@@ -1,5 +1,5 @@
-const router = require('express').Router();
 const passport = require('passport');
+const router = require('express').Router();
 const {
     getAllBusiness,
     getBusinessByName,
@@ -8,7 +8,6 @@ const {
     modifyBusinessPassword,
     deleteBusiness,
 } = require("../controllers/business");
-const { isAdmin, isAdminMiddleware } = require('../middlewares/auth');
 
 //This route will retrieve all business in DB
 router.get('/', async (req,res) => {
@@ -56,7 +55,7 @@ router.post('/', async (req, res) => {
 });
 
 //This route will modify a business in our DB
-router.put('/:id', isAdmin, async (req, res) => {
+router.put('/:id', passport.authenticate("jwt", { session: false }),  async (req, res) => {
     const { id } = req.params;
     const { actualPassword, newPassword } = req.body
     try {
@@ -69,7 +68,7 @@ router.put('/:id', isAdmin, async (req, res) => {
 
 
 //This route will delete a business in our DB
-router.delete('/:id', isAdmin, async (req, res) => {
+router.delete('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params
     try {
         const businessDeleted = await deleteBusiness(id)

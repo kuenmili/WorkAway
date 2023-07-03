@@ -28,7 +28,6 @@ schemaUser.pre("save", function (next) {
     return next();
   }
   this.password = bcrypt.hashSync(this.password, 10);
-  console.log("PASSSS" , this.password)
   next();
 });
 

@@ -83,7 +83,7 @@ const Profile = ({
            
           </div>
           {
-            reviews.length > 0 ? reviews.map((review, index) => {
+            reviews?.length > 0 ? reviews.map((review, index) => {
               return (
                 <div key={index} >
                   <div className="flex justify-center mb-4">
@@ -94,7 +94,7 @@ const Profile = ({
                   <p>Comentario: {review.comment}</p>
                   <p>Puntaje: {renderStars(review.score)}</p>
                   </div>
-                  {index !== reviews.length - 1 && <FontAwesomeIcon icon={faMinus} className="text-gray-500 mx-2" />}
+                  {index !== reviews?.length - 1 && <FontAwesomeIcon icon={faMinus} className="text-gray-500 mx-2" />}
                   </div>
                     )
             }) 
@@ -109,7 +109,7 @@ const Profile = ({
 
               <div className="bg-white rounded-lg w-auto p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
                         {
-                        reserve_id.length > 0 ? reserve_id.map((reserve, index) => {
+                        reserve_id?.length > 0 ? reserve_id.map((reserve, index) => {
                           return (
                             <div key={index}>  
                              <div className="flex justify-center text-xl mb-4">

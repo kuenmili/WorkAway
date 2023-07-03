@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Navbar from "../components/navbar";
+import Navbar from "../components/navBusiness";
 import Footer from "../components/footer";
 import { businessValidations } from "../components/validations"
-
-
-const { login } = require("../redux/actions/auth");
+import { login } from "../redux/actions/auth"
 
 const LoginBusiness = () => {
+
   const dispatch = useDispatch();
   const router = useRouter();
   const { user, loggedIn, isAdmin, error } = useSelector((state) => state.auth);
@@ -30,7 +29,7 @@ const LoginBusiness = () => {
       ...businessData,
       [event.target.name]: event.target.value
     })
-    setErrors(businessValidations({ ...businessData, [event.target.name]: event.target.value}))
+    setErrors(businessValidations({ ...businessData, [event.target.name]: event.target.value}));
   };
   
   const handleSubmit = (event) => {
@@ -110,6 +109,7 @@ const LoginBusiness = () => {
             {/*Log in button */}
             <div className="flex justify-center">
               <button
+                disabled= {errors?.email || errors?.password}
                 type="submit"
                 onClick={handleSubmit}
                 className="w-3/4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none"
