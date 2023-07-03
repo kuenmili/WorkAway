@@ -48,8 +48,10 @@ export const getCoworkSpacesBySearch = ({ name, score, location, services, price
 }
 
 export const getCoworkSpace = id => async dispatch => {
+    
     try {
         const { data } = await axios.get(`${baseCoworkSpacesURL}/${id}`);
+        console.log(data)
         dispatch({
             type: GET_COWORKSPACE,
             payload: data

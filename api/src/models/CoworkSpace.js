@@ -29,8 +29,8 @@ const schemaSpaceCowork = new Schema({
 });
 
 
-schemaReview.plugin(require('mongoose-autopopulate'))
-schemaReview.set('toJSON', {
+schemaSpaceCowork.plugin(require('mongoose-autopopulate'))
+schemaSpaceCowork.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id
         delete returnedObject._id

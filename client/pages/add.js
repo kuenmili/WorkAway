@@ -7,6 +7,7 @@ import { addCoworkSpace } from '../redux/actions/coworkSpaces';
 import { uploadImage } from '../components/firebase/client';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import Select from 'react-select';
+import Modal from '../components/Modal';
 
 function Add() {
   const [data, setData] = useState({
@@ -106,7 +107,7 @@ function Add() {
     console.log('Información enviada:', coworkingData);
 
     dispatch(addCoworkSpace(coworkingData));
-    alert('Reserva confirmada');
+    openModal();
   
   };
 
@@ -115,6 +116,17 @@ function Add() {
       value: amenity,
       label: amenity
     }));
+  };
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    router.push('/dashboard');
   };
 
   return (
@@ -129,7 +141,7 @@ function Add() {
           Crear un espacio
         </p>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-          {/* Input Name of space */}
+            {/* Input Name of space */}
           <div className="flex flex-col">
             <input
               type="text"
@@ -140,7 +152,7 @@ function Add() {
               className="w-full bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-white"
             />
           </div>
-          {/* Input about */}
+             {/* Input about */}
           <div className="flex flex-col">
             <input
               type="text"
@@ -151,7 +163,7 @@ function Add() {
               className="w-full bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
             />
           </div>
-          {/* Input services 2*/}
+            {/* Input services 2*/}
           <div className="flex flex-col">
             <div className="relative">
               <Select
@@ -165,11 +177,9 @@ function Add() {
               <RiArrowDropDownLine className="absolute top-3 right-3 text-gray-400 pointer-events-none" />
               </div>
           </div>
-                    {/* Input images */}
-                {/* Input images */}
-
-                <div className="flex flex-col">
-            <input
+               {/* Input images */}
+             <div className="flex flex-col">
+               <input
               type="file"
               placeholder='Imagenes del espacio'
               name="images"
@@ -179,8 +189,6 @@ function Add() {
               className="w-full bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
             />
           </div>
-
-
           {/* Render previous images */}
           {data.images.length > 0 && (
             <div className="grid grid-cols-3 gap-4">
@@ -211,8 +219,6 @@ function Add() {
               ))}
             </div>
           )}
-
-
           {/* Input price */}
           <div className="flex flex-col">
             <input
@@ -256,6 +262,13 @@ function Add() {
         </form>
       </div>
       <Footer />
+      {showModal && (
+        <Modal
+          onClose={closeModal}
+          content="Nuevo espacio creado"
+        />
+      )}
+
     </div>
   );
 }

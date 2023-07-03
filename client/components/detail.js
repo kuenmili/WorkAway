@@ -7,6 +7,8 @@ import Link from 'next/link';
 import 'swiper/css/navigation';
 import 'swiper/css';
 
+
+
 import Container from './container';
 
 const Detail = ({
@@ -20,6 +22,9 @@ const Detail = ({
   rating,
   reviews
 }) => {
+
+ 
+ 
   const renderStars = (score) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -34,70 +39,92 @@ const Detail = ({
     }
     return stars;
   };
-
+  console.log(reviews)
   return (
     <div className="w-screen bg-gray-100 dark:bg-gray-900">
-    <Container className="mx-auto py-10 px-2 max-w-full">
-      <div className="flex flex-col gap-6 md:flex-row">
-        <div className="md:w-1/2">
-          <Swiper
-            spaceBetween={10}
-            slidesPerView={1}
-            navigation={true}
-            modules={[Navigation]}
-            className="mySwiper"
-            loop
-          >
-            {images &&
-              images.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div className="ml-4">
-                    <img
-                      src={image}
-                      alt={`Slide ${index + 1}`}
-                      className="rounded-t-2xl object-cover h-96 w-full"
+      <Container className="mx-auto py-10 px-2 max-w-full">
+        <div className="flex flex-col gap-6 md:flex-row">
+          <div className="md:w-1/2">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              navigation={true}
+              modules={[Navigation]}
+              className="mySwiper"
+              loop
+            >
+              {images &&
+                images.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="ml-4">
+                      <img
+                        src={image}
+                        alt={`Slide ${index + 1}`}
+                        className="rounded-t-2xl object-cover h-96 w-full"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+            <div className="ml-4 mt-4">
+              {reviews && reviews.length > 0 ? (
+                reviews.map((reviews, index) => (
+                  <div key={index}>
+                    <div className="flex justify-start mb-4">
+                      <FontAwesomeIcon
+                        icon={faQuoteLeft}
+                        className="text-indigo-700 mr-2 fa-lg dark:text-white"
+                      />
+                      <h2 className="text ml-0">Reseña</h2>
+                    </div>
+
+                    {reviews.user_id && reviews.user_id.profile_image && (
+                      <div className="flex items-center">
+                        <img
+                          src={reviews.user_id.profile_image}
+                          alt="Profile Image"
+                          className="w-10 h-10 rounded-full mr-2"
+                        />
+                        <p className="font-semibold">
+                          {reviews.user_id.first_name} {reviews.user_id.last_name}
+                        </p>
+                      </div>
+                    )}
+                    <div className="leading-9">
+                      <p>Comentario: {reviews.comment}</p>
+                      <p>Puntaje: {renderStars(reviews.score)}</p>
+                    </div>
+                    {index !== reviews.length - 1 && (
+                      <FontAwesomeIcon
+                        icon={faMinus}
+                        className="text-gray-600 mx-2"
+                      />
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="text-center items-center">
+                  <div className="flex justify-center mb-4">
+                    <FontAwesomeIcon
+                      icon={faQuoteLeft}
+                      className="text-indigo-700 mr-2 fa-lg dark:text-white"
                     />
                   </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-          <div className="ml-4 mt-4">
-                      {reviews && reviews.length > 0 ? (
-                        reviews.map((review, index) => (
-                          <div key={index}>
-                            <div className="flex justify-start mb-4">
-                              <FontAwesomeIcon
-                                icon={faQuoteLeft}
-                                className="text-indigo-700 mr-2 fa-lg dark:text-white"
-                              />
-                              <h2 className=" text ml-0" >Reseña</h2>
-                            </div>
-                            <div className="leading-9">
-                              <p>{review.user_id}</p>
-                              <p>Comentario: {review.comment}</p>
-                              <p>Puntaje: {renderStars(review.score)}</p>
-                            </div>
-                            {index !== reviews.length - 1 && (
-                              <FontAwesomeIcon
-                                icon={faMinus}
-                                className="text-gray-500 mx-2"
-                              />
-                            )}
-                          </div>
-                        ))
-                      ) : (
-                        <div className="text-center items-center">
-                          <div className="flex justify-center mb-4">
-                            <FontAwesomeIcon
-                              icon={faQuoteLeft}
-                              className="text-indigo-700 mr-2 fa-lg dark:text-white"
-                            />
-                          </div>
-                          <p>No se han hecho reseñas</p>
-                        </div>
-                      )}
-                    </div>
-        </div>
+                  <p>No se han hecho reseñas</p>
+                </div>
+              )}
+            </div>
+            <div className="flex-1">
+                  <div className="p-4 flex justify-start items-center mb-6">
+                    <Link
+                      href="/reviewForm"
+                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                    >
+                      Agregar reseña
+                    </Link>
+                  </div>
+            </div>
+          </div>
 
           <div className="md:w-1/2">
             <div className="p-5">
@@ -131,30 +158,21 @@ const Detail = ({
                     {location}
                   </p>
                 </div>
-                <div className="flex-1">
-                  <div className="p-4 flex justify-start items-center mb-6">
+
+                <div className="p-4 flex justify-start items-center space-x-4 mt-8 mr-12">
                     <Link
-                      href="/login"
-                      className="px-6 py-2 text-black bg-white border border-black rounded-md md:ml-0 mt-8 inline-block mr-4"
+                     href="/booking"
+                    className="px-6 py-2 text-white bg-indigo-800 rounded-md"
                     >
-                      Contacta al anfitrión
-                    </Link>
-                  </div>
-                  <div className="p-4 flex justify-start items-center space-x-4">
-                    <Link
-                      href="/booking"
-                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
-                    >
-                      Reservar
+                       Reservar
                     </Link>
                     <Link
-                      href="/home"
-                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                     href="/home"
+                     className="px-6 py-2 text-white bg-indigo-800 rounded-md"
                     >
                       Volver a Home
                     </Link>
-                  </div>
-                </div>
+                    </div>
               </div>
             </div>
           </div>
