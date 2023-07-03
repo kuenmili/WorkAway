@@ -133,6 +133,10 @@ export default function booking() {
             handleReserveClick();
         } 
     };
+  
+
+
+  
 
 
   const checkout = async () => {
@@ -249,9 +253,9 @@ export default function booking() {
                         </div>
                         <div className="mb-6 flex justify-center mt-8">
                             <button
-                                type="submit"
-                                onClick={handleCheckoutClick}
-                                className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
+                             onClick={handleCheckoutClick}
+                             type="submit"
+                             className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
                             >
                                 Reservar
                             </button>
