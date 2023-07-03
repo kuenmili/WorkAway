@@ -1,4 +1,6 @@
-import { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { Fragment, useEffect } from "react";
+import { login } from "../redux/actions/auth";
 import {
   Bars3CenterLeftIcon,
   PencilIcon,
@@ -10,16 +12,28 @@ import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 
+
+
 export default function TopBar({ showNav, setShowNav }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(login({}));
+    }
+  }, []);
+
+
   return (
     <div
-      className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms]  ${
+      className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
         showNav ? "pl-56" : ""
       }`}
     >
       <div className="pl-4 md:pl-16">
         <Bars3CenterLeftIcon
-          className="h-8 w-8 text-white-500 cursor-pointer"
+          className="h-8 w-8 text-gray-700 cursor-pointer"
           onClick={() => setShowNav(!showNav)}/>
       </div>
       <div className="flex items-center pr-4 md:pr-16">
@@ -107,7 +121,7 @@ export default function TopBar({ showNav, setShowNav }) {
             <Menu.Button className="inline-flex w-full justify-center items-center">
               <picture>
                 <img
-                  src="/img/nico.jpg"
+                  src="{user?.profilePicture}"
                   className="rounded-full h-8 md:mr-4 border-2 border-white shadow-sm"
                   alt="profile picture"
                 />
@@ -132,30 +146,13 @@ export default function TopBar({ showNav, setShowNav }) {
                 <Menu.Item>
                   <Link
                     href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                    className="flex hover:bg-indigo-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <PencilIcon className="h-4 w-4 mr-2" />
-                    Titulo 1
+                    Logout
                   </Link>
                 </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
-                  >
-                    <CreditCardIcon className="h-4 w-4 mr-2" />
-                    Titulo 2
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
-                  >
-                    <Cog8ToothIcon className="h-4 w-4 mr-2" />
-                    Titulo 3
-                  </Link>
-                </Menu.Item>
+
               </div>
             </Menu.Items>
           </Transition>

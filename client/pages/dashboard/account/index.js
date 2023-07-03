@@ -8,22 +8,19 @@ import { useState } from 'react';
 
 
 
-const Profile = ({ profile_image, name, cuit, email, address, cellphone_number, id}) => {
+const Profile = ({  name, email, cuit, password ,profile_image, address, cellphone_number, id}) => {
   
   const [inputValue, setInputValue] = useState({
-    name: 'Palermo CoWorks',
-    email: 'palermo_cowork@gmail.com',
-    password: '1234567',
+    name: '',
+    email: '',
+    password: '',
     profile_image: '',
-    address: 'Av. del Libertador 1745, Palermo, Buenos Aires',
-    cuit: '2334782302',
-    cellphone_number: '3845988263',
+    address: '',
+    cuit: '',
+    cellphone_number: '',
   })
 
   const [isEditing, setIsEditing] = useState(false)
-
-  
-
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -67,7 +64,7 @@ const handleSubmit = (event) => {
                 <FontAwesomeIcon icon={faUser} className="text-indigo-700 mr-2 dark:text-white"/>
                 <input
                   type="text"
-                  value={inputValue.name}
+                  value={name}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                   readOnly={isEditing ? false : true}
@@ -81,7 +78,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faEnvelope} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={inputValue.email}
+                    value={email}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -95,7 +92,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faAddressCard} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={inputValue.address}
+                    value={address}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -109,7 +106,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faStar} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={inputValue.password}
+                    value={password}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -123,7 +120,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faNavicon} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={inputValue.cuit}
+                    value={cuit}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -137,7 +134,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faPhone} className="text-indigo-700 mr-2 dark:text-white" />
                   <input
                     type="text"
-                    value={inputValue.cellphone_number}
+                    value={cellphone_number}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}

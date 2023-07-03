@@ -6,12 +6,22 @@ export const CREATE_BUSINESS = "CREATE_BUSINESS";
 export const UPDATE_BUSINESS = "UPDATE_BUSINESS";
 
 export const getBusinessById = (id) => {
+    console.log("ESTOY ACA MAN")
     return async (dispatch) => {
-        const json = await axios.put(`http://localhost:3001/business/${ id }`);
-        return dispatch({
-            type:GET_BUSINESS_BY_ID,
-            payload: json.data
-        })
+        try {
+            const json = await axios.get(`http://localhost:3001/business/${ id }`, {
+                headers: {
+                    Authorization: `Bearer ${ localStorage.getItem("token") }`,
+                }
+            });
+            console.log("JSON: ", json)
+            return dispatch({
+                type:GET_BUSINESS_BY_ID,
+                payload: json.data
+            })
+        } catch (error) {
+            console.log("ERROR: ", error);
+        }
     }
 };
 

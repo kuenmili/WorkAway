@@ -98,7 +98,7 @@ export default function Signup() {
             <Navbar />
             <div className="container mx-auto px-4 ">
                 <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
-                    <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">Sign Up</h2>
+                    <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">Registro de Cliente</h2>
                     <p className="mb-6 text-center text-gray-400 ">Get access to the WorkAway service.</p>
 
                     <form onSubmit={handleSubmit}>

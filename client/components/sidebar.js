@@ -7,7 +7,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
   const router = useRouter();
 
   return (
-    <div ref={ref} className="fixed w-72 h-full shadow-sm bg-indigo-500">
+    <div ref={ref} className="fixed w-72 h-full shadow-sm bg-white-500">
       <div className="flex justify-center mt-6 mb-14">
         <picture>
           <img
@@ -31,7 +31,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
               <HomeIcon className="h-5 w-5" />
             </div>
             <div>
-              <p>Dashboard</p>
+              <p className="dark:text-white">Dashboard</p>
             </div>
           </div>
         </Link>
@@ -48,7 +48,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
               <UserIcon className="h-5 w-5" />
             </div>
             <div>
-              <span className="">Panel de perfil</span>
+              <span className=" dark:text-white">Panel de perfil</span>
             </div>
           </div>
         </Link>
@@ -65,7 +65,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
               <UserIcon className="h-5 w-5" />
             </div>
             <div>
-              <span className="">Editar perfil</span>
+              <span className="dark:text-white">Editar perfil</span>
             </div>
           </div>
         </Link>
@@ -84,7 +84,7 @@ const sideBar = forwardRef(({ showNav }, ref) => {
               <CreditCardIcon className="h-5 w-5" />
             </div>
             <div>
-              <p>CoworkSpace Admin</p>
+              <p className="dark:text-white">Agregar CoworkSpace </p>
             </div>
           </div>
         </Link>

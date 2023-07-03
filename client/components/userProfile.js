@@ -1,14 +1,7 @@
-import {
-  faEnvelope,
-  faPhone,
-  faQuoteLeft,
-  faCalendar,
-  faMinus,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import React from "react";
+import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
+import React from 'react';
 
 const Profile = ({
   profile_image,
@@ -20,10 +13,11 @@ const Profile = ({
   reserve_id,
   id,
 }) => {
+
   const renderStars = (score) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starClass = i <= score ? "text-yellow-500" : "text-gray-300";
+      const starClass = i <= score ? 'text-yellow-500' : 'text-gray-300';
       stars.push(
         <FontAwesomeIcon
           key={i}
@@ -52,14 +46,13 @@ const Profile = ({
           <h1 className="text-3xl text-slate-700 mb-3 dark:text-white">
             {first_name}
           </h1>
-          <h2 className="text-xl text-gray-600 dark:text-white">{last_name}</h2>
+          <h2 className="text-xl text-gray-600 dark:text-white">
+            {last_name}
+          </h2>
         </div>
         <div className="mt-4">
           <div className="flex items-center">
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className="text-indigo-700 mr-2 dark:text-white "
-            />
+            <FontAwesomeIcon icon={faEnvelope} className="text-indigo-700 mr-2 dark:text-white " />
             <input
               type="text"
               value={email}
@@ -70,10 +63,7 @@ const Profile = ({
         </div>
         <div className="mt-4">
           <div className="flex items-center">
-            <FontAwesomeIcon
-              icon={faPhone}
-              className="text-indigo-700 mr-2 dark:text-white"
-            />
+            <FontAwesomeIcon icon={faPhone} className="text-indigo-700 mr-2 dark:text-white" />
             <input
               type="text"
               value={cellphone_number}
@@ -82,94 +72,70 @@ const Profile = ({
           </div>
         </div>
         <div className="mt-4 flex justify-center pt-3">
-          <Link
-            href={`/users/${id}/edit`}
-            className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700"
-          >
-            Editar
+          <Link href={`/users/${id}/edit`} className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700">           
+              Editar          
           </Link>
         </div>
-      </div>
-      <div className="flex-col ">
+                    </div>
+                    <div className="flex-col ">
         <div className="bg-white rounded-lg  w-auto my-5 p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
-          <div className="flex justify-center"></div>
-          {reviews.length > 0 ? (
-            reviews.map((review, index) => {
+          <div className='flex justify-center'>
+           
+          </div>
+          {
+            reviews.length > 0 ? reviews.map((review, index) => {
               return (
-                <div key={index}>
+                <div key={index} >
                   <div className="flex justify-center mb-4">
-                    <FontAwesomeIcon
-                      icon={faQuoteLeft}
-                      className="text-indigo-700 mr-2 fa-lg dark:text-white"
-                    />
-                    <h2 className="text">Reseña</h2>
+                    <FontAwesomeIcon icon={faQuoteLeft} className="text-indigo-700 mr-2 fa-lg dark:text-white" />
+                     <h2 className='text'>Reseña</h2>
+                  </div> 
+                  <div className='leading-9'>                           
+                  <p>Comentario: {review.comment}</p>
+                  <p>Puntaje: {renderStars(review.score)}</p>
                   </div>
-                  <div className="leading-9">
-                    <p>Comentario: {review.comment}</p>
-                    <p>Puntaje: {renderStars(review.score)}</p>
+                  {index !== reviews.length - 1 && <FontAwesomeIcon icon={faMinus} className="text-gray-500 mx-2" />}
                   </div>
-                  {index !== reviews.length - 1 && (
-                    <FontAwesomeIcon
-                      icon={faMinus}
-                      className="text-gray-500 mx-2"
-                    />
-                  )}
-                </div>
-              );
-            })
-          ) : (
-            <div className="text-center items-center">
+                    )
+            }) 
+            : 
+            <div className='text-center items-center'>
               <div className="flex justify-center mb-4">
-                <FontAwesomeIcon
-                  icon={faQuoteLeft}
-                  className="text-indigo-700 mr-2 fa-lg dark:text-white"
-                />
+                <FontAwesomeIcon icon={faQuoteLeft} className="text-indigo-700 mr-2 fa-lg dark:text-white" />
               </div>
               <p>No se han hecho reseñas</p>
             </div>
-          )}
-        </div>
+          }</div>
 
-        <div className="bg-white rounded-lg w-auto p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
-          {reserve_id.length > 0 ? (
-            reserve_id.map((reserve, index) => {
-              return (
-                <div key={index}>
-                  <div className="flex justify-center text-xl mb-4">
-                    <FontAwesomeIcon
-                      icon={faCalendar}
-                      className="text-indigo-700 mr-2 dark:text-white"
-                    />
-                  </div>
-                  <div className="flex justify-center">
-                    <h2>Reserva</h2>
-                  </div>
-                  <div className="leading-9">
-                    <p>Date: {reserve.date}</p>
-                    <p>Duration: {reserve.duration}</p>
-                    <p>Room:{reserve.room}</p>
-                  </div>
-                  {index !== reserve_id.length - 1 && (
-                    <FontAwesomeIcon
-                      icon={faMinus}
-                      className="text-gray-500 mx-2"
-                    />
-                  )}
-                </div>
-              );
-            })
-          ) : (
-            <div className="text-center items-center">
-              <div className="flex justify-center text-xl mb-4">
-                <FontAwesomeIcon
-                  icon={faCalendar}
-                  className="text-indigo-700 mr-2 dark:text-white"
-                />
-              </div>
-              <p>No se han hecho reservas</p>
+              <div className="bg-white rounded-lg w-auto p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
+                        {
+                        reserve_id.length > 0 ? reserve_id.map((reserve, index) => {
+                          return (
+                            <div key={index}>  
+                             <div className="flex justify-center text-xl mb-4">
+                                <FontAwesomeIcon icon={faCalendar} className="text-indigo-700 mr-2 dark:text-white" />
+                            </div> 
+                            <div className='flex justify-center'>
+                            <h2>Reserva</h2>      
+                            </div>  
+                            <div className='leading-9'>                     
+                            <p>Date: {reserve.date}</p>
+                            <p>Duration: {reserve.duration}</p>
+                            <p>Room:{reserve.room}</p>
+                            </div>
+                            {index !== reserve_id.length - 1 && <FontAwesomeIcon icon={faMinus} className="text-gray-500 mx-2" />}
+                            </div>
+                        )
+                    }) 
+                  
+                    : <div className='text-center items-center'>
+                      <div className="flex justify-center text-xl mb-4">
+                                <FontAwesomeIcon icon={faCalendar} className="text-indigo-700 mr-2 dark:text-white" />
+                            </div>
+                        <p>No se han hecho reservas</p>
+                    </div>
+                    }
             </div>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import Navhome from "../components/navhome";
+import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import CardsSection from "../components/cardsSection";
 import cardList from "../components/datalist"
@@ -13,8 +13,10 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import Filters from "../components/filters";
 import Search from "../components/search";
+import { useDispatch, useSelector } from "react-redux";
 
 import Chatbot from "../components/chatbot";
+import { getBusinessById } from "../redux/actions/business";
 
 
 
@@ -52,11 +54,12 @@ const Home = () => {
       });
       setCards(cardList.filter(card => card[name] === value));
   }
+  const dispatch = useDispatch();
 
   return (
     <>
       <header>
-      <Navhome/>  
+      <Navbar/>  
       </header> 
       <Search/>
       <Swiper
