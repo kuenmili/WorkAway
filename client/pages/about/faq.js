@@ -1,76 +1,78 @@
 import React from "react";
-import Container from "../components/container";
+import Container from "../../components/container";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import ThemeChanger from "../components/DarkSwitch";
+import ThemeChanger from "../../components/DarkSwitch";
 import Image from "next/image";
-import Footer from "../components/footer";
-import Work from "../public/favicon.ico";
+import Footer from "../../components/footer";
+import Work from "../../public/favicon.ico";
 
 const Faq = () => {
   return (
     <div>
       <div>
-        <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
-          {/* Logo  */}
-          <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-            <Link href="/home">
-              <span
-                className="flex items-center space-x-2 text-4xl 
+        <div>
+          <nav className="container relative flex flex-wrap items-center mb-6 justify-between p-8 mx-auto lg:justify-between xl:px-0">
+            {/* Logo  */}
+            <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+              <Link href="/home">
+                <span
+                  className="flex items-center space-x-2 text-4xl 
               font-bold text-indigo-800 dark:text-gray-100 "
-              >
-                <span>
-                  <Image src={Work} alt="" width="50" height="40" />
+                >
+                  <span>
+                    <Image src={Work} alt="" width="50" height="40" />
+                  </span>
+                  <span>WorkAway</span>
                 </span>
-                <span>WorkAway</span>
-              </span>
-            </Link>
-          </div>
-          <ThemeChanger />
-        </nav>
-      </div>
-      <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl p-10">
-        <Container className="!p-0">
-          <h1
-            className=" text-3xl font-medium text-center pt-10 pb-10
-                        text-gray-800 underline rounded-md dark:text-gray-200 
+              </Link>
+            </div>
+            <ThemeChanger />
+          </nav>
+        </div>
+        <div className="max-w-2xl mx-auto mt-8 p-6 dark:bg-black bg-white rounded-lg shadow-2xl p-10">
+          <Container className="!p-0 ">
+            <h1
+              className=" text-3xl font-medium text-center pt-10 pb-10
+                        text-gray-800 underline rounded-md dark:text-white
                         hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 
                         focus:outline-none dark:focus:bg-gray-300"
-          >
-            FAQ - Preguntas frecuentes
-          </h1>
-          <div className="w-full max-w-2xl p-2 m-auto rounded-2xl">
-            {faqdata.map((item, index) => (
-              <div key={item.question} className="mb-5">
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button
-                        className="flex items-center justify-between w-full px-4 py-4 text-lg 
+            >
+              FAQ - Preguntas frecuentes
+            </h1>
+            <div className="w-full max-w-2xl p-2 m-auto rounded-2xl">
+              {faqdata.map((item, index) => (
+                <div key={item.question} className="mb-5">
+                  <Disclosure>
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button
+                          className="flex items-center justify-between w-full px-4 py-4 text-lg 
                           text-left text-gray-800 rounded-lg bg-gray-50 hover:bg-gray-100 focus:outline-nonefocus-visible:ring 
                           focus-visible:ring-indigo-100 focus-visible:ring-opacity-75 dark:bg-trueGray-800 dark:text-gray-200"
-                      >
-                        <span>{item.question}</span>
-                        <ChevronUpIcon
-                          className={`${
-                            open ? "transform rotate-180" : ""
-                          } w-5 h-5 text-indigo-500`}
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-gray-500 dark:text-gray-300">
-                        {item.answer}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-              </div>
-            ))}
-          </div>
-        </Container>
-        <div className="absolute inset-x-0 bottom-0 ">
-          <Footer />
+                        >
+                          <span>{item.question}</span>
+                          <ChevronUpIcon
+                            className={`${
+                              open ? "transform rotate-180 mb-6" : ""
+                            } w-5 h-5 text-indigo-500`}
+                          />
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-gray-500 dark:text-white">
+                          {item.answer}
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                </div>
+              ))}
+            </div>
+          </Container>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );
