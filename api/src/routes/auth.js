@@ -28,16 +28,21 @@ router.post("/logout", (req, res, next) => {
     });
 });
 
-router.get('/auth/google',
+router.get('/google',
   passport.authenticate('google', { scope: [ 'email', 'profile' ] }
 ));
 
-router.get( '/auth/google/callback',
-  passport.authenticate( 'google', {
-    successRedirect: '/protected',
-    failureRedirect: '/auth/google/failure'
-  })
-);
+
+router.get( '/google/callback', (req, res, next) => {
+    passport.authenticate( 'google', (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err.message });
+        }
+    
+        const token = generateUserToken(user);
+        res.redirect(`http://localhost:3000/home?token=${token}`);
+      })(req, res, next);
+});
 
 
 module.exports = router;
