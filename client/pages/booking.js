@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
@@ -26,7 +24,7 @@ export default function booking() {
   const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
   const [cowork_space, setCoworkSpace] = useState("");
-
+  const [darkMode, setDarkMode] = useState(false);
   const [dateFromError, setDateFromError] = useState(false);
   const [dateToError, setDateToError] = useState(false);
   const [occupantsError, setOccupantsError] = useState(false);
@@ -36,13 +34,28 @@ export default function booking() {
   const [selectedDays, setSelectedDays] = useState(0);
 
   const handleDateFromChange = (e) => {
-    setDateFrom(e.target.value);
+    const selectedDate = e.target.value;
+    setDateFrom(selectedDate);
     setDateFromError(false);
+
+    if (date_to) {
+      const days = differenceInDays(new Date(date_to), new Date(selectedDate));
+      setSelectedDays(days + 1); // Sumamos 1 para incluir también el último día
+    }
   };
 
   const handleDateToChange = (e) => {
-    setDateTo(e.target.value);
+    const selectedDate = e.target.value;
+    setDateTo(selectedDate);
     setDateToError(false);
+
+    if (date_from) {
+      const days = differenceInDays(
+        new Date(selectedDate),
+        new Date(date_from)
+      );
+      setSelectedDays(days + 1); // Sumamos 1 para incluir también el primer día
+    }
   };
 
   const handleOccupantsChange = (e) => {
@@ -69,7 +82,7 @@ export default function booking() {
       date_to === "" ||
       occupants === "" ||
       cowork_space === "" ||
-      isChecked === ""
+      !isChecked
     ) {
       alert("Por favor complete todos los campos.");
       return;
@@ -84,6 +97,15 @@ export default function booking() {
       })
     );
   };
+
+  useEffect(() => {
+    if (date_from && date_to) {
+      const fromDate = new Date(date_from);
+      const toDate = new Date(date_to);
+      const days = differenceInDays(toDate, fromDate);
+      setSelectedDays(days);
+    }
+  }, [date_from, date_to]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -100,21 +122,26 @@ export default function booking() {
     if (cowork_space === "") {
       setCoworkSpaceError(true);
     }
+    if (!isChecked) {
+      setShowCheckboxError(true);
+    }
 
     if (
       !dateFromError &&
       !dateToError &&
       !occupantsError &&
-      !coworkSpaceError
+      !coworkSpaceError &&
+      isChecked
     ) {
       handleReserveClick();
     }
   };
 
   const checkout = async () => {
+    const totalPayment = coworkSpace.name * selectedDays;
     const paymentInfo = {
       detail: coworkSpace.name,
-      amount: coworkSpace.price,
+      amount: totalPayment,
     };
     const response = await axios.post(
       "http://localhost:3001/payments/create",
@@ -199,6 +226,11 @@ export default function booking() {
                     Este campo es requerido.
                   </p>
                 )}
+                {date_to && (
+                  <p className="text-indigo-600 mt-2 ml-20">
+                    Días seleccionados: {selectedDays}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -247,8 +279,8 @@ export default function booking() {
             </div>
             <div className="mb-6 flex justify-center mt-8">
               <button
-                type="submit"
                 onClick={handleCheckoutClick}
+                type="submit"
                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
               >
                 Reservar
@@ -257,9 +289,7 @@ export default function booking() {
           </form>
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 ">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
