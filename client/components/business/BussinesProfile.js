@@ -15,13 +15,13 @@ const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
         {/* business name */}
         <div className="flex  mt-8">
           <h1 className="text-3xl font-bold text-slate-700  dark:text-white">
-            {"Work Away"}
+            {name}
           </h1>
         </div>
         {/* business address */}
         <div>
           <h2 className=" mt-2 text-l text-gray-600 dark:text-white mb-5">
-            {"Av Corrientes 1145, Buenos Aires, Argentina."}
+            {address}
           </h2>
         </div>
         {/* business email */}
@@ -33,7 +33,7 @@ const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
             />
             <input
               type="text"
-              value={"workaway@business.example.com"}
+              value={email}
               className="block w-full dark:bg-transparent dark:text-white bg-white border border-indigo-600 rounded-md py-2 px-4 mt-1 ml-4 mr-8 "
               readOnly
             />
@@ -63,7 +63,7 @@ const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
             />
             <input
               type="text"
-              value={"24881083708"}
+              value={cuit}
               className="block w-full dark:bg-transparent dark:text-white bg-white border border-indigo-600 rounded-md py-2 px-4 ml-4 mr-8  "
               readOnly
             />

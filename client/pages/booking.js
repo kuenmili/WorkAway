@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { createReserve } from "../redux/actions/reserves";
+import { differenceInDays } from "date-fns";
 import axios from "axios";
 
 export default function booking() {
@@ -30,15 +31,31 @@ export default function booking() {
   const [coworkSpaceError, setCoworkSpaceError] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
+  const [selectedDays, setSelectedDays] = useState(0);
 
   const handleDateFromChange = (e) => {
-    setDateFrom(e.target.value);
+    const selectedDate = e.target.value;
+    setDateFrom(selectedDate);
     setDateFromError(false);
+
+    if (date_to) {
+      const days = differenceInDays(new Date(date_to), new Date(selectedDate));
+      setSelectedDays(days + 1); // Sumamos 1 para incluir también el último día
+    }
   };
 
   const handleDateToChange = (e) => {
-    setDateTo(e.target.value);
+    const selectedDate = e.target.value;
+    setDateTo(selectedDate);
     setDateToError(false);
+
+    if (date_from) {
+      const days = differenceInDays(
+        new Date(selectedDate),
+        new Date(date_from)
+      );
+      setSelectedDays(days + 1); // Sumamos 1 para incluir también el primer día
+    }
   };
 
   const handleOccupantsChange = (e) => {
@@ -79,9 +96,16 @@ export default function booking() {
         cowork_space: cowork_space,
       })
     );
-
-    alert("Reserva confirmada");
   };
+
+  useEffect(() => {
+    if (date_from && date_to) {
+      const fromDate = new Date(date_from);
+      const toDate = new Date(date_to);
+      const days = differenceInDays(toDate, fromDate);
+      setSelectedDays(days);
+    }
+  }, [date_from, date_to]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,9 +134,11 @@ export default function booking() {
   };
 
   const checkout = async () => {
+    const days = selectedDays;
+    const totalAmount = days * coworkSpace.price;
     const paymentInfo = {
       detail: coworkSpace.name,
-      amount: coworkSpace.price,
+      amount: totalAmount,
     };
     const response = await axios.post(
       "http://localhost:3001/payments/create",
@@ -197,6 +223,11 @@ export default function booking() {
                     Este campo es requerido.
                   </p>
                 )}
+                {date_to && (
+                  <p className="text-indigo-600 mt-2 ml-20">
+                    Días seleccionados: {selectedDays}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -227,7 +258,7 @@ export default function booking() {
                 <input
                   type="checkbox"
                   checked={isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
+                  onChange={handleCheckBox}
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded ml-14"
                 />
                 <label
@@ -245,8 +276,8 @@ export default function booking() {
             </div>
             <div className="mb-6 flex justify-center mt-8">
               <button
-                onClick={handleCheckoutClick}
                 type="submit"
+                onClick={handleCheckoutClick}
                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
               >
                 Reservar
