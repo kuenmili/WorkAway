@@ -42,7 +42,11 @@ export const createUser = ({
 
 export const putUser = (id, userData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/users/${id}`, userData)
+        const json = await axios.put(`http://localhost:3001/users/${id}`,{
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, userData)
         return dispatch({
             type: PUT_USER,
             payload: json.data,

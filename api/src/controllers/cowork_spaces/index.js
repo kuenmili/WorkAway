@@ -2,6 +2,7 @@ const {
     getAllCoworkSpaces,
     getCoworkSpacesBySearch,
     getCoworkSpaceByID,
+    getCoworkSpaceWithReserve,
 } = require("./get");
 const { createSpaceCowork } = require('./post');
 const { modifyCoworkSpace } = require('./put');
@@ -11,6 +12,7 @@ module.exports = {
     getAllCoworkSpaces,
     getCoworkSpacesBySearch,
     getCoworkSpaceByID,
+    getCoworkSpaceWithReserve,
     createSpaceCowork,
     modifyCoworkSpace,
     deleteCoworkSpace,

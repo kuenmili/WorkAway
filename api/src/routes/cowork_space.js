@@ -1,12 +1,15 @@
+const passport = require('passport');
 const router = require('express').Router();
 const {
     getAllCoworkSpaces,
     getCoworkSpacesBySearch,
     getCoworkSpaceByID,
+    getCoworkSpaceWithReserve,
     createSpaceCowork,
     modifyCoworkSpace,
     deleteCoworkSpace,
 } = require("../controllers/cowork_spaces");
+const { isAdmin, isAdminMiddleware } = require('../middlewares/auth');
 
 //This route will retrieve all cowork spaces in DB
 router.get('/', async (req,res) => {
@@ -42,9 +45,20 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/detail', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { name, score, location, services, price, reserve } = req.query;
+    try {
+        const coworkWithReserve = await getCoworkSpaceWithReserve(name, score, location, services, price, reserve);
+        res.status(202).json(coworkWithReserve);
+    } catch (error) {
+        console.log("ACA ES EL ERROR", error)
+        res.status(500).json(error);
+    }
+} )
+
 //This route will create a cowork space in our DB
-router.post('/', async (req, res) => {
-    const  coworkSpaceToCreate  = req.body;
+router.post('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { coworkSpaceToCreate } = req.body;
     try {
         const spaceCoworkCreated = await createSpaceCowork(coworkSpaceToCreate);
         res.status(201).json(spaceCoworkCreated);
@@ -54,7 +68,7 @@ router.post('/', async (req, res) => {
 });
 
 //This route will modify a cowork space in our DB
-router.put('/:id', async (req, res) => {
+router.put('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     const { name, about, services, images } = req.body;
     try {
@@ -66,12 +80,13 @@ router.put('/:id', async (req, res) => {
 });
 
 //This route will delete a cowork space in our DB
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params
     try {
         const coworkSpaceDeleted = await deleteCoworkSpace(id);
         res.status(202).json(coworkSpaceDeleted);
     } catch (error) {
+        console.log("ACA ES EL Error", error)
         res.status(400).json(error);
     } 
 });
