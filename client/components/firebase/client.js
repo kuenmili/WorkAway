@@ -9,7 +9,7 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 
 export const uploadImage = file => {
-    const storageRef = firebase.storage().ref(`images/${file.name}`);
+    const storageRef = firebase.storage().ref();
     const fileRef = storageRef.child(file.name);
     const task = fileRef.put(file)
     return task;

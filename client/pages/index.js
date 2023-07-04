@@ -25,7 +25,7 @@ const Landing = () => {
           name="description"
           content="WorkAway es una plataforma que te permite encontrar tu lugar de trabajo de manera remota."
         />
-        <link rel="icon" href="img/workaway.ico"/>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <FirstSection />

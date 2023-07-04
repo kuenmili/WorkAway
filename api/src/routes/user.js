@@ -1,3 +1,4 @@
+const passport = require('passport');
 const userRouter = require("express").Router();
 const createUser = require('../controllers/user/post');
 const {
@@ -16,7 +17,7 @@ userRouter.get('/', async (req, res) => {
     }
 });
 
-userRouter.get('/:id', async (req, res) => {
+userRouter.get('/:id', passport.authenticate("jwt", { session: false }),  async (req, res) => {
     const { id } = req.params;
     try {       
         const user = await getById(id);
@@ -54,7 +55,7 @@ userRouter.post('/signup', async (req, res) => {
     }
 });
 
-userRouter.put('/:id', async (req, res) => {
+userRouter.put('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     const user = req.body;
     
@@ -66,7 +67,7 @@ userRouter.put('/:id', async (req, res) => {
     }
 });
 
-userRouter.delete('/:id', async (req, res) => {
+userRouter.delete('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     try {
         const deletedUser = await deleteUser(id);

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
@@ -34,28 +36,13 @@ export default function booking() {
   const [selectedDays, setSelectedDays] = useState(0);
 
   const handleDateFromChange = (e) => {
-    const selectedDate = e.target.value;
-    setDateFrom(selectedDate);
+    setDateFrom(e.target.value);
     setDateFromError(false);
-
-    if (date_to) {
-      const days = differenceInDays(new Date(date_to), new Date(selectedDate));
-      setSelectedDays(days + 1); // Sumamos 1 para incluir también el último día
-    }
   };
 
   const handleDateToChange = (e) => {
-    const selectedDate = e.target.value;
-    setDateTo(selectedDate);
+    setDateTo(e.target.value);
     setDateToError(false);
-
-    if (date_from) {
-      const days = differenceInDays(
-        new Date(selectedDate),
-        new Date(date_from)
-      );
-      setSelectedDays(days + 1); // Sumamos 1 para incluir también el primer día
-    }
   };
 
   const handleOccupantsChange = (e) => {
@@ -98,15 +85,6 @@ export default function booking() {
     );
   };
 
-  useEffect(() => {
-    if (date_from && date_to) {
-      const fromDate = new Date(date_from);
-      const toDate = new Date(date_to);
-      const days = differenceInDays(toDate, fromDate);
-      setSelectedDays(days);
-    }
-  }, [date_from, date_to]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -134,11 +112,9 @@ export default function booking() {
   };
 
   const checkout = async () => {
-    const days = selectedDays;
-    const totalAmount = days * coworkSpace.price;
     const paymentInfo = {
       detail: coworkSpace.name,
-      amount: totalAmount,
+      amount: coworkSpace.price,
     };
     const response = await axios.post(
       "http://localhost:3001/payments/create",
@@ -221,11 +197,6 @@ export default function booking() {
                     style={{ marginLeft: "92px" }}
                   >
                     Este campo es requerido.
-                  </p>
-                )}
-                {date_to && (
-                  <p className="text-indigo-600 mt-2 ml-20">
-                    Días seleccionados: {selectedDays}
                   </p>
                 )}
               </div>

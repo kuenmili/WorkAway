@@ -4,7 +4,7 @@ const getById = async (id) => {
     
     if (!id) throw new Error(`Id required`);
 
-    const user = await User.findById(id)   
+    const user = await User.findById(id).populate("reviews").populate('reserve_id');    
     
     if (!user) return;   
     
@@ -12,7 +12,7 @@ const getById = async (id) => {
 };
 
 const getAllUsers = async () => {
-    const users = await User.find({})
+    const users = await User.find({}).populate('reserve_id').populate("reviews");
     return users;
 };
 

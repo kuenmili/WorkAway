@@ -13,9 +13,8 @@ const createSpaceCowork = async ({ location, address,business, name, price, abou
         review,
         price
     });
-     
-    if (business) {
-        const businessCreated = await Business.findByIdAndUpdate(
+
+    await Business.findByIdAndUpdate(
         business,
         {
             $push: {
@@ -24,7 +23,7 @@ const createSpaceCowork = async ({ location, address,business, name, price, abou
         },
         { new: true }
     );
-    }
+
     return coworkSpaceCreated;
 };
 

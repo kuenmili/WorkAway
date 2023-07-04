@@ -15,7 +15,7 @@ const rootReducer = (state= InitialState, action) => {
         case CREATE_USER: {
             return {
                 ...state,
-                user: user,
+                user: action.payload,
             }
         }
         case PUT_USER: {
