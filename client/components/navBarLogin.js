@@ -42,7 +42,9 @@ const DropdownMenu = ({ profileImage }) => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href={loggedIn && isAdmin ? "/dashboard/account" : `users/${user._id}`}>Dashboard</a>
+              <a href={loggedIn && isAdmin ? "/dashboard/account" : `users/${user._id}`}>
+                {loggedIn && isAdmin ? "Dashboard" : "Perfil"}
+              </a>
             </li>
             <li className=" px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800 ">
               <button onClick={() => dispatch(logout())}>Cerrar sesión</button>

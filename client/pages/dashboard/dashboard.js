@@ -1,5 +1,11 @@
+import { useDispatch } from "react-redux";
+
+
 
 export default function Dashboard() {
+
+
+
   return (
     <>
       <p className="text-gray-700 text-3xl mb-16 font-bold">Este es el Dashboard</p>

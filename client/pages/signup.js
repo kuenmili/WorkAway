@@ -5,6 +5,7 @@ import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Modal from "../components/modal";
+import { createUser } from "../redux/actions/users";
 
 export default function Signup() {
     const router = useRouter();
@@ -102,7 +103,7 @@ export default function Signup() {
             <div className="container mx-auto px-4 ">
                 <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
                     <h2 className="text-4xl font-bold mb-6 text-center dark:text-black">Registro de Cliente</h2>
-                    <p className="mb-6 text-center text-gray-400 ">Get access to the WorkAway service.</p>
+                    <p className="mb-6 text-center text-gray-400 ">Obtiene acceso al servicio de WorkAway.</p>
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-6">
@@ -110,13 +111,13 @@ export default function Signup() {
                                 <input
                                     type="text"
                                     value={first_name}
-                                    placeholder="First Name"
+                                    placeholder="Nombre"
                                     onChange={handleFirstNameChange}
                                     className={`w-3/4 mx-auto bg-white border ${firstNameError ? "border-red-500" : "border-indigo-300"
                                         } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
                                 {firstNameError && (
-                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
                             </div>
                         </div>
@@ -127,13 +128,13 @@ export default function Signup() {
                                 <input
                                     type="text"
                                     value={last_name}
-                                    placeholder="Last Name"
+                                    placeholder="Apellido"
                                     onChange={handleLastNameChange}
                                     className={`w-3/4 mx-auto bg-white border ${lastNameError ? "border-red-500" : "border-indigo-300"
                                         } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
                                 {lastNameError && (
-                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
                             </div>
                         </div>
@@ -144,13 +145,13 @@ export default function Signup() {
                                 <input
                                     type="email"
                                     value={email}
-                                    placeholder="name@address.com"
+                                    placeholder="nombre@email.com"
                                     onChange={handleEmailChange}
                                     className={`w-3/4 mx-auto bg-white border ${emailError ? "border-red-500" : "border-indigo-300"
                                         } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
                                 {emailError && (
-                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
                             </div>
                         </div>
@@ -161,13 +162,13 @@ export default function Signup() {
                                 <input
                                     type="password"
                                     value={password}
-                                    placeholder="Enter your password"
+                                    placeholder="Ingresa tu contraseña"
                                     onChange={handlePasswordChange}
                                     className={`w-3/4 mx-auto bg-white border ${passwordError ? "border-red-500" : "border-indigo-300"
                                         } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
                                 {passwordError && (
-                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
                             </div>
                         </div>
@@ -178,13 +179,13 @@ export default function Signup() {
                                 <input
                                     type="tel"
                                     value={cellphone_number}
-                                    placeholder="Enter your cellphone Number"
+                                    placeholder="Ingresa tu numero de celular"
                                     onChange={handleCellphoneNumberChange}
                                     className={`w-3/4 mx-auto bg-white border ${cellphoneNumberError ? "border-red-500" : "border-indigo-300"
                                         } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                                 />
                                 {cellphoneNumberError && (
-                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>This field is required.</p>
+                                    <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
                             </div>
                         </div>
@@ -205,12 +206,12 @@ export default function Signup() {
                                     }}
                                 />
                                 <span className="ml-2 text-gray-500">
-                                    I agree to the terms and conditions.
+                                    Estoy de acuerdo con los terminos y condiciones.
                                 </span>
                             </label>
                             {showCheckboxError && (
                                 <p className="text-red-500 text-center ml-8">
-                                    This checkbox is required.
+                                    Es requerido.
                                 </p>
                             )}
                         </div>
@@ -220,7 +221,7 @@ export default function Signup() {
                                 type="submit"
                                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
                             >
-                                Sign Up
+                                Registrate
                             </button>
                         </div>
                     </form>
@@ -237,7 +238,7 @@ export default function Signup() {
                         </button>
                     </div>
                     <p className="mt-4 text-center text-gray-500">
-                        Already have an account? <a href="/login" className="text-indigo-600">Log in</a>.
+                        ¿Ya tienes una cuenta? <a href="/login" className="text-indigo-600">Inicia Sesión</a>.
                     </p>
                 </div>
             </div>

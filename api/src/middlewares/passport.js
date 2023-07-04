@@ -34,6 +34,7 @@ passport.use("login", new Strategy({
 
         return done(null, user || business, { message: "Logged in successfully" });
     } catch (error) {
+        console.log("ERROR PASSPORT: ", error);
         return done(error);
     }
 }));

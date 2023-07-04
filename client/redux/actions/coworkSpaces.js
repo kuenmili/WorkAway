@@ -8,6 +8,7 @@ export const UPDATE_COWORKSPACE = 'UPDATE_COWORKSPACE';
 export const DELETE_COWORKSPACE = 'DELETE_COWORKSPACE';
 export const COWORKSPACE_LOADING = 'COWORKSPACE_LOADING';
 export const COWORKSPACE_ERROR = 'COWORKSPACE_ERROR';
+export const GET_BUSINESS_WITH_RESERVE = "GET_BUSINESS_WITH_RESERVE";
 
 const baseCoworkSpacesURL = '/cowork_spaces';
 
@@ -61,6 +62,25 @@ export const getCoworkSpace = id => async dispatch => {
         });
     }
 }
+
+export const getBusinessWithReserve = () => {
+    return async (dispatch) => {
+        try {
+            const json = await axios.get(`${baseCoworkSpacesURL}/${id}/detail`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        });
+        return dispatch({
+            type: GET_BUSINESS_WITH_RESERVE,
+            payload:json.data
+        })
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+};
+
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {

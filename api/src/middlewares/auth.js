@@ -38,13 +38,15 @@ const isAuthenticated = (req, res, next) => {
     res.status(401).json({ message: 'You are not authenticated' });
 };
 
-const isAdmin = (user) => {
-    const business = Business.findById(user._id);
-    if (business) {
-        return true;
+const isAdmin = async (user) => {
+    try {
+        const business = await Business.findById(user._id);
+        if (business) {
+            return true;
+        }
+    } catch (error) {
+        return false;
     }
-
-    return false;
 };
 
 const isAdminMiddleware = (req, res, next) => {

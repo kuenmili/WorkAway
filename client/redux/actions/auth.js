@@ -20,7 +20,7 @@ export const login = ({ email, password }) => async (dispatch) => {
             email,
             password,
         });
-
+        console.log("JSON.DATA: ", json.data);
         if (json.data.success) {
             return dispatch({
                 type: LOGIN,

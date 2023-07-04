@@ -6,6 +6,7 @@ export const CREATE_BUSINESS = "CREATE_BUSINESS";
 export const UPDATE_BUSINESS = "UPDATE_BUSINESS";
 export const LOGIN_BUSINESS = "LOGIN_BUSINESS";
 
+
 export const loginBusiness = () => {
     return async (dispatch) => {
         try {
@@ -25,7 +26,7 @@ export const loginBusiness = () => {
 }
 
 export const getBusinessById = (id) => {
-    console.log("ESTOY ACA MAN")
+
     return async (dispatch) => {
         try {
             const json = await axios.get(`http://localhost:3001/business/${ id }`, {
@@ -43,6 +44,8 @@ export const getBusinessById = (id) => {
         }
     }
 };
+
+
 
 export const createBusiness = ({  name,
     cuit,

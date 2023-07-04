@@ -21,11 +21,10 @@ function Dashboard() {
       id && dispatch(getBusinessById(id));
     }, [dispatch, id]);
 
- 
-
   return (
     <Layout>
       <h1 className='text-center text-3xl'>CoworkSpaces</h1>
+
       <div className='ml-8'>
         <div className="container py-12 flex ">
           <div className="grid lg:grid-cols-3 gap-12 ">

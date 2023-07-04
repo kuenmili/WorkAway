@@ -4,7 +4,8 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("login", { session: false }), async (req, res, next) => {
     try {
-        if (isAdmin(req.user)) {
+        const isAdminUser = await isAdmin(req.user);
+        if (isAdminUser) {
             const token = generateBusinessToken(req.user);
             return res.status(200).json({ success: true, token, isAdmin: true });
         }
