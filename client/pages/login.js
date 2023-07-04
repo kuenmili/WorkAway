@@ -1,62 +1,96 @@
-import { FaGoogle } from "react-icons/fa";
-import React, { useState, useEffect } from "react";
+import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import { useRouter } from "next/router";
-import useUser from "../components/hooks/useUser";
-import { loginWithGoogle, signIn, signOut } from '../components/firebase/client';
-import { onAuthStateChanged } from "../components/firebase/client";
+import ApiCaller from "../components/apiCaller";
+import Modal from "../components/modal";
 
 
 export default function Login() {
-
-  const user = useUser();
+  const [emailData, setEmailData] = useState([]);
+  const [inputEmail, setInputEmail] = useState("");
+  const [modalContent, setModalContent] = useState("");// Estado del modal
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Configuración del modal.
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const passwordInputRef = useRef(null);
+  const emailInputRef = useRef(null);
   const router = useRouter();
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState({
-    email: '',
-    password: ''
-  });
-  const handleInputChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
-  };
-  
-  const handleClickGoogle = () => {
-    loginWithGoogle()
-    .then(user => {
-      console.log(user);
-    }).catch(error => console.log(error))
-  }
-
-  const handleNormalLogin = () => {
-    const {email, password} = data
-    try {
-      signIn(email, password)
-      router.push('/home')
-    } catch (error) {
-      console.log(error.message);
-    }    
-  }
-
-  const handleSignOut = () => {
-    signOut()
-  }
 
   useEffect(() => {
-    if (user) router.push('/login')
-  },[user])
+    const fetchData = async () => {
+      const data = await ApiCaller();
+      setEmailData(data);
+    };
+    fetchData();
+  }, []);
+
+  const handleEmailChange = (event) => {
+    const { value } = event.target;
+    setInputEmail(value);
+    setIsEmailValid(emailData && emailData.includes(value));
+  };
+
+  const clearForm = () => {
+    setInputEmail("");
+    passwordInputRef.current.value = "";
+  };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsFormSubmitted(true);
+
+    const inputEmail = emailInputRef.current.value.trim();
+    console.log(inputEmail, "Este es el email ingresado");
+    const inputPassword = passwordInputRef.current.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    setIsEmailEmpty(inputEmail === "");
+    setIsPasswordEmpty(inputPassword === "");
+
+    if (inputEmail === "" || inputPassword === "") {
+      return;
+    }
+
+    if (emailRegex.test(inputEmail)) {
+      const user = emailData.find((item) => item.email === inputEmail);
+    
+      if (user) {
+        if (user.password === inputPassword) {
+          setModalContent("Login exitoso");
+          setShowModal(true);
+        } else {
+          setErrorMessage("Error: Contraseña incorrecta");
+          //clearForm();
+        }
+      } else {
+        setErrorMessage("Error: Email incorrecto");
+        //clearForm();
+      }
+    } else {
+      setErrorMessage("Error: Email inválido");
+      clearForm();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    router.push("/");
+  }
 
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl dark:bg-gray-200">
-          <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">Iniciar sesión</h2>
+        <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
+          <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">Log in</h2>
           <p className="mb-6 text-center text-gray-400 ">Accede a tu cuenta de WorkAway</p>
 
           {/* Input email */}
@@ -66,14 +100,15 @@ export default function Login() {
               <input
                 type="email"
                 id="email"
-                name="email"
                 placeholder="nombre@email.com"
-                className={`w-3/4 mx-auto bg-white border rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
-                value={data.email}
-                onChange={handleInputChange}
+                className={`w-3/4 mx-auto bg-white border ${isEmailEmpty ? "border-red-500" : "border-indigo-300"
+                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                value={inputEmail}
+                onChange={handleEmailChange}
+                ref={emailInputRef}
                 required
               />
-             
+              {isEmailEmpty && <p className="text-red-500 ml-20">El campo email es obligatorio</p>}
             </div>
           </div>
 
@@ -84,53 +119,54 @@ export default function Login() {
               <input
                 type="password"
                 id="password"
-                name= "password"
                 placeholder="ingresa un password"
-                className={`w-3/4 mx-auto bg-white border 
-                   rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
-                value={data.password}
-                onChange={handleInputChange}
+                className={`w-3/4 mx-auto bg-white border ${isPasswordEmpty ? "border-red-500" : "border-indigo-300"
+                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                ref={passwordInputRef}
                 required
               />
-              
+              {isPasswordEmpty && <p className="text-red-500 ml-20">El campo password es obligatorio</p>}
 
             </div>
           </div>
           <div className="flex items-center justify-center h-full">
-            {/* <div className="bg-white-500 text-red-500 text-center py-1 px-2 text-sm w-60 dark:text-red-500">
+            <div className="bg-white-500 text-red text-center py-1 px-2 text-sm w-60 dark:text-red">
               {errorMessage}
-            </div> */}
-           
+            </div>
           </div>
           {/* Renderizado del modal */}
-          
+          {showModal && (
+            <Modal onClose={handleCloseModal} content={modalContent} />
+          )}
 
           {/* Botón login */}
           <div className="flex justify-center mt-4">
             <button
               className="w-3/4  bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none"
-              onClick={handleNormalLogin}
-            >Iniciar sesión</button>
+              onClick={handleSubmit}
+            >Log in</button>
           </div>
+
 
           {/* Iconos de google, facebook, apple */}
           <div className="mt-6 flex justify-center">
-            <button
-              className="mr-2 bg-white hover:bg-gray-200 p-2 rounded-full"
-              onClick={handleClickGoogle}
-            >
+            <button className="mr-2 bg-white hover:bg-gray-200 p-2 rounded-full">
               <FaGoogle size={24} color="#DB4437" />
             </button>
-            
+            <button className="mr-2 bg-white hover:bg-gray-200 p-2 rounded-full">
+              <FaFacebook size={24} color="#1877F2" />
+            </button>
+            <button className="bg-white hover:bg-gray-200 p-2 rounded-full">
+              <FaApple size={24} color="#000000" />
+            </button>
 
           </div>
           <p className="mt-4 text-center text-gray-500">
-            ¿Todavía no tienes una cuenta?{" "} <a href="/signup" className="text-indigo-600"> Registrate</a>.
+            ¿Todavía no tienes una cuenta?{" "} <a href="/" className="text-indigo-600"> Registrate</a>.
           </p>
-
-          <button onClick={handleSignOut}> SIGN OUT</button>
         </div>
       </div>
+
       <div className="mt-8">
         <Footer />
       </div>

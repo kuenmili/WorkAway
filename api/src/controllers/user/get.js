@@ -1,17 +1,18 @@
 const { User } = require('../../models/User');
 
-const getById = async (uid) => {
-    console.log(uid)  
+const getById = async (id) => {   
     
-    if (!uid) throw new Error(`Id required`);
+    if (!id) throw new Error(`Id required`);
 
-    const user = await User.findOne({uid})     
+    const user = await User.findById(id).populate("reviews").populate('reserve_id');    
     
-    return user
+    if (!user) return;   
+    
+    return { ...user.toJSON()};
 };
 
 const getAllUsers = async () => {
-    const users = await User.find({})
+    const users = await User.find({}).populate('reserve_id').populate("reviews");
     return users;
 };
 

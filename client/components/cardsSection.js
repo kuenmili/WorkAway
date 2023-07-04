@@ -38,8 +38,7 @@ export default function cardsSection() {
                           alt="" /> */}
                             <img className = "rounded-t-2xl h-80 object-cover" src={image} alt="" />
                         </SwiperSlide>
-                 
-                      ))
+                 ))
                     }
                   </Swiper>
                     </Link>

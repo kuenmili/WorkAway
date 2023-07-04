@@ -9,7 +9,11 @@ export const DELETE_RESERVE = "DELETE_RESERVE";
 
 export const getReserveById = (id) => {
     return async (dispatch) => {
-        const json = await axios.get(`http://localhost:3001/reserves/${id}`);
+        const json = await axios.get(`http://localhost:3001/reserves/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        });
         return dispatch({
             type: GET_RESERVE_BY_ID,
             payload: json.data
@@ -26,6 +30,10 @@ export const createReserve = ({
 }) => {
     return async dispatch => {
         const json = await axios.post("http://localhost:3001/reserves", {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        } , {
             reserveToCreate: {
                 date_from,
                 date_to,
@@ -33,6 +41,10 @@ export const createReserve = ({
                 user,
                 coworkspace,
             },
+        }, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
         });
 
         return dispatch({
@@ -44,10 +56,14 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {...reserveData});
+        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        } , {...reserveData});
         return dispatch({
             type:UPDATE_RESERVE,
             payload: json.data,
         })
     }
-}
+};

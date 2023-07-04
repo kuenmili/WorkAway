@@ -61,7 +61,6 @@ const UpdateProfile = () => {
               profile_image: url,
             }));
             setImagePreview(url);
-            console.log(url);
           });
         }
       );
@@ -81,7 +80,6 @@ const UpdateProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    console.log(data);
     try {
       await axios.put(
         'http://localhost:3001/users/64947129094d3e9c514fe822', //ESTA HARDCODEADO. NECESITO A USER DE AUTH

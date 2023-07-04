@@ -2,9 +2,6 @@ import { CREATE_USER, PUT_USER, GET_USER_BY_ID } from "../actions/users";
 
 const InitialState = {
     user: {},
-    loggedIn: false,
-    userAuth: {}
-    
 };
 
 const rootReducer = (state= InitialState, action) => {
@@ -18,7 +15,7 @@ const rootReducer = (state= InitialState, action) => {
         case CREATE_USER: {
             return {
                 ...state,
-                user: user,
+                user: action.payload,
             }
         }
         case PUT_USER: {

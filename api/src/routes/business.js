@@ -1,3 +1,4 @@
+const passport = require('passport');
 const router = require('express').Router();
 const {
     getAllBusiness,
@@ -31,7 +32,7 @@ router.get('/search', async (req, res) => {
 });
 
 //This route will retrieve a business in DB searched by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params
     try {
         const businessByID = await getBusinessByID(id)
@@ -48,12 +49,13 @@ router.post('/', async (req, res) => {
         const businessCreated = await createBusiness(businessToCreate)
         res.status(201).json(businessCreated)
     } catch (error) {
+        console.log("BUSINESS ERROR: ", error);
         res.status(400).json(error)
     }
 });
 
 //This route will modify a business in our DB
-router.put('/:id', async (req, res) => {
+router.put('/:id', passport.authenticate("jwt", { session: false }),  async (req, res) => {
     const { id } = req.params;
     const { actualPassword, newPassword } = req.body
     try {
@@ -66,7 +68,7 @@ router.put('/:id', async (req, res) => {
 
 
 //This route will delete a business in our DB
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params
     try {
         const businessDeleted = await deleteBusiness(id)

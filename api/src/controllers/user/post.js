@@ -3,8 +3,7 @@ const { APIKEY_NODEMAILER, USER_NODEMAILER } = process.env;
 const nodemailer = require('nodemailer');
 
 const createUser = async ( 
-    {   
-        uid,
+    { 
         first_name,
         last_name,
         email,
@@ -40,13 +39,13 @@ const createUser = async (
             </head>
             
             <body>
-              <div class="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-                <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-                  <h1 class="text-2xl font-bold mb-4">¡Bienvenido a nuestra plataforma de reservas de espacios remotos!</h1>
-                  <p class="text-base mb-4">Estimado ${first_name},</p>
-                  <p class="text-base mb-4">¡Gracias por unirte a nosotros! Te damos la bienvenida a nuestra plataforma de reservas de espacios remotos. Esperamos que encuentres el lugar perfecto para trabajar y conectarte desde cualquier parte.</p>
-                  <p class="text-base mb-4">Si tienes alguna pregunta, no dudes en contactarnos. ¡Disfruta de tu experiencia!</p>
-                  <p class="text-base">Saludos,<br>
+              <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+                <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                  <h1 className="text-2xl font-bold mb-4">¡Bienvenido a nuestra plataforma de reservas de espacios remotos!</h1>
+                  <p className="text-base mb-4">Estimado ${first_name} ${last_name},</p>
+                  <p className="text-base mb-4">¡Gracias por unirte a nosotros! Te damos la bienvenida a nuestra plataforma de reservas de espacios remotos. Esperamos que encuentres el lugar perfecto para trabajar y conectarte desde cualquier parte.</p>
+                  <p className="text-base mb-4">Si tienes alguna pregunta, no dudes en contactarnos. ¡Disfruta de tu experiencia!</p>
+                  <p className="text-base">Saludos,<br>
                     Work Away!<br>                    
                   </p>
                 </div>
@@ -61,7 +60,6 @@ const createUser = async (
         console.log('Message sent: %s', info.messageId);     
         
     const user =  new User({
-        uid,
         first_name,
         last_name,
         email,

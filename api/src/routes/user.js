@@ -1,3 +1,4 @@
+const passport = require('passport');
 const userRouter = require("express").Router();
 const createUser = require('../controllers/user/post');
 const {
@@ -16,10 +17,10 @@ userRouter.get('/', async (req, res) => {
     }
 });
 
-userRouter.get('/:uid', async (req, res) => {
-    const { uid } = req.params;
+userRouter.get('/:id', passport.authenticate("jwt", { session: false }),  async (req, res) => {
+    const { id } = req.params;
     try {       
-        const user = await getById(uid);
+        const user = await getById(id);
         res.status(200).json(user);
     } catch (error) {       
         res.status(400).json({ error: error.message });
@@ -28,7 +29,6 @@ userRouter.get('/:uid', async (req, res) => {
 
 userRouter.post('/signup', async (req, res) => {   
     const {
-        uid,
         first_name,
         last_name,
         email,
@@ -39,7 +39,6 @@ userRouter.post('/signup', async (req, res) => {
     
     try {
         const user = await createUser({
-            uid,
             first_name,
             last_name,
             email,
@@ -47,7 +46,7 @@ userRouter.post('/signup', async (req, res) => {
             cellphone_number,
             profile_image,
         });
-        console.log(user, "user creado");
+        console.log(user);
         res.status(201).json('User successfully created!');
         
     } catch (error) {     
@@ -56,22 +55,22 @@ userRouter.post('/signup', async (req, res) => {
     }
 });
 
-userRouter.put('/:uid', async (req, res) => {
-    const { uid } = req.params;
+userRouter.put('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { id } = req.params;
     const user = req.body;
     
     try {
-        const updatedUser = await updateUser(uid, user);
+        const updatedUser = await updateUser(id, user);
         res.json(updatedUser);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
 
-userRouter.delete('/:uid', async (req, res) => {
-    const { uid } = req.params;
+userRouter.delete('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { id } = req.params;
     try {
-        const deletedUser = await deleteUser(uid);
+        const deletedUser = await deleteUser(id);
         res.json(deletedUser);
     } catch (error) {
         res.status(400).json({ error: error.message });
