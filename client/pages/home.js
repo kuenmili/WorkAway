@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import CardsSection from "../components/cardsSection";
-import cardList from "../components/datalist"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Scrollbar, Mousewheel, Pagination } from "swiper";
 import "swiper/css/navigation";
@@ -14,14 +13,24 @@ import "swiper/css/scrollbar";
 import Filters from "../components/filters";
 import Search from "../components/search";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
+import { login } from "../redux/actions/auth";
 import Chatbot from "../components/chatbot";
-import { getBusinessById } from "../redux/actions/business";
+
 
 
 
 const Home = () => {
-  const [cards, setCards] = useState(cardList);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const queries = router.query
+  if (queries.token) {
+    localStorage.setItem("token", queries.token);
+    localStorage.setItem("isAdmin", "false");
+
+    dispatch(login({}));
+  }
+
   const [ filters, setFilters ] = useState({
     rating: '',
     location: '',
@@ -30,31 +39,8 @@ const Home = () => {
     prices: ''
   });
 
-  const handleInputChange = ({ target: { name, value } }) => {
-      if (value === 'reset') {
-          setFilters({
-              rating: '',
-              location: '',
-              capacity: '',
-              services: '',
-              price: ''
-          });
-          return setCards(cardList);
-      }
 
-      if (name === "price") {
-          const [min, max] = value.split('-');
-          setCards(cardList.filter(card => card.price >= min && card.price <= max));
-          return
-      }
 
-      setFilters({
-          ...filters,
-          [name]: value,
-      });
-      setCards(cardList.filter(card => card[name] === value));
-  }
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -74,15 +60,13 @@ const Home = () => {
             <SwiperSlide>
             <main className=" flex space-x-28 > * + * ">
               <div className="">
-            <Filters filters={filters} setFilters={setFilters} handleInputChange={handleInputChange} className="" />
+            <Filters filters={filters} setFilters={setFilters}  className="" />
               </div>
             <CardsSection className=""/>
             </main>
             </SwiperSlide>
-
         </Swiper>   
         <Chatbot/>
-
       <Footer />
      </>
   )}
