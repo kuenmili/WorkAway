@@ -9,20 +9,29 @@ const createReview = async (
         comment,
         coworkspace
     }) => {
-        
+      console.log(user_id);  
         const user = await User.findById(user_id);
        
-        const review =  new Review({
-            user_id: user.id,
+       
+
+        const review = await Review.create({
+            user_id,
             score,
             comment,
             cowork_space: coworkspace,
-        });   
-        
-        const savedReview = await review.save();
+        });
 
-        user.reviews = [...user.reviews, review._id];
-        user.save();
+      
+
+        await User.findByIdAndUpdate(
+            user_id,
+            {
+                $push: {
+                    reserve_id: review._id,
+                }
+            },
+            { new: true }
+        );
 
         await CoworkSpace.findByIdAndUpdate(
             coworkspace,
@@ -34,8 +43,7 @@ const createReview = async (
             { new: true }
         );
     
-
-        return savedReview;
+        return review;
 };
 
-module.exports = createReview;
+module.exports=createReview;

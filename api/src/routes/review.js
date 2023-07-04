@@ -1,3 +1,4 @@
+const passport = require('passport');
 const reviewRouter = require("express").Router();
 const updateReview = require('../controllers/review/put');
 const deleteReview = require('../controllers/review/delete');
@@ -26,7 +27,7 @@ reviewRouter.get("/:id", async (req, res) => {
     }
 });
 
-reviewRouter.post("/post", async (req, res) => {
+reviewRouter.post("/post", passport.authenticate("jwt", { session: false }),  async (req, res) => {
     const {
         user_id,
         score,
@@ -49,7 +50,7 @@ reviewRouter.post("/post", async (req, res) => {
     }
 });
 
-reviewRouter.put("/:id", async (req, res) => {
+reviewRouter.put("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     const review = req.body;
     try {
@@ -60,7 +61,7 @@ reviewRouter.put("/:id", async (req, res) => {
     }
 });
 
-reviewRouter.delete("/:id", async (req, res) => {
+reviewRouter.delete("/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     try {
         const deletedReview = await deleteReview(id);

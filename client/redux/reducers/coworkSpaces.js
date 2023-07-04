@@ -6,6 +6,7 @@ import {
     UPDATE_COWORKSPACE,
     DELETE_COWORKSPACE,
     COWORKSPACE_LOADING,
+    GET_BUSINESS_WITH_RESERVE,
     COWORKSPACE_ERROR
 } from '../actions/coworkSpaces';
 
@@ -58,6 +59,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+            case GET_BUSINESS_WITH_RESERVE: {
+                return {
+                    ...state,
+                    business: action.payload,
+                }
             }
         case COWORKSPACE_ERROR:
             return {

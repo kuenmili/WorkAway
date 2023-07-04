@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; // Importa Axios
-
 import Footer from '../components/footer';
-import NavbarBooking from "../components/navBarBooking";
-import { useSelector } from 'react-redux';
+import Navbar from '../components/navbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { createReview } from '../redux/actions/review';
+
 
 const ReviewForm = () => {
+    const dispatch = useDispatch();
   const [score, setScore] = useState(0);
   const [comment, setComment] = useState('');
  
@@ -16,13 +18,20 @@ const ReviewForm = () => {
   const [coworkSpaceError, setCoworkSpaceError] = useState(false);
 
   const coworkspace = useSelector((state) => state.coworkSpaces.coworkSpace);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (coworkspace) {
+        
       const { name } = coworkspace;
       setCoworkSpace(name);
     }
-  }, [coworkspace]);
+    if (user) {
+        console.log(user);
+      const { id } = user;
+      setUserId(id);
+    }
+  }, [coworkspace, user]);
 
   const renderStars = (selectedScore) => {
     const stars = [];
@@ -42,26 +51,14 @@ const ReviewForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log("Data:", {
-      user_id: userId, // Obtén el valor de user_id del estado
-      score: score,
-      comment: comment,
-      cowork_space: cowork_space
-    });
-
-    axios.post("http://localhost:3001/reviews/post", {
-      user_id: userId,
-      score: score,
-      comment: comment,
-      cowork_space: cowork_space
-    })
-      .then(response => {
-        console.log("Response:", response.data);
-        // Reiniciar los campos del formulario
-        console.error("Error:", error);
-        // Manejar el error de alguna forma si es necesario
-      });
+    console.log(userId, score, comment, coworkspace._id);
+    dispatch(createReview({ 
+        user_id: userId, 
+        score, 
+        comment, 
+        coworkspace : coworkspace._id })
+    
+    );
   };
 
   const handleCoworkspaceChange = (event) => {
@@ -82,7 +79,7 @@ const ReviewForm = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <NavbarBooking />
+      <Navbar/>  
       <div className="mt-8 flex-grow mx-auto p-4 bg-white rounded shadow max-w-md">
         <h2 className="text-xl font-semibold mb-4">Dejanos tu reseña del espacio de trabajo</h2>
 
@@ -111,14 +108,7 @@ const ReviewForm = () => {
             ></textarea>
           </div>
 
-          <div className="mb-4">
-            <label className="block font-medium mb-2">ID de usuario</label>
-            <input
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
-              value={userId}
-              onChange={handleUserIdChange}
-            />
-          </div>
+     
 
           <button
             type="submit"

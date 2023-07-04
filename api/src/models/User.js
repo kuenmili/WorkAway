@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { model, Schema } = mongoose;
+const bcrypt = require("bcrypt");
 
 const schemaUser = new Schema({
   first_name: String,
@@ -12,18 +13,28 @@ const schemaUser = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Reserve",
-      autopopulate: true
     },
   ],
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
-      autopopulate: true
     },
   ],
 });
-schemaUser.plugin(require('mongoose-autopopulate'))
+
+schemaUser.pre("save", function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
+});
+
+schemaUser.methods.isValidPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 schemaUser.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id;

@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store from "../redux/store";
 import Script from 'next/script';
 
-
 const {GOOGLE_API_KEY} = process.env;
 
 axios.defaults.baseURL = "http://localhost:3001/";
@@ -18,9 +17,7 @@ function MyApp({ Component, pageProps }) {
       strategy="beforeInteractive"
     />
     <ThemeProvider attribute="class">
-      
       <Component {...pageProps} />
-      
     </ThemeProvider>
     </Provider>
   );

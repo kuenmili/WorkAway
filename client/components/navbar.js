@@ -2,18 +2,21 @@ import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
 import DropdownMenu from "./navBarLogin";
-import { IsDarkMode } from "./DarkSwitch";
-import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclousure, no se usa por ahora
+import defaultProfileImage from '../public/img/default.jpg';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { login } from "../redux/actions/auth";
 
 function Navbar() {
+  const loggedIn = useSelector((state) => state.auth?.loggedIn);
   const links = [
+    {
+      label: `Inicio`,
+      href: `/`,
+    },
     {
       label: `Home`,
       href: `/home`,
-    },
-    {
-      label: ``,
-      href: `/`,
     },
     {
       label: ``,
@@ -24,8 +27,16 @@ function Navbar() {
       href: `/about`,
     },
   ];
-  const user = false;
-  const image = ''
+  let token;
+  const image = '';
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    token = localStorage.getItem("token");
+    if (token) {
+      dispatch(login({}));
+    }
+  }, [token]);
 
   return (
     <div className="w-full">
@@ -48,21 +59,18 @@ function Navbar() {
                   </span>
                 </Link>
               </div>
-       
-
-
         {/* menu  */}
         <div className="hidden text-center lg:flex lg:items-center">
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
-            {links.map((link) => (
-              <li className="mr-3 nav__item">
+            {links.map((link, index) => (
+              <li className="mr-3 nav__item" key={index}>
                 <div
                   className="inline-block px-4 py-2 text-lg font-medium 
                                 text-gray-800 no-underline rounded-md dark:text-gray-200 
                                 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 
-                                focus:outline-none dark:focus:bg-gray-300"
+                                focus:outline-none dark:focus:bg-gray-300 hover:bg-indigo-100"
                 >
-                  <Link href={link.href} key={link.label}>
+                  <Link href={link.href}>
                     {link.label}
                   </Link>
                 </div>
@@ -73,21 +81,21 @@ function Navbar() {
 
         {/* botones  */}
 
-        { user
-        ? <DropdownMenu profileImage={image} />
+        { loggedIn
+        ? <DropdownMenu profileImage={image ? image : defaultProfileImage} />
         :
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
-          <Link
+          {/* <Link
             href="/login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
             Sign in or register
-          </Link>
+          </Link> */}
           <Link
             href="/business-login"
-            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
+            className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5 -mr-3"
           >
-            Ingresa como proveedor
+            Iniciar Sesion
           </Link>
         </div>
         }

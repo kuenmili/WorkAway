@@ -8,6 +8,7 @@ export const UPDATE_COWORKSPACE = 'UPDATE_COWORKSPACE';
 export const DELETE_COWORKSPACE = 'DELETE_COWORKSPACE';
 export const COWORKSPACE_LOADING = 'COWORKSPACE_LOADING';
 export const COWORKSPACE_ERROR = 'COWORKSPACE_ERROR';
+export const GET_BUSINESS_WITH_RESERVE = "GET_BUSINESS_WITH_RESERVE";
 
 const baseCoworkSpacesURL = '/cowork_spaces';
 
@@ -64,9 +65,32 @@ export const getCoworkSpace = id => async dispatch => {
     }
 }
 
+export const getBusinessWithReserve = () => {
+    return async (dispatch) => {
+        try {
+            const json = await axios.get(`${baseCoworkSpacesURL}/${id}/detail`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        });
+        return dispatch({
+            type: GET_BUSINESS_WITH_RESERVE,
+            payload:json.data
+        })
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+};
+
+
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, coworkSpaceToCreate);
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, coworkSpaceToCreate);
         dispatch({
             type: ADD_COWORKSPACE,
             payload: data
@@ -81,7 +105,11 @@ export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
 
 export const updateCoworkSpace = coworkSpace => async dispatch => {
     try {
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, coworkSpace);
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, coworkSpace);
         dispatch({
             type: UPDATE_COWORKSPACE,
             payload: data
@@ -96,7 +124,11 @@ export const updateCoworkSpace = coworkSpace => async dispatch => {
 
 export const deleteCoworkSpace = id => async dispatch => {
     try {
-        await axios.delete(`${baseCoworkSpacesURL}/${id}`);
+        await axios.delete(`${baseCoworkSpacesURL}/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        });
         dispatch({
             type: DELETE_COWORKSPACE,
             payload: id

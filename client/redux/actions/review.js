@@ -8,7 +8,9 @@ export const UPDATE_REVIEW = "UPDATE_REVIEW";
 
 export const getAllReview = () => {
     return async (dispatch) => {
-        const json = await axios.get("http://localhost:3001/reviews")
+        const json = await axios.get("http://localhost:3001/reviews",{
+            
+        })
         return dispatch({
             type: GET_ALL_REVIEW,
             payload: json.data
@@ -23,7 +25,11 @@ export const createReview = ({
     coworkspace
 }) => {
     return async dispatch => {
-        const json = await axios.post("http://localhost:3001/reviews/post", {
+        const json = await axios.post("http://localhost:3001/reviews/post",{
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, {
             user_id,
             score,
             comment,
@@ -38,7 +44,11 @@ export const createReview = ({
 
 export const updateReview = (id, reviewData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reviews/${id}`, reviewData)
+        const json = await axios.put(`http://localhost:3001/reviews/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        }, reviewData)
         return dispatch({
             type: UPDATE_REVIEW,
             payload: json.data,

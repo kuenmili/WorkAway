@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from 'next/router';
-import Link from "next/link";
 import NavbarBooking from "../components/navBarBooking";
 import Footer from "../components/footer";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from 'date-fns';
 import axios from "axios";
@@ -27,7 +25,6 @@ export default function booking() {
     const [date_to, setDateTo] = useState("");
     const [occupants, setOccupants] = useState("");
     const [cowork_space, setCoworkSpace] = useState("");
-    const [darkMode, setDarkMode] = useState(false);
     const [dateFromError, setDateFromError] = useState(false);
     const [dateToError, setDateToError] = useState(false);
     const [occupantsError, setOccupantsError] = useState(false);
@@ -133,10 +130,6 @@ export default function booking() {
             handleReserveClick();
         } 
     };
-  
-
-
-  
 
 
   const checkout = async () => {
@@ -253,9 +246,9 @@ export default function booking() {
                         </div>
                         <div className="mb-6 flex justify-center mt-8">
                             <button
-                             onClick={handleCheckoutClick}
-                             type="submit"
-                             className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
+                                type="submit"
+                                onClick={handleCheckoutClick}
+                                className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
                             >
                                 Reservar
                             </button>
@@ -268,3 +261,4 @@ export default function booking() {
         </>
     );
 }
+

@@ -18,25 +18,13 @@ const schemaSpaceCowork = new Schema({
     price: Number,
     reviews: [{
         type:Schema.Types.ObjectId,
-        ref: "Review",
-        autopopulate: true
+        ref: "Review"
     }],
     reserves: [{
         type:Schema.Types.ObjectId,
-        ref: "Reserve",
-        autopopulate: true
+        ref: "Reserve"
     }]
 });
-
-
-schemaSpaceCowork.plugin(require('mongoose-autopopulate'))
-schemaSpaceCowork.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id
-        delete returnedObject._id
-        delete returnedObject.__v
-    }
-})
 
 const CoworkSpace = model('CoworkSpace', schemaSpaceCowork)
 
