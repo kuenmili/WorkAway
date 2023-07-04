@@ -2,35 +2,14 @@ import React from "react";
 import Container from "../../components/container";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
-import ThemeChanger from "../../components/DarkSwitch";
-import Image from "next/image";
 import Footer from "../../components/footer";
-import Work from "../../public/favicon.ico";
+import Navbar from "../../components/navbar";
 
 const Faq = () => {
   return (
     <div>
+      <Navbar />
       <div>
-        <div>
-          <nav className="container relative flex flex-wrap items-center mb-6 justify-between p-8 mx-auto lg:justify-between xl:px-0">
-            {/* Logo  */}
-            <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-              <Link href="/home">
-                <span
-                  className="flex items-center space-x-2 text-4xl 
-              font-bold text-indigo-800 dark:text-gray-100 "
-                >
-                  <span>
-                    <Image src={Work} alt="" width="50" height="40" />
-                  </span>
-                  <span>WorkAway</span>
-                </span>
-              </Link>
-            </div>
-            <ThemeChanger />
-          </nav>
-        </div>
         <div className="max-w-2xl mx-auto mt-8 p-6 dark:bg-black bg-white rounded-lg shadow-2xl p-10">
           <Container className="!p-0 ">
             <h1
