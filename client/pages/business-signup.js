@@ -9,6 +9,7 @@ import { createBusinessValidation } from "../components/validations"
 const signupBusiness = () => {
   const dispatch = useDispatch()
   const history = useRouter()
+  
 
   const [input, setInput] = useState({
     name:'',

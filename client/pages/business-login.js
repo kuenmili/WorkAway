@@ -5,14 +5,23 @@ import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { businessValidations } from "../components/validations"
+import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
 
 const { login } = require("../redux/actions/auth");
 
 const LoginBusiness = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const queries = router.query
+  if (queries.token) {
+    localStorage.setItem("token", queries.token);
+    localStorage.setItem("isAdmin", "false");
+
+    dispatch(login({}));
+  }
   const { user, loggedIn, isAdmin, error } = useSelector((state) => state.auth);
+  
 
   const [businessData, setBusinessData] = useState({
     email:'',
@@ -63,9 +72,11 @@ const LoginBusiness = () => {
 
   }, [user, loggedIn, isAdmin, error]);
 
+
+  
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl dark:bg-gray-200">
         <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">
           Iniciar sesión 
@@ -112,12 +123,19 @@ const LoginBusiness = () => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="w-3/4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none"
+                className="w-40 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-2 rounded-md focus:outline-none"
               >
                 Ingresa
               </button>
-            </div>
-
+              </div>
+                <div>
+                    <div>
+                    <button className= "ml-72 mt-5" onClick={ e => {
+                      e.preventDefault()
+                     window.location.href = 'http://localhost:3001/auth/google'
+                    }}> {<FaGoogle size={24} color="#DB4437" />} </button>
+                    </div>
+                 </div>
             {/*Redirect to Signup form */}
             <p className="mt-4 text-center text-gray-500">
               ¿No tienes cuenta aún?{" "} Regístrate como {" "} 

@@ -33,15 +33,16 @@ function Navbar() {
       href: `/about`,
     },
   ];
+  let token;
   const image = '';
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    token = localStorage.getItem("token");
     if (token) {
       dispatch(login({}));
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="w-full">
