@@ -1,8 +1,29 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Link from "next/link";
+import { createReserve } from "../redux/actions/reserves";
 
 const Payed = () => {
+  const dispatch = useDispatch();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    const { user, date_from, date_to, occupants, coworkspace } = query;
+    console.log("QUERY VALUES: ", query);
+    if (user && date_from && date_to && occupants && coworkspace) {
+      dispatch(createReserve({
+        user,
+        date_from,
+        date_to,
+        occupants,
+        coworkspace,
+      }));
+    }
+  }, [ dispatch, query ]);
+
   return (
     <div>
       <Navbar />

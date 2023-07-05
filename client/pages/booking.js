@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
-import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
 import Navbar from "../components/navbar";
 
 export default function Booking() {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [date_from, setDateFrom] = useState("");
   const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
@@ -80,40 +78,6 @@ export default function Booking() {
     setShowCheckboxError(false);
   };
 
-  const handleReserveClick = () => {
-    if (!isChecked) {
-      setShowCheckboxError(true);
-      return;
-    }
-
-    if (
-      date_from === "" ||
-      date_to === "" ||
-      occupants === "" ||
-      cowork_space === ""
-    ) {
-      alert("Por favor complete todos los campos.");
-      return;
-    }
-    console.log("Datos de reserva:", {
-      user: userId,
-      date_from: date_from,
-      date_to: date_to,
-      occupants: occupants,
-      coworkspace: cowork_space._id,
-    });
-
-    dispatch(
-      createReserve({
-        user: userId,
-        date_from: date_from,
-        date_to: date_to,
-        occupants: occupants,
-        coworkspace: cowork_space._id,
-      })
-    );
-  };
-
   useEffect(() => {
     if (date_from && date_to) {
       const fromDate = new Date(date_from);
@@ -122,36 +86,6 @@ export default function Booking() {
       setSelectedDays(days);
     }
   }, [date_from, date_to]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (date_from === "") {
-      setDateFromError(true);
-    }
-    if (date_to === "") {
-      setDateToError(true);
-    }
-    if (occupants === "") {
-      setOccupantsError(true);
-    }
-    if (cowork_space === "") {
-      setCoworkSpaceError(true);
-    }
-    if (!isChecked) {
-      setShowCheckboxError(true);
-    }
-
-    if (
-      !dateFromError &&
-      !dateToError &&
-      !occupantsError &&
-      !coworkSpaceError &&
-      isChecked
-    ) {
-      handleReserveClick();
-    }
-  };
 
   const checkout = async () => {
     const totalPayment = coworkSpace.price * selectedDays;
@@ -162,12 +96,20 @@ export default function Booking() {
     };
     const response = await axios.post(
       "http://localhost:3001/payments/create",
-      paymentInfo
+      {paymentInfo, coworkSpace: {
+        user: userId,
+        date_from: date_from,
+        date_to: date_to,
+        occupants: occupants,
+        coworkspace: coworkSpace._id,
+      }}
     );
+    
     router.push(response.data);
   };
 
-  const handleCheckoutClick = () => {
+  const handleCheckoutClick = (e) => {
+    e.preventDefault();
     if (!isChecked) {
       setShowCheckboxError(true);
       return;
@@ -183,7 +125,6 @@ export default function Booking() {
       return;
     }
 
-    handleReserveClick();
     checkout();
   };
 
@@ -196,7 +137,7 @@ export default function Booking() {
             Reserva tu espacio
           </h2>
 
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="mb-6">
               <div className="flex flex-col">
                 <input

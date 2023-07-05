@@ -43,7 +43,7 @@ export const createReserve = ({
             }
         }  
         );
-
+        console.log("RESERVA CREADA: ", json.data);
         return dispatch({
             type: CREATE_RESERVE,
             payload: json.data,

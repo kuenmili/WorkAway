@@ -6,13 +6,13 @@ const cretedReserve = async ({
   date_from,
   date_to,
   occupants,
-  coworkSpace,
+  coworkspace,
   user,
 }) => {
   console.log("date_from:", date_from);
   console.log("date_to:", date_to);
   console.log("occupants:", occupants);
-  console.log("cowork_space:", coworkSpace);
+  console.log("cowork_space:", coworkspace);
   console.log("user:", user);
 
   const reserveCreated = await Reserve.create({
@@ -20,11 +20,11 @@ const cretedReserve = async ({
     date_to,
     occupants,
     user,
-    cowork_space: coworkSpace,
+    cowork_space: coworkspace,
   });
 
   await CoworkSpace.findByIdAndUpdate(
-    coworkSpace,
+    coworkspace,
     {
       $push: {
         reserves: reserveCreated._id,
