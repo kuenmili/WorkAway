@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
+import Navbar from "../components/navbar";
 
-export default function booking() {
+export default function Booking() {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
-
-  useEffect(() => {
-    if (coworkSpace) {
-      const { name, price } = coworkSpace;
-      setCoworkSpace(`${name} - ${price}`);
-    }
-  }, [coworkSpace]);
-
   const [date_from, setDateFrom] = useState("");
   const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
   const [cowork_space, setCoworkSpace] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
   const [dateFromError, setDateFromError] = useState(false);
   const [dateToError, setDateToError] = useState(false);
   const [occupantsError, setOccupantsError] = useState(false);
@@ -32,6 +21,21 @@ export default function booking() {
   const [isChecked, setIsChecked] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
   const [selectedDays, setSelectedDays] = useState(0);
+  const [userId, setUserId] = useState("");
+
+  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (coworkSpace) {
+      const { name, price } = coworkSpace;
+      setCoworkSpace(`${name} - ${price}`);
+    }
+    if (user) {
+      const { id } = user;
+      setUserId(id);
+    }
+  }, [coworkSpace, user]);
 
   const handleDateFromChange = (e) => {
     const selectedDate = e.target.value;
@@ -72,28 +76,40 @@ export default function booking() {
   };
 
   const handleCheckBox = (e) => {
-    setIsChecked(e.target.value);
+    setIsChecked(e.target.checked);
     setShowCheckboxError(false);
   };
 
   const handleReserveClick = () => {
+    if (!isChecked) {
+      setShowCheckboxError(true);
+      return;
+    }
+
     if (
       date_from === "" ||
       date_to === "" ||
       occupants === "" ||
-      cowork_space === "" ||
-      !isChecked
+      cowork_space === ""
     ) {
       alert("Por favor complete todos los campos.");
       return;
     }
+    console.log("Datos de reserva:", {
+      user: userId,
+      date_from: date_from,
+      date_to: date_to,
+      occupants: occupants,
+      cowork_space: coworkSpace._id,
+    });
 
     dispatch(
       createReserve({
+        user: userId,
         date_from: date_from,
         date_to: date_to,
         occupants: occupants,
-        cowork_space: cowork_space,
+        cowork_space: coworkSpace._id,
       })
     );
   };
@@ -138,7 +154,7 @@ export default function booking() {
   };
 
   const checkout = async () => {
-    const totalPayment = coworkSpace.name * selectedDays;
+    const totalPayment = coworkSpace.price * selectedDays;
     const paymentInfo = {
       detail: coworkSpace.name,
       amount: totalPayment,
@@ -150,8 +166,24 @@ export default function booking() {
     router.push(response.data);
   };
 
-  const handleCheckoutClick = (e) => {
-    checkout(e);
+  const handleCheckoutClick = () => {
+    if (!isChecked) {
+      setShowCheckboxError(true);
+      return;
+    }
+
+    if (
+      date_from === "" ||
+      date_to === "" ||
+      occupants === "" ||
+      cowork_space === ""
+    ) {
+      alert("Por favor complete todos los campos.");
+      return;
+    }
+
+    handleReserveClick();
+    checkout();
   };
 
   return (
@@ -279,8 +311,8 @@ export default function booking() {
             </div>
             <div className="mb-6 flex justify-center mt-8">
               <button
-                onClick={handleCheckoutClick}
                 type="submit"
+                onClick={handleCheckoutClick}
                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
               >
                 Reservar
