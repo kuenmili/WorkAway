@@ -6,6 +6,7 @@ import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
 import Navbar from "../components/navbar";
+import Link from "next/link"
 
 export default function Booking() {
 	const router = useRouter();
@@ -75,116 +76,6 @@ export default function Booking() {
 		setCoworkSpaceError(false);
 	};
 
-	// const handleCheckBox = (e) => {
-	//   setIsChecked(e.target.checked);
-	//   setShowCheckboxError(false);
-	// };
-
-	// const handleReserveClick = () => {
-	//   if (!isChecked) {
-	//     setShowCheckboxError(true);
-	//     return;
-	//   }
-
-	//   if (
-	//     date_from === "" ||
-	//     date_to === "" ||
-	//     occupants === "" ||
-	//     cowork_space === ""
-	//   ) {
-	//     alert("Por favor complete todos los campos.");
-	//     return;
-	//   }
-	//   console.log("Datos de reserva:", {
-	//     user: userId,
-	//     date_from: date_from,
-	//     date_to: date_to,
-	//     occupants: occupants,
-	//     cowork_space: coworkSpace._id,
-	//   });
-
-	//   dispatch(
-	//     createReserve({
-	//       user: userId,
-	//       date_from: date_from,
-	//       date_to: date_to,
-	//       occupants: occupants,
-	//       cowork_space: coworkSpace._id,
-	//     })
-	//   );
-	// };
-
-	// useEffect(() => {
-	//   if (date_from && date_to) {
-	//     const fromDate = new Date(date_from);
-	//     const toDate = new Date(date_to);
-	//     const days = differenceInDays(toDate, fromDate);
-	//     setSelectedDays(days);
-	//   }
-	// }, [date_from, date_to]);
-
-	// const handleSubmit = (e) => {
-	//   e.preventDefault();
-
-	//   if (date_from === "") {
-	//     setDateFromError(true);
-	//   }
-	//   if (date_to === "") {
-	//     setDateToError(true);
-	//   }
-	//   if (occupants === "") {
-	//     setOccupantsError(true);
-	//   }
-	//   if (cowork_space === "") {
-	//     setCoworkSpaceError(true);
-	//   }
-	//   if (!isChecked) {
-	//     setShowCheckboxError(true);
-	//   }
-
-	//   if (
-	//     !dateFromError &&
-	//     !dateToError &&
-	//     !occupantsError &&
-	//     !coworkSpaceError &&
-	//     isChecked
-	//   ) {
-	//     handleReserveClick();
-	//   }
-	// };
-
-	// const checkout = async () => {
-	//   const totalPayment = coworkSpace.price * selectedDays;
-	//   const paymentInfo = {
-	//     detail: coworkSpace.name,
-	//     amount: totalPayment,
-	//   };
-	//   const response = await axios.post(
-	//     "http://localhost:3001/payments/create",
-	//     paymentInfo
-	//   );
-	//   router.push(response.data);
-	// };
-
-	// const handleCheckoutClick = () => {
-	//   if (!isChecked) {
-	//     setShowCheckboxError(true);
-	//     return;
-	//   }
-
-	//   if (
-	//     date_from === "" ||
-	//     date_to === "" ||
-	//     occupants === "" ||
-	//     cowork_space === ""
-	//   ) {
-	//     alert("Por favor complete todos los campos.");
-	//     return;
-	//   }
-
-	//   handleReserveClick();
-	//   checkout();
-	// };
 	const handleCheckBox = (e) => {
 		setIsChecked(e.target.value);
 		setShowCheckboxError(false);
@@ -277,6 +168,7 @@ export default function Booking() {
 									value={coworkSpace?.name}
 									placeholder="Espacio de coworking"
 									onChange={handleCoworkSpaceChange}
+									disabled
 									className={`w-3/4 mx-auto bg-white border ${coworkSpaceError ? "border-red-500" : "border-indigo-300"
 										} rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
 								/>
@@ -285,6 +177,7 @@ export default function Booking() {
 									value={`Precio: ${coworkSpace?.price} usd /dia`}
 									placeholder="Espacio de coworking"
 									onChange={handleCoworkSpaceChange}
+									disabled
 									className={`w-3/4 mx-auto bg-white border ${coworkSpaceError ? "border-red-500" : "border-indigo-300"
 										} rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
 								/>

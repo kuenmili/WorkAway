@@ -30,10 +30,6 @@ export const createReserve = ({
 }) => {
     return async dispatch => {
         const json = await axios.post("http://localhost:3001/reserves", {
-            headers: {
-                Authorization: `Bearer ${ localStorage.getItem("token") }`,
-            }
-        } , {
             reserveToCreate: {
                 date_from,
                 date_to,
@@ -57,7 +53,7 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {
+        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {...reserveData},  {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
