@@ -1,8 +1,6 @@
 const { CoworkSpace } = require("../../models/CoworkSpace");
 const { Reserve } = require("../../models/Reserve");
 const { User } = require("../../models/User");
-//const { APIKEY_NODEMAILER, USER_NODEMAILER } = process.env;
-//const nodemailer = require('nodemailer');
 
 const cretedReserve = async ({
   date_from,
