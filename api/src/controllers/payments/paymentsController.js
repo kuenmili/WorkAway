@@ -23,7 +23,7 @@ const createOrderController = async (_req, res) => {
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
         return_url: "http://localhost:3001/payments/capture",
-        cancel_url: "http://localhost:3000/booking",
+        cancel_url: "http://localhost:3000/home",
       },
     };
 

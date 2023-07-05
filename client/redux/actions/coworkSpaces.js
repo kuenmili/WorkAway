@@ -66,29 +66,6 @@ export const getCoworkSpace = id => async dispatch => {
     }
 }
 
-
-
-export const updateCoworkSpacePrice = (id, price) => async dispatch => {
-    try {
-        const token = localStorage.getItem("token");
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${id}/price`, { price }, {
-            headers: {
-                Authorization: `Bearer ${ token }`,
-            }
-        });
-        dispatch(getBusinessById(data.business));
-        dispatch({
-            type: UPDATE_COWORKSPACE_PRICE,
-            payload: { id, price }
-        });
-    } catch ({ response: { data }}) {
-        dispatch({
-            type: COWORKSPACE_ERROR,
-            payload: data
-        });
-    }
-}
-
 export const getBusinessWithReserve = () => {
     return async (dispatch) => {
         try {
@@ -110,7 +87,7 @@ export const getBusinessWithReserve = () => {
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, coworkSpaceToCreate , {
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
@@ -129,7 +106,7 @@ export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
 
 export const updateCoworkSpace = coworkSpace => async dispatch => {
     try {
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, coworkSpace , {
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

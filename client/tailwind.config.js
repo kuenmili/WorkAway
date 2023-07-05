@@ -22,6 +22,7 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/aspect-ratio"),
             require('flowbite/plugin'),
+            require('tailwind-scrollbar')({ nocompatible: true }),
     ],
             
 };

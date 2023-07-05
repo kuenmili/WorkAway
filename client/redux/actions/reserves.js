@@ -29,8 +29,11 @@ export const createReserve = ({
     coworkspace
 }) => {
     return async dispatch => {
-        const json = await axios.post("http://localhost:3001/reserves", 
-        {
+        const json = await axios.post("http://localhost:3001/reserves", {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        } , {
             reserveToCreate: {
                 date_from,
                 date_to,
@@ -42,7 +45,8 @@ export const createReserve = ({
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
-        });
+        }  
+        );
 
         return dispatch({
             type: CREATE_RESERVE,
@@ -53,7 +57,7 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {...reserveData},  {
+        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

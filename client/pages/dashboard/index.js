@@ -13,6 +13,8 @@ function Dashboard() {
       id && dispatch(getBusinessById(id));
     }, [dispatch, id]);
 
+
+
   return (
     <Layout>
       <h1 className='text-center text-3xl'>CoworkSpaces</h1>

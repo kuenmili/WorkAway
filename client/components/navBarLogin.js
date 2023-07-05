@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/actions/auth';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/auth";
+import { useRouter } from "next/router";
 
-const DropdownMenu = ({ profileImage }) => {
+const DropdownMenu = () => {
   const { user, loggedIn, isAdmin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -20,6 +23,11 @@ const DropdownMenu = ({ profileImage }) => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogOut = () => {
+    dispatch(logout());
+    router.push("/home");
+  };
+
   return (
     <div className="relative">
       <button
@@ -29,9 +37,9 @@ const DropdownMenu = ({ profileImage }) => {
         onMouseLeave={handleMouseLeave}
       >
         <img
-          src="/img/default.jpg"
+          src={user?.profile_image || "/img/default.jpg"}
           alt="Profile"
-          className="w-16 h-16 rounded-full transition duration-300 ease-in-out transform hover:scale-110 hover:rotate-12  "
+          className="w-16 h-16 rounded-full transition duration-300 ease-in-out object-cover transform hover:scale-110 hover:rotate-12  "
         />
       </button>
       {(isHovered || isOpen) && (
@@ -42,12 +50,18 @@ const DropdownMenu = ({ profileImage }) => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href={loggedIn && isAdmin ? "/dashboard/account" : `users/${user.id}`}>
+              <a
+                href={
+                  loggedIn && isAdmin
+                    ? "/dashboard/account"
+                    : `users/${user.id}`
+                }
+              >
                 {loggedIn && isAdmin ? "Dashboard" : "Perfil"}
               </a>
             </li>
             <li className=" px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800 ">
-              <button onClick={() => dispatch(logout())}>Cerrar sesión</button>
+              <button onClick={handleLogOut}>Cerrar sesión</button>
             </li>
           </ul>
         </div>

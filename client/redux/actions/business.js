@@ -34,7 +34,6 @@ export const getBusinessById = (id) => {
                     Authorization: `Bearer ${ localStorage.getItem("token") }`,
                 }
             });
-            console.log("JSON: ", json)
             return dispatch({
                 type:GET_BUSINESS_BY_ID,
                 payload: json.data

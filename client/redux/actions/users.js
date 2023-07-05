@@ -41,8 +41,9 @@ export const createUser = ({
 }
 
 export const putUser = (id, userData) => {
+    console.log(id);
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/users/${id}` , userData ,{
+        const json = await axios.put(`http://localhost:3001/users/${id}`,userData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
