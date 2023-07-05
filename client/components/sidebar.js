@@ -61,23 +61,6 @@ const sideBar = forwardRef(({ showNav }, ref) => {
                 : "text-black hover:bg-indigo-100 hover:text-indigo-500"
             }`}
           >
-            <div className="mr-4">
-              <UserIcon className="h-5 w-5" />
-            </div>
-            <div>
-              <span className="dark:text-white">Editar perfil</span>
-            </div>
-          </div>
-        </Link>
-        <hr className="mx-auto w-20 border-black"></hr>
-        <Link href="/dashboard/add">
-          <div
-            className={`pl-6 py-3 mx-2 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/billing"
-                ? "bg-orange-100 text-orange-500"
-                : "text-black hover:bg-indigo-100 hover:text-indigo-500"
-            }`}
-          >
             <div className="mr-3">
               <CreditCardIcon className="h-5 w-5" />
             </div>
