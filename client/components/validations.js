@@ -57,8 +57,8 @@ const businessValidations = (businessData) => {
         errors.password = "Tiene que tener al menos 1 numero"
     }
         
-    if (businessData.password.length <= 8 || businessData.password.length >= 16){
-        errors.password = "Tiene que tener entre 8 y 16 caracteres"
+    if (businessData.password.length <= 6 || businessData.password.length >= 16){
+        errors.password = "Tiene que tener entre 6 y 16 caracteres"
     }
     
     return errors
