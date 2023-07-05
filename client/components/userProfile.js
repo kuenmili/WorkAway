@@ -32,7 +32,7 @@ const Profile = () => {
           <div className="rounded-full overflow-hidden w-32 h-32 md:w-48 md:h-48 xl:w-56 xl:h-56">
             <img
               className="w-full h-full object-cover"
-              src={user?.profile_image}
+              src={user?.profile_image ? user.profile_image : "/img/default.jpg"}
               alt=""
               loading="eager"
             />

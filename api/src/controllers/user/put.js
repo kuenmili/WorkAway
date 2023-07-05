@@ -15,9 +15,6 @@ const updateUser = async (id, user) => {
         review_id,
     } = user
     
-    const reserve =  await Reserve.findById(user.reserve_id);
-    const review =  await Review.findById(user.review_id);
-    
     const newUserInfo = {
         first_name,
         last_name,
@@ -25,20 +22,11 @@ const updateUser = async (id, user) => {
         password,
         cellphone_number,
         profile_image,
-        reserve_id: reserve ? [...reserve_id, reserve._id] : [],
-        review_id: review ? [...review_id, review._id] : [],
+        reserve_id:  [...reserve_id],
+        review_id:  [...review_id] 
     }
 
     const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true });
-    
-    if (review) {
-        review.user_id = updateUser._id;
-        review.save();
-    };
-    if (reserve) {
-        reserve.user_id = updateUser._id;
-        reserve.save();
-    };
     
     return updatedUser;
 };

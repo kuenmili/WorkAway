@@ -26,7 +26,7 @@ const DropdownMenu = () => {
 
   const handleLogOut = () => {
     dispatch(logout());
-    router.push('/home');
+    router.push('/');
   }
 
   return (
@@ -38,7 +38,7 @@ const DropdownMenu = () => {
         onMouseLeave={handleMouseLeave}
       >
         <img
-          src={user?.profile_image || "/img/default.jpg"}
+          src={user?.profile_image ? user.profile_image : "/img/default.jpg"}
           alt="Profile"
           className="w-16 h-16 rounded-full transition duration-300 ease-in-out object-cover transform hover:scale-110 hover:rotate-12  "
         />
