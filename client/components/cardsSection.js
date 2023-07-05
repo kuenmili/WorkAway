@@ -38,9 +38,9 @@ export default function cardsSection() {
                           alt="" /> */}
                             <img className = "rounded-t-2xl h-80 object-cover" src={image} alt="" />
                         </SwiperSlide>
-                 ))
+                       ))
                     }
-                  </Swiper>
+                    </Swiper>
                     </Link>
                    <div className='p-5'>
                     <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.name}</h3>

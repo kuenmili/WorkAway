@@ -18,7 +18,7 @@ const chatbot = () => {
   const userName = useWatch({ control, name: "name", defaultValue: "Someone" });
 
   const onSubmit = async (data, e) => {
-    console.log(data);
+    
     await fetch("", {
       method: "POST",
       headers: {
@@ -74,7 +74,6 @@ const chatbot = () => {
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>{" "}
               </Transition>
-
               <Transition
                 show={open}
                 enter="transition duration-200 transform ease"
@@ -121,7 +120,7 @@ const chatbot = () => {
                       />
                       <input
                         type="hidden"
-                        value={`${userName} sent a message from Nextly`}
+                        value={`${userName} `}
                         {...register("subject")}
                       />
                       <input

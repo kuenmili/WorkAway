@@ -4,6 +4,7 @@ import {
     GET_COWORKSPACE,
     ADD_COWORKSPACE,
     UPDATE_COWORKSPACE,
+    UPDATE_COWORKSPACE_PRICE,
     DELETE_COWORKSPACE,
     COWORKSPACE_LOADING,
     GET_BUSINESS_WITH_RESERVE,
@@ -49,6 +50,12 @@ export default (state = initialState, action) => {
                 coworkSpaces: state.coworkSpaces.map(coworkSpace => coworkSpace._id === action.payload._id ? action.payload : coworkSpace),
                 loading: false
             }
+            case UPDATE_COWORKSPACE_PRICE:
+                return {
+                    ...state,
+                    coworkSpaces: state.coworkSpaces.map(coworkSpace => coworkSpace._id === action.payload.id ? action.payload : coworkSpace),
+                    loading: false
+                }    
         case DELETE_COWORKSPACE:
             return {
                 ...state,

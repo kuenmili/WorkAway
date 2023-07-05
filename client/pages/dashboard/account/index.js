@@ -5,11 +5,16 @@ import React from 'react';
 import Layout from '../../../components/layout';
 import { BsFillPencilFill } from "react-icons/bs";
 import { useState } from 'react';
+import { useSelector , useDispatch} from 'react-redux';
+import { updateBusiness } from '../../../redux/actions/business';
 
 
+const Profile = ({}) => {
 
-const Profile = ({  name, email, cuit, password ,profile_image, address, cellphone_number, id}) => {
-  
+  const bussinesProfile = useSelector((state) => state.auth?.user);
+
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState({
     name: '',
     email: '',
@@ -23,18 +28,24 @@ const Profile = ({  name, email, cuit, password ,profile_image, address, cellpho
   const [isEditing, setIsEditing] = useState(false)
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue({
+      ...inputValue,
+      [event.target.name]: event.target.value,
+    })
+     
+ 
   };
 
 const handleSubmit = (event) => {
     event.preventDefault();
     setIsEditing(false);
-    // Lógica para enviar los datos del formulario
+    dispatch(updateBusiness(inputValue));
   };
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
+
 
   return (
     <>
@@ -45,7 +56,7 @@ const handleSubmit = (event) => {
               <div className="rounded-full overflow-hidden w-32 h-32 md:w-48 md:h-48 xl:w-56 xl:h-56">
                 <img
                   className="w-full h-full object-cover"
-                  src={profile_image}
+                  src=""
                   alt=""
                   loading="eager"
                 />
@@ -64,7 +75,7 @@ const handleSubmit = (event) => {
                 <FontAwesomeIcon icon={faUser} className="text-indigo-700 mr-2 dark:text-white"/>
                 <input
                   type="text"
-                  value={name}
+                  value={bussinesProfile?.name}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                   readOnly={isEditing ? false : true}
@@ -78,7 +89,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faEnvelope} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={email}
+                    value={bussinesProfile?.email}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -92,7 +103,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faAddressCard} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={address}
+                    value={bussinesProfile?.address}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -106,7 +117,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faStar} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={password}
+                    value={bussinesProfile?.password}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -120,10 +131,10 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faNavicon} className="text-indigo-700 mr-2 dark:text-white " />
                   <input
                     type="text"
-                    value={cuit}
+                    value={bussinesProfile?.cuit}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
-                    readOnly={isEditing ? false : true}
+                    readOnly={isEditing ? false : true} 
                   />
                   <BsFillPencilFill className = "cursor-pointer" onClick={() => handleEditClick()}/>
                 </div>
@@ -134,7 +145,7 @@ const handleSubmit = (event) => {
                   <FontAwesomeIcon icon={faPhone} className="text-indigo-700 mr-2 dark:text-white" />
                   <input
                     type="text"
-                    value={cellphone_number}
+                    value={bussinesProfile?.cellphone_number}
                     onChange={handleInputChange}
                     className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                     readOnly={isEditing ? false : true}
@@ -143,12 +154,22 @@ const handleSubmit = (event) => {
                 </div>
                 </div>
                 <div className="mt-4 flex justify-center pt-3">
-                  <Link href={`/users/${id}/edit`} className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700">           
+                  <Link  onClick={handleSubmit} href="" className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700">           
                     Guardar       
                   </Link>
                 </div>
               </div>
           </div>  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       </Layout>
     </>
     )

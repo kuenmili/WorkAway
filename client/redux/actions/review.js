@@ -25,15 +25,16 @@ export const createReview = ({
     coworkspace
 }) => {
     return async dispatch => {
-        const json = await axios.post("http://localhost:3001/reviews/post",{
-            headers: {
-                Authorization: `Bearer ${ localStorage.getItem("token") }`,
-            }
-        }, {
+        const json = await axios.post("http://localhost:3001/reviews/post",
+        {
             user_id,
             score,
             comment,
             coworkspace
+        },{
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
         })
         return dispatch({
             type: CREATE_REVIEW,

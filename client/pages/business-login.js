@@ -54,7 +54,7 @@ const LoginBusiness = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("USER", user);
+    
       if (isAdmin) {
         router.push("/dashboard");
         return;
@@ -119,7 +119,7 @@ const LoginBusiness = () => {
             {/*Log in button */}
             <div className="flex justify-center">
               <button
-                disabled= {errors?.email || errors?.password}
+                // disabled= {errors?.email || errors?.password}
                 type="submit"
                 onClick={handleSubmit}
                 className="w-40 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-2 rounded-md focus:outline-none"

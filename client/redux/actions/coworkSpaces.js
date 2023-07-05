@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getBusinessById } from './business';
 
 export const GET_COWORKSPACES = 'GET_COWORKSPACES';
 export const GET_COWORKSPACES_BY_NAME = 'GET_COWORKSPACES_BY_NAME';
@@ -9,6 +10,8 @@ export const DELETE_COWORKSPACE = 'DELETE_COWORKSPACE';
 export const COWORKSPACE_LOADING = 'COWORKSPACE_LOADING';
 export const COWORKSPACE_ERROR = 'COWORKSPACE_ERROR';
 export const GET_BUSINESS_WITH_RESERVE = "GET_BUSINESS_WITH_RESERVE";
+export const UPDATE_COWORKSPACE_PRICE = 'UPDATE_COWORKSPACE_PRICE';
+
 
 const baseCoworkSpacesURL = '/cowork_spaces';
 
@@ -56,6 +59,29 @@ export const getCoworkSpace = id => async dispatch => {
             payload: data
         });
     } catch ({ response: { data } }) {
+        dispatch({
+            type: COWORKSPACE_ERROR,
+            payload: data
+        });
+    }
+}
+
+
+
+export const updateCoworkSpacePrice = (id, price) => async dispatch => {
+    try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${id}/price`, { price }, {
+            headers: {
+                Authorization: `Bearer ${ token }`,
+            }
+        });
+        dispatch(getBusinessById(data.business));
+        dispatch({
+            type: UPDATE_COWORKSPACE_PRICE,
+            payload: { id, price }
+        });
+    } catch ({ response: { data }}) {
         dispatch({
             type: COWORKSPACE_ERROR,
             payload: data

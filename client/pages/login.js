@@ -47,7 +47,7 @@ export default function Login() {
     setIsFormSubmitted(true);
 
     const inputEmail = emailInputRef.current.value.trim();
-    console.log(inputEmail, "Este es el email ingresado");
+
     const inputPassword = passwordInputRef.current.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
