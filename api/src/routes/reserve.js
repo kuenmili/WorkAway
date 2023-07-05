@@ -50,6 +50,7 @@ router.post('/', passport.authenticate("jwt", { session: false }), async (req, r
         const reserveCreated = await cretedReserve(reserveToCreate);
         res.status(201).json(reserveCreated);
     } catch (error) {
+        console.log("ERROR EN RESERVA: ", error);
         res.status(400).json(error);
     }
 });

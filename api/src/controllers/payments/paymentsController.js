@@ -6,7 +6,9 @@ const {
 } = require("../../config");
 
 const createOrderController = async (req, res) => {
-  const { detail, amount } = req.body;
+  const { paymentInfo, coworkSpace } = req.body;
+  const { amount, detail } = paymentInfo;
+  const { user, date_from, date_to, occupants, coworkspace } = coworkSpace;
   try {
     const order = {
       intent: "CAPTURE",
@@ -23,7 +25,7 @@ const createOrderController = async (req, res) => {
         brand_name: "WorkAway",
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
-        return_url: "http://localhost:3000/payed",
+        return_url: `http://localhost:3000/payed?user=${user}&date_from=${date_from}&date_to=${date_to}&occupants=${occupants}&coworkspace=${coworkspace}`,
         cancel_url: "http://localhost:3000/home",
       },
     };

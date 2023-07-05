@@ -28,8 +28,6 @@ export const createReserve = ({
     user,
     coworkspace
 }) => {
-    console.log( "esta es la action")
-    console.log(coworkspace)
     return async dispatch => {
         const json = await axios.post("http://localhost:3001/reserves", {
             reserveToCreate: {
@@ -45,7 +43,7 @@ export const createReserve = ({
             }
         }  
         );
-
+        console.log("RESERVA CREADA: ", json.data);
         return dispatch({
             type: CREATE_RESERVE,
             payload: json.data,
@@ -55,7 +53,7 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reserves/${id}` , {...reserveData}, {
+        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {...reserveData},  {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
@@ -63,6 +61,6 @@ export const updateReserve = (id, reserveData) => {
         return dispatch({
             type:UPDATE_RESERVE,
             payload: json.data,
-        })
-    }
+        })
+    }
 };

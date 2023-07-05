@@ -68,7 +68,7 @@ const getCoworkSpaceByID = async (id) => {
 const getCoworkSpaceWithReserve = async (id) => {
   let coworkSpaceWithReserve = await CoworkSpace.findById(id)
   .populate("reviews")
-  .populate("reserve")
+  .populate("reserves")
 
   if (!coworkSpaceWithReserve) throw new Error("cowork space not found")
 

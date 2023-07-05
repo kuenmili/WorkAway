@@ -34,7 +34,6 @@ export const getBusinessById = (id) => {
                     Authorization: `Bearer ${ localStorage.getItem("token") }`,
                 }
             });
-            console.log("JSON: ", json)
             return dispatch({
                 type:GET_BUSINESS_BY_ID,
                 payload: json.data
@@ -73,11 +72,11 @@ export const createBusiness = ({  name,
 
 export const updateBusiness = (id, bussinessData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/business/${ id }`, {
+        const json = await axios.put(`http://localhost:3001/business/${ id }` , bussinessData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
-        }, bussinessData);
+        });
         return dispatch({
             type: UPDATE_BUSINESS,
             payload: json.data,

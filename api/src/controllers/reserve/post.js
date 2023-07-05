@@ -97,8 +97,9 @@ console.log('Message sent: %s', info.messageId);
   );
     
     return reserveCreated;
-}
+};
+
 
 module.exports = {
-    cretedReserve,
-}
+  cretedReserve,
+};

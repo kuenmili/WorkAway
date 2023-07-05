@@ -5,7 +5,7 @@ const {
     getCoworkSpaceWithReserve,
 } = require("./get");
 const { createSpaceCowork } = require('./post');
-const { modifyCoworkSpace } = require('./put');
+const { modifyCoworkSpace, modifyCoworkSpacePrice } = require('./put');
 const { deleteCoworkSpace } = require('./delete');
 
 module.exports = {
@@ -16,4 +16,5 @@ module.exports = {
     createSpaceCowork,
     modifyCoworkSpace,
     deleteCoworkSpace,
+    modifyCoworkSpacePrice,
 }

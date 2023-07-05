@@ -24,6 +24,8 @@ const schemaSpaceCowork = new Schema({
         type:Schema.Types.ObjectId,
         ref: "Reserve"
     }]
+}, {
+    strictPopulate: false,
 });
 
 const CoworkSpace = model('CoworkSpace', schemaSpaceCowork)

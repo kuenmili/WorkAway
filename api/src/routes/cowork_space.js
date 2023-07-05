@@ -7,6 +7,7 @@ const {
     getCoworkSpaceWithReserve,
     createSpaceCowork,
     modifyCoworkSpace,
+    modifyCoworkSpacePrice,
     deleteCoworkSpace,
 } = require("../controllers/cowork_spaces");
 const { isAdmin, isAdminMiddleware } = require('../middlewares/auth');
@@ -46,9 +47,9 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:id/detail', passport.authenticate("jwt", { session: false }), async (req, res) => {
-    const { name, score, location, services, price, reserve } = req.query;
+    const { id } = req.params;
     try {
-        const coworkWithReserve = await getCoworkSpaceWithReserve(name, score, location, services, price, reserve);
+        const coworkWithReserve = await getCoworkSpaceWithReserve(id);
         res.status(202).json(coworkWithReserve);
     } catch (error) {
         console.log("ACA ES EL ERROR", error)
@@ -75,6 +76,18 @@ router.put('/:id', passport.authenticate("jwt", { session: false }), async (req,
         const coworkSpaceModified = await modifyCoworkSpace(id, name, about, services, images);
         res.status(202).json(coworkSpaceModified);
     } catch (error) {
+        res.status(406).json(error);
+    }
+});
+
+router.put('/:id/price', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const { id } = req.params;
+    const { price } = req.body;
+    try {
+        const coworkSpaceModified = await modifyCoworkSpacePrice(id, price);
+        res.status(202).json(coworkSpaceModified);
+    } catch (error) {
+       
         res.status(406).json(error);
     }
 });

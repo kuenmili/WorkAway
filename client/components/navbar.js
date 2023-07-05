@@ -9,6 +9,7 @@ import { login } from "../redux/actions/auth";
 
 function Navbar() {
   const loggedIn = useSelector((state) => state.auth?.loggedIn);
+  
   const links = [
     {
       label: `Inicio`,
@@ -18,10 +19,7 @@ function Navbar() {
       label: `Home`,
       href: `/home`,
     },
-    {
-      label: ``,
-      href: `/`,
-    },
+ 
     {
       label: `About`,
       href: `/about`,

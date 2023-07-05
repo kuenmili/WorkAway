@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Link from "next/link";
 
-const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
+const BusinessProfile = ({ name, email, address, cellphone_number, cuit }) => {
   return (
     <div className="flex justify-evenly pt-20 ">
       {/*info container */}
@@ -48,7 +48,7 @@ const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
             />
             <input
               type="text"
-              value={"+54 9 2920 35-8382"}
+              value={cellphone_number}
               className="block w-full dark:bg-transparent dark:text-white bg-white border border-indigo-600 rounded-md py-2 px-4 mt-1 ml-4 mr-8 "
               readOnly
             />
@@ -71,7 +71,7 @@ const BusinessProfile = ({ name, email, cellphone_number, address, cuit }) => {
         </div>
         <div className="mt-4 flex justify-center pt-3">
           <Link
-            href={`/dashboard/account`}
+            href={`/dashboard/account/profile`}
             className="px-6 py-2 text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700"
           >
             Editar
