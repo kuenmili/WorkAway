@@ -12,8 +12,8 @@ import {
 export default function Layout({ children }) {
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
-  const { loggedIn, isAdmin } = useSelector((state) => state.auth);
 
   function handleResize() {
     if (innerWidth <= 640) {
@@ -30,12 +30,19 @@ export default function Layout({ children }) {
       addEventListener("resize", handleResize);
     }
 
+
+
     return () => {
       removeEventListener("resize", handleResize);
     };
   }, []);
 
-  return loggedIn && isAdmin ? (
+  useEffect(() => {
+    const isAdmin = JSON.parse(localStorage?.getItem("isAdmin"));
+    setIsAdmin(isAdmin);
+  }, []);
+
+  return isAdmin ? (
     <>
       <Navbar/>
       <div
