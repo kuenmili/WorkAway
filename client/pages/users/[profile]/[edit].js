@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const UpdateProfilePage = () => {
   const router = useRouter();
- 
+
   
   if (router.isFallback) {
     return <div>Loading...</div>;

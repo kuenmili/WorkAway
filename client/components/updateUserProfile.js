@@ -18,7 +18,6 @@ const UpdateProfile = () => {
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
     email: user?.email || "",
-    password: user?.password || "",
     profile_image: user?.profile_image || "",
     cellphone_number: user?.cellphone_number || "",
   });
@@ -86,6 +85,7 @@ const UpdateProfile = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     dispatch(putUser(user?.id, data))
+    router.push(`http://localhost:3000/users/${user.id}`)
   };
 
 
@@ -126,7 +126,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="first_name"
                 placeholder="Nombre"
-                value={data?.first_name}
+                value={data.first_name}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -138,7 +138,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="last_name"
                 placeholder="Apellido"
-                value={data?.last_name}
+                value={data.last_name}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -149,7 +149,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="cellphone_number"
                 placeholder="Numero de celular"
-                value={data?.cellphone_number}
+                value={data.cellphone_number}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -161,26 +161,14 @@ const UpdateProfile = () => {
                 type="email"
                 name="email"
                 placeholder="Correo Electronico"
-                value={data?.email}
-                onChange={handleInputChange}
-                className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block mb-1">Contraseña:</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                value={data?.password}
+                value={data.email}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
             </div>
 
             <div className="flex justify-center">
-              <Link href= {`http://localhost:3000/users/${user?.id}`} className='my-2 mx-2 px-6 py-3 text-center inline-block text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700'>
+              <Link href= {`/users/${user?.id}`} className='my-2 mx-2 px-6 py-3 text-center inline-block text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700'>
               Volver
               </Link>
 
