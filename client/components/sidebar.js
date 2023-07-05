@@ -53,10 +53,10 @@ const sideBar = forwardRef(({ showNav }, ref) => {
           </div>
         </Link>
 
-        <Link href="/dashboard/account/profile">
+        <Link href="/dashboard/add">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "dashboard/account"
+              router.pathname == "dashboard/add"
                 ? "bg-indigo-100 text-indigo-500"
                 : "text-black hover:bg-indigo-100 hover:text-indigo-500"
             }`}
