@@ -45,11 +45,11 @@ export const createReview = ({
 
 export const updateReview = (id, reviewData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reviews/${id}`, {
+        const json = await axios.put(`http://localhost:3001/reviews/${id}`, reviewData , {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
-        }, reviewData)
+        })
         return dispatch({
             type: UPDATE_REVIEW,
             payload: json.data,

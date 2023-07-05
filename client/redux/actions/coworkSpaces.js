@@ -110,11 +110,11 @@ export const getBusinessWithReserve = () => {
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, coworkSpaceToCreate , {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
-        }, coworkSpaceToCreate);
+        });
         dispatch({
             type: ADD_COWORKSPACE,
             payload: data
@@ -129,11 +129,11 @@ export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
 
 export const updateCoworkSpace = coworkSpace => async dispatch => {
     try {
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, {
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, coworkSpace , {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
-        }, coworkSpace);
+        });
         dispatch({
             type: UPDATE_COWORKSPACE,
             payload: data
