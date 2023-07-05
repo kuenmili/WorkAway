@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
 import { differenceInDays } from "date-fns";
 import axios from "axios";
-import Navbar from "../components/navbar";
 
-export default function Booking() {
+export default function booking() {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
+
+  useEffect(() => {
+    if (coworkSpace) {
+      const { name, price } = coworkSpace;
+      setCoworkSpace(`${name} - ${price}`);
+    }
+  }, [coworkSpace]);
+
   const [date_from, setDateFrom] = useState("");
   const [date_to, setDateTo] = useState("");
   const [occupants, setOccupants] = useState("");
   const [cowork_space, setCoworkSpace] = useState("");
+
   const [dateFromError, setDateFromError] = useState(false);
   const [dateToError, setDateToError] = useState(false);
   const [occupantsError, setOccupantsError] = useState(false);
@@ -21,45 +34,15 @@ export default function Booking() {
   const [isChecked, setIsChecked] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
   const [selectedDays, setSelectedDays] = useState(0);
-  const [userId, setUserId] = useState("");
-
-  const coworkSpace = useSelector((state) => state.coworkSpaces.coworkSpace);
-  const user = useSelector((state) => state.auth.user);
-
-  useEffect(() => {
-    if (coworkSpace) {
-      const { name, price, _id } = coworkSpace;
-      setCoworkSpace(`${name} - ${price} -${_id}`);
-    }
-    if (user) {
-      const { id } = user;
-      setUserId(id);
-    }
-  }, [coworkSpace, user]);
 
   const handleDateFromChange = (e) => {
-    const selectedDate = e.target.value;
-    setDateFrom(selectedDate);
+    setDateFrom(e.target.value);
     setDateFromError(false);
-
-    if (date_to) {
-      const days = differenceInDays(new Date(date_to), new Date(selectedDate));
-      setSelectedDays(days + 1); // Sumamos 1 para incluir también el último día
-    }
   };
 
   const handleDateToChange = (e) => {
-    const selectedDate = e.target.value;
-    setDateTo(selectedDate);
+    setDateTo(e.target.value);
     setDateToError(false);
-
-    if (date_from) {
-      const days = differenceInDays(
-        new Date(selectedDate),
-        new Date(date_from)
-      );
-      setSelectedDays(days + 1); // Sumamos 1 para incluir también el primer día
-    }
   };
 
   const handleOccupantsChange = (e) => {
@@ -76,36 +59,24 @@ export default function Booking() {
   };
 
   const handleCheckBox = (e) => {
-    setIsChecked(e.target.checked);
+    setIsChecked(e.target.value);
     setShowCheckboxError(false);
   };
 
   const handleReserveClick = () => {
-    if (!isChecked) {
-      setShowCheckboxError(true);
-      return;
-    }
-
     if (
       date_from === "" ||
       date_to === "" ||
       occupants === "" ||
-      cowork_space === ""
+      cowork_space === "" ||
+      isChecked === ""
     ) {
       alert("Por favor complete todos los campos.");
       return;
     }
-    console.log("Datos de reserva:", {
-      user: userId,
-      date_from: date_from,
-      date_to: date_to,
-      occupants: occupants,
-      coworkspace: cowork_space._id,
-    });
 
     dispatch(
       createReserve({
-        user: userId,
         date_from: date_from,
         date_to: date_to,
         occupants: occupants,
@@ -113,15 +84,6 @@ export default function Booking() {
       })
     );
   };
-
-  useEffect(() => {
-    if (date_from && date_to) {
-      const fromDate = new Date(date_from);
-      const toDate = new Date(date_to);
-      const days = differenceInDays(toDate, fromDate);
-      setSelectedDays(days);
-    }
-  }, [date_from, date_to]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -138,16 +100,12 @@ export default function Booking() {
     if (cowork_space === "") {
       setCoworkSpaceError(true);
     }
-    if (!isChecked) {
-      setShowCheckboxError(true);
-    }
 
     if (
       !dateFromError &&
       !dateToError &&
       !occupantsError &&
-      !coworkSpaceError &&
-      isChecked
+      !coworkSpaceError
     ) {
       handleReserveClick();
     }
@@ -155,7 +113,6 @@ export default function Booking() {
 
   const checkout = async () => {
     const totalPayment = coworkSpace.price * selectedDays;
-    console.log(totalPayment);
     const paymentInfo = {
       detail: coworkSpace.name,
       amount: totalPayment,
@@ -167,24 +124,8 @@ export default function Booking() {
     router.push(response.data);
   };
 
-  const handleCheckoutClick = () => {
-    if (!isChecked) {
-      setShowCheckboxError(true);
-      return;
-    }
-
-    if (
-      date_from === "" ||
-      date_to === "" ||
-      occupants === "" ||
-      cowork_space === ""
-    ) {
-      alert("Por favor complete todos los campos.");
-      return;
-    }
-
-    handleReserveClick();
-    checkout();
+  const handleCheckoutClick = (e) => {
+    checkout(e);
   };
 
   return (
@@ -268,11 +209,6 @@ export default function Booking() {
                     Este campo es requerido.
                   </p>
                 )}
-                {date_to && (
-                  <p className="text-indigo-600 mt-2 ml-20">
-                    Días seleccionados: {selectedDays}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -331,7 +267,9 @@ export default function Booking() {
           </form>
         </div>
       </div>
-      <Footer />
+      <div className="absolute inset-x-0 bottom-0 ">
+        <Footer />
+      </div>
     </>
   );
 }
