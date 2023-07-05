@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import dalma from "../../public/img/dalma.jpg";
-import ricardo from "../../public/img/ricardo.jpg";
-import mili from "../../public/img/mili.jpg";
-import nico from "../../public/img/nico.jpg";
-import lucio from "../../public/img/lucio.jpg";
-import camilo from "../../public/img/camilo.jpg";
-import Footer from "../../components/footer";
-import ThemeChanger from "../../components/DarkSwitch";
-import Work from "../../public/favicon.ico";
+import dalma from "../public/img/dalma.jpg";
+import ricardo from "../public/img/ricardo.jpg";
+import mili from "../public/img/mili.jpg";
+import nico from "../public/img/nico.jpg";
+import lucio from "../public/img/lucio.jpg";
+import camilo from "../public/img/camilo.jpg";
+import Footer from "../components/footer";
+import ThemeChanger from "../components/DarkSwitch";
+import Work from "../public/favicon.ico";
 
 export default function About() {
   return (

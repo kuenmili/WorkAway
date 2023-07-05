@@ -6,6 +6,7 @@ const {
 } = require("../../config");
 
 const createOrderController = async (_req, res) => {
+  const { detail, amount } = req.body;
   try {
     const order = {
       intent: "CAPTURE",
@@ -13,9 +14,9 @@ const createOrderController = async (_req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: "100.20",
+            value: amount,
           },
-          description: "object", //necessary
+          description:detail, //necessary
         },
       ],
       application_context: {
