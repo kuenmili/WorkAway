@@ -6,11 +6,10 @@ import Footer from "../components/footer";
 import ApiCaller from "../components/apiCaller";
 import Modal from "../components/modal";
 
-
 export default function Login() {
   const [emailData, setEmailData] = useState([]);
   const [inputEmail, setInputEmail] = useState("");
-  const [modalContent, setModalContent] = useState("");// Estado del modal
+  const [modalContent, setModalContent] = useState(""); // Estado del modal
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [showModal, setShowModal] = useState(false); // Configuración del modal.
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -20,7 +19,6 @@ export default function Login() {
   const [isEmailEmpty, setIsEmailEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +39,6 @@ export default function Login() {
     passwordInputRef.current.value = "";
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsFormSubmitted(true);
@@ -60,7 +57,7 @@ export default function Login() {
 
     if (emailRegex.test(inputEmail)) {
       const user = emailData.find((item) => item.email === inputEmail);
-    
+
       if (user) {
         if (user.password === inputPassword) {
           setModalContent("Login exitoso");
@@ -82,16 +79,19 @@ export default function Login() {
   const handleCloseModal = () => {
     setShowModal(false);
     router.push("/");
-  }
-
+  };
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-2xl">
-          <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">Log in</h2>
-          <p className="mb-6 text-center text-gray-400 ">Accede a tu cuenta de WorkAway</p>
+          <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">
+            Log in
+          </h2>
+          <p className="mb-6 text-center text-gray-400 ">
+            Accede a tu cuenta de WorkAway
+          </p>
 
           {/* Input email */}
           <div className="mb-6 ">
@@ -101,14 +101,19 @@ export default function Login() {
                 type="email"
                 id="email"
                 placeholder="nombre@email.com"
-                className={`w-3/4 mx-auto bg-white border ${isEmailEmpty ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                className={`w-3/4 mx-auto bg-white border ${
+                  isEmailEmpty ? "border-red-500" : "border-indigo-300"
+                } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                 value={inputEmail}
                 onChange={handleEmailChange}
                 ref={emailInputRef}
                 required
               />
-              {isEmailEmpty && <p className="text-red-500 ml-20">El campo email es obligatorio</p>}
+              {isEmailEmpty && (
+                <p className="text-red-500 ml-20">
+                  El campo email es obligatorio
+                </p>
+              )}
             </div>
           </div>
 
@@ -120,13 +125,17 @@ export default function Login() {
                 type="password"
                 id="password"
                 placeholder="ingresa un password"
-                className={`w-3/4 mx-auto bg-white border ${isPasswordEmpty ? "border-red-500" : "border-indigo-300"
-                  } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                className={`w-3/4 mx-auto bg-white border ${
+                  isPasswordEmpty ? "border-red-500" : "border-indigo-300"
+                } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
                 ref={passwordInputRef}
                 required
               />
-              {isPasswordEmpty && <p className="text-red-500 ml-20">El campo password es obligatorio</p>}
-
+              {isPasswordEmpty && (
+                <p className="text-red-500 ml-20">
+                  El campo password es obligatorio
+                </p>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-center h-full">
@@ -144,9 +153,10 @@ export default function Login() {
             <button
               className="w-3/4  bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none"
               onClick={handleSubmit}
-            >Log in</button>
+            >
+              Log in
+            </button>
           </div>
-
 
           {/* Iconos de google, facebook, apple */}
           <div className="mt-6 flex justify-center">
@@ -159,10 +169,14 @@ export default function Login() {
             <button className="bg-white hover:bg-gray-200 p-2 rounded-full">
               <FaApple size={24} color="#000000" />
             </button>
-
           </div>
           <p className="mt-4 text-center text-gray-500">
-            ¿Todavía no tienes una cuenta?{" "} <a href="/" className="text-indigo-600"> Registrate</a>.
+            ¿Todavía no tienes una cuenta?{" "}
+            <a href="/" className="text-indigo-600">
+              {" "}
+              Registrate
+            </a>
+            .
           </p>
         </div>
       </div>
@@ -173,4 +187,3 @@ export default function Login() {
     </>
   );
 }
-

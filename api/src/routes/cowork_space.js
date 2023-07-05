@@ -46,9 +46,9 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:id/detail', passport.authenticate("jwt", { session: false }), async (req, res) => {
-    const { name, score, location, services, price, reserve } = req.query;
+    const { id } = req.params;
     try {
-        const coworkWithReserve = await getCoworkSpaceWithReserve(name, score, location, services, price, reserve);
+        const coworkWithReserve = await getCoworkSpaceWithReserve(id);
         res.status(202).json(coworkWithReserve);
     } catch (error) {
         console.log("ACA ES EL ERROR", error)
