@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/actions/auth';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/auth";
 
 const DropdownMenu = ({ profileImage }) => {
   const { user, loggedIn, isAdmin } = useSelector((state) => state.auth);
@@ -42,7 +42,13 @@ const DropdownMenu = ({ profileImage }) => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-              <a href={loggedIn && isAdmin ? "/dashboard/account" : `users/${user._id}`}>
+              <a
+                href={
+                  loggedIn && isAdmin
+                    ? "/dashboard/account"
+                    : `users/${user.id}`
+                }
+              >
                 {loggedIn && isAdmin ? "Dashboard" : "Perfil"}
               </a>
             </li>
