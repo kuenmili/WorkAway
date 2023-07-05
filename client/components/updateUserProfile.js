@@ -85,7 +85,7 @@ const UpdateProfile = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     dispatch(putUser(user?.id, data))
-    router.push(`http://localhost:3000/users/${user.id}`)
+    router.push(`/users/${user.id}`)
   };
 
 
