@@ -1,7 +1,6 @@
-
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/actions/auth';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/actions/auth";
 import { useRouter } from "next/router";
 
 const DropdownMenu = () => {
@@ -51,8 +50,13 @@ const DropdownMenu = () => {
         >
           <ul className="py-2">
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:text-indigo-800">
-
-            <a href={loggedIn && isAdmin ? "/dashboard/account" : `users/${user.id}`}>
+              <a
+                href={
+                  loggedIn && isAdmin
+                    ? "/dashboard/account"
+                    : `users/${user?.id}`
+                }
+              >
                 {loggedIn && isAdmin ? "Dashboard" : "Perfil"}
               </a>
             </li>

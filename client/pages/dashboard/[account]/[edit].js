@@ -67,11 +67,7 @@ const Profile = ({ profile_image }) => {
                   value={bussinesProfile?.name}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
-                  readOnly={isEditing ? false : true}
-                />
-                <BsFillPencilFill
-                  className="cursor-pointer"
-                  onClick={() => handleEditClick()}
+                  readOnly={true}
                 />
               </div>
             </div>
@@ -87,31 +83,24 @@ const Profile = ({ profile_image }) => {
                   value={bussinesProfile?.email}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
-                  readOnly={isEditing ? false : true}
-                />
-                <BsFillPencilFill
-                  className="cursor-pointer"
-                  onClick={() => handleEditClick()}
+                  readOnly={true}
                 />
               </div>
             </div>
+
             <div className="mt-4 text-center">
-              <h1>Dirección</h1>
+              <h1>Cuit</h1>
               <div className="flex items-center">
                 <FontAwesomeIcon
-                  icon={faAddressCard}
+                  icon={faNavicon}
                   className="text-indigo-700 mr-2 dark:text-white "
                 />
                 <input
                   type="text"
-                  value={bussinesProfile?.address}
+                  value={bussinesProfile?.cuit}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
-                  readOnly={isEditing ? false : true}
-                />
-                <BsFillPencilFill
-                  className="cursor-pointer"
-                  onClick={() => handleEditClick()}
+                  readOnly={true}
                 />
               </div>
             </div>
@@ -136,15 +125,15 @@ const Profile = ({ profile_image }) => {
               </div>
             </div>
             <div className="mt-4 text-center">
-              <h1>Cuit</h1>
+              <h1>Dirección</h1>
               <div className="flex items-center">
                 <FontAwesomeIcon
-                  icon={faNavicon}
+                  icon={faAddressCard}
                   className="text-indigo-700 mr-2 dark:text-white "
                 />
                 <input
                   type="text"
-                  value={bussinesProfile?.cuit}
+                  value={bussinesProfile?.address}
                   onChange={handleInputChange}
                   className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 ml-4 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600 "
                   readOnly={isEditing ? false : true}

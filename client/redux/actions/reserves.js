@@ -43,7 +43,7 @@ export const createReserve = ({
             }
         }  
         );
-
+        console.log("RESERVA CREADA: ", json.data);
         return dispatch({
             type: CREATE_RESERVE,
             payload: json.data,
@@ -53,7 +53,7 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reserves/${id}` , {...reserveData}, {
+        const json = await axios.put(`http://localhost:3001/reserves/${id}`, {...reserveData},  {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

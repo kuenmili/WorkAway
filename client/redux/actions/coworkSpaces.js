@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getBusinessById } from './business';
 
 export const GET_COWORKSPACES = 'GET_COWORKSPACES';
 export const GET_COWORKSPACES_BY_NAME = 'GET_COWORKSPACES_BY_NAME';
@@ -9,6 +10,8 @@ export const DELETE_COWORKSPACE = 'DELETE_COWORKSPACE';
 export const COWORKSPACE_LOADING = 'COWORKSPACE_LOADING';
 export const COWORKSPACE_ERROR = 'COWORKSPACE_ERROR';
 export const GET_BUSINESS_WITH_RESERVE = "GET_BUSINESS_WITH_RESERVE";
+export const UPDATE_COWORKSPACE_PRICE = 'UPDATE_COWORKSPACE_PRICE';
+
 
 const baseCoworkSpacesURL = '/cowork_spaces';
 
@@ -63,7 +66,7 @@ export const getCoworkSpace = id => async dispatch => {
     }
 }
 
-export const getCoworkSpaceWithReserve = (id) => {
+export const getBusinessWithReserve = () => {
     return async (dispatch) => {
         try {
             const json = await axios.get(`${baseCoworkSpacesURL}/${id}/detail`, {
@@ -84,7 +87,7 @@ export const getCoworkSpaceWithReserve = (id) => {
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, coworkSpaceToCreate, {
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
@@ -103,7 +106,7 @@ export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
 
 export const updateCoworkSpace = coworkSpace => async dispatch => {
     try {
-        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, coworkSpace, {
+        const { data } = await axios.put(`${baseCoworkSpacesURL}/${coworkSpace._id}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
