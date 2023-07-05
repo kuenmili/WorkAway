@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
+import { useSelector } from "react-redux";
 import SideBar from "./sidebar";
 import TopBar from "./topbar";
 import { Transition } from "@headlessui/react";
@@ -11,6 +12,8 @@ import {
 export default function Layout({ children }) {
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+
+  const { loggedIn, isAdmin } = useSelector((state) => state.auth);
 
   function handleResize() {
     if (innerWidth <= 640) {
@@ -32,7 +35,7 @@ export default function Layout({ children }) {
     };
   }, []);
 
-  return (
+  return loggedIn && isAdmin ? (
     <>
       <Navbar/>
       <div
@@ -67,5 +70,5 @@ export default function Layout({ children }) {
         <div className="px-4 md:px-16">{children}</div>
       </main>
     </>
-  );
+  ) : (<>Unauthorized</>);
 }
