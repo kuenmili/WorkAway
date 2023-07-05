@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { Disclosure, Transition } from "@headlessui/react";
+import axios from 'axios';
 
 const chatbot = () => {
   const {
     register,
-    handleSubmit,
     reset,
     control,
     formState: { errors, isSubmitSuccessful, isSubmitting },
@@ -15,36 +15,38 @@ const chatbot = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [Message, setMessage] = useState("");
 
-  const userName = useWatch({ control, name: "name", defaultValue: "Someone" });
-
-  const onSubmit = async (data, e) => {
-    console.log(data);
-    await fetch("", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data, null, 2),
-    })
-      .then(async (response) => {
-        let json = await response.json();
-        if (json.success) {
-          setIsSuccess(true);
-          setMessage(json.message);
-          e.target.reset();
-          reset();
-        } else {
-          setIsSuccess(false);
-          setMessage(json.message);
-        }
-      })
-      .catch((error) => {
-        setIsSuccess(false);
-        setMessage("Client Error. Please check the console.log for more info");
-        console.log(error);
-      });
+  const [data, setData] = useState({
+    name: '',
+    email: "",
+    message: "",
+  });
+  const handleInputChange = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
   };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    console.log(data);
+    try {
+      const response = await axios.post("/send-email", data);
+      if (response.status === 200) {
+        setIsSuccess(true);
+        setMessage("¡Mensaje enviado con éxito!");
+      } else {
+        setIsSuccess(false);
+        setMessage("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.");
+      }
+    } catch (error) {
+      console.log(error.message);
+      setIsSuccess(false);
+      setMessage("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.");
+    }
+  };
+  
 
   return (
     <div>
@@ -112,43 +114,23 @@ const chatbot = () => {
                   </p>
                 </div>
                 <div className="flex-grow h-full p-6 overflow-auto bg-gray-50 ">
-                  {!isSubmitSuccessful && (
-                    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                      <input
-                        type="hidden"
-                        value="YOUR_ACCESS_KEY_HERE"
-                        {...register("apikey")}
-                      />
-                      <input
-                        type="hidden"
-                        value={`${userName} sent a message from Nextly`}
-                        {...register("subject")}
-                      />
-                      <input
-                        type="hidden"
-                        value=""
-                        {...register("from_name")}
-                      />
-                      <input
-                        type="checkbox"
-                        className="hidden"
-                        style={{ display: "none" }}
-                        {...register("botcheck")}></input>
+                
+                    <form onSubmit={handleSubmit} >                    
 
                       <div className="mb-4">
                         <label
-                          htmlFor="full_name"
+                          htmlFor="name"
                           className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
                           Nombre
                         </label>
                         <input
                           type="text"
-                          id="full_name"
+                          id="name"
+                          name="name"
+                          value={data?.name}
+                          onChange={handleInputChange}
                           placeholder="Nombre completo"
-                          {...register("name", {
-                            required: "Ingresa tu nombre",
-                            maxLength: 80,
-                          })}
+                          
                           className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
                             errors.name
                               ? "border-red-600 focus:border-red-600 ring-red-100"
@@ -171,13 +153,10 @@ const chatbot = () => {
                         <input
                           type="email"
                           id="email"
-                          {...register("email", {
-                            required: "Ingresa tu email",
-                            pattern: {
-                              value: /^\S+@\S+$/i,
-                              message: "Por favor ingresa un mail valido",
-                            },
-                          })}
+                          name="email"
+                          value={data?.email}
+                          onChange={handleInputChange}
+                          
                           placeholder="you@mail.com"
                           className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
                             errors.email
@@ -203,15 +182,10 @@ const chatbot = () => {
                         <textarea
                           rows="4"
                           id="message"
-                          {...register("message", {
-                            required: "Ingresa tu mensaje",
-                          })}
-                          placeholder="Your Message"
-                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md h-28 focus:outline-none focus:ring   ${
-                            errors.message
-                              ? "border-red-600 focus:border-red-600 ring-red-100"
-                              : "border-gray-300 focus:border-indigo-600 ring-indigo-100"
-                          }`}
+                          name="message"
+                          value={data?.message}
+                          onChange={handleInputChange}
+                          
                           required></textarea>
                         {errors.message && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
@@ -261,7 +235,7 @@ const chatbot = () => {
                         </span>
                       </p>
                     </form>
-                  )}
+                  
 
                   {isSubmitSuccessful && isSuccess && (
                     <>

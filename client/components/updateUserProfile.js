@@ -3,25 +3,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { uploadImage } from './firebase/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import axios from 'axios';
 import Link from 'next/link';
+import { putUser } from '../redux/actions/users';
+import {  useSelector, useDispatch } from 'react-redux';
+
 
 const UpdateProfile = () => {
 
+  const user = useSelector((state) => state.auth?.user)
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    profile_image: '',
-    cellphone_number: '',
+    first_name: user?.first_name || "",
+    last_name: user?.last_name || "",
+    email: user?.email || "",
+    password: user?.password || "",
+    profile_image: user?.profile_image || "",
+    cellphone_number: user?.cellphone_number || "",
   });
-  const [imagePreview, setImagePreview] = useState(
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-  );
+  const [imagePreview, setImagePreview] = useState(user?.profile_image || "");
   const [errorImage, setErrorImage] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleInputChange = (event) => {
     setData({
@@ -47,6 +50,7 @@ const UpdateProfile = () => {
       task.on(
         'state_changed',
         (snapshot) => {
+          setIsEditing(true)
           const percentage =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(percentage);
@@ -56,6 +60,7 @@ const UpdateProfile = () => {
         },
         () => {
           task.snapshot.ref.getDownloadURL().then((url) => {
+            setIsEditing(false)
             setData((prevData) => ({
               ...prevData,
               profile_image: url,
@@ -80,17 +85,10 @@ const UpdateProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    try {
-      await axios.put(
-        'http://localhost:3001/users/64947129094d3e9c514fe822', //ESTA HARDCODEADO. NECESITO A USER DE AUTH
-        data
-      );
-      alert('User updated successfully');
-      router.push('http://localhost:3000/users/64947129094d3e9c514fe822') //ESTA HARDCODEADO. NECESITO A USER DE AUTH
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(putUser(user?.id, data))
   };
+
+
 
   return (
 
@@ -128,7 +126,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="first_name"
                 placeholder="Nombre"
-                value={data.first_name}
+                value={data?.first_name}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -140,7 +138,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="last_name"
                 placeholder="Apellido"
-                value={data.last_name}
+                value={data?.last_name}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1 mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -151,7 +149,7 @@ const UpdateProfile = () => {
                 type="text"
                 name="cellphone_number"
                 placeholder="Numero de celular"
-                value={data.cellphone_number}
+                value={data?.cellphone_number}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -163,7 +161,7 @@ const UpdateProfile = () => {
                 type="email"
                 name="email"
                 placeholder="Correo Electronico"
-                value={data.email}
+                value={data?.email}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
@@ -175,14 +173,14 @@ const UpdateProfile = () => {
                 type="password"
                 name="password"
                 placeholder="Contraseña"
-                value={data.password}
+                value={data?.password}
                 onChange={handleInputChange}
                 className="block w-full dark:bg-transparent dark:text-white bg-white border border-gray-300 rounded-md py-2 px-4 mt-1  mr-8 focus:outline-none focus:border-indigo-600  hover:border-indigo-600"
               />
             </div>
 
             <div className="flex justify-center">
-              <Link href= '64947129094d3e9c514fe822' className='my-2 mx-2 px-6 py-3 text-center inline-block text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700'>
+              <Link href= {`http://localhost:3000/users/${user?.id}`} className='my-2 mx-2 px-6 py-3 text-center inline-block text-white bg-indigo-700 border border-transparent rounded-md hover:bg-blue-700'>
               Volver
               </Link>
 
