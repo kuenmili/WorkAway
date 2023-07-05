@@ -58,6 +58,7 @@ userRouter.post('/signup', async (req, res) => {
 userRouter.put('/:id', passport.authenticate("jwt", { session: false }), async (req, res) => {
     const { id } = req.params;
     const user = req.body;
+    console.log(user);
     
     try {
         const updatedUser = await updateUser(id, user);

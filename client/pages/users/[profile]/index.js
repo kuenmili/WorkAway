@@ -2,9 +2,11 @@ import Profile from '../../../components/userProfile';
 import Navbar from '../../../components/navbar';
 import Footer from '../../../components/footer';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
-const ProfilePage = ({ item }) => {
+const ProfilePage = () => {
 
+  const user = useSelector((state) => state.auth?.user)
   const router = useRouter();
 
   if (router.isFallback) {
@@ -14,13 +16,15 @@ const ProfilePage = ({ item }) => {
   return (
     <div>
       <Navbar />
-      <Profile {...item} />
+      <Profile {...user} />
       <div className="mt-4">
                 <Footer />
             </div>
     </div>
   );
 };
+
+
 
 // export async function getStaticPaths() {
 //     const res = await fetch('http://localhost:3001/users');

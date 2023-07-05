@@ -7,6 +7,7 @@ const roomRouter = require("./room");
 const reviewRouter = require("./review");
 const paymentsRouter = require("./payment");
 const authRouter = require("./auth");
+const mailingRouter = require("./chatMail");
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use("/rooms", roomRouter);
 router.use("/reviews", reviewRouter);
 router.use("/payments", paymentsRouter);
 router.use("/auth", authRouter);
+router.use("/send-email", mailingRouter);
 
 module.exports = router;
