@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
-import {  faQuoteLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faQuoteLeft, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import 'swiper/css/navigation';

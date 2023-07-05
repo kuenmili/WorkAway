@@ -6,6 +6,8 @@ import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { createReview } from '../redux/actions/review';
+import Modal from '../components/Modal';
+import { useRouter } from "next/router";
 
 
 const ReviewForm = () => {
@@ -59,6 +61,20 @@ const ReviewForm = () => {
         coworkspace : coworkspace._id })
     
     );
+    openModal();
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+
+  
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    router.push('/home');
   };
 
   const handleCoworkspaceChange = (event) => {
@@ -81,12 +97,12 @@ const ReviewForm = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar/>  
       <div className="mt-8 flex-grow mx-auto p-4 bg-white rounded shadow max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Dejanos tu reseña del espacio de trabajo</h2>
+        <h2 className="text-xl font-semibold mb-4  dark:text-black">Dejanos tu reseña del espacio</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
-              className={`w-3/4 mx-auto bg-white border ${
+              className={`w-full mx-auto bg-white border ${
                 coworkSpaceError ? 'border-red-500' : 'border-indigo-300'
               } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
               value={coworkspace?.name}
@@ -95,14 +111,14 @@ const ReviewForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block font-medium mb-2">Puntuación</label>
+            <label className="block font-medium mb-2  dark:text-black">Puntuación</label>
             <div className="flex items-center">{renderStars(score)}</div>
           </div>
 
           <div className="mb-4">
-            <label className="block font-medium mb-2">Comentario</label>
+            <label className="block font-medium mb-2  dark:text-black">Comentario</label>
             <textarea
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500 dark:text-black"
               value={comment}
               onChange={handleCommentChange}
             ></textarea>
@@ -119,6 +135,12 @@ const ReviewForm = () => {
         </form>
       </div>
       <Footer />
+      {showModal && (
+        <Modal
+          onClose={closeModal}
+          content="Nueva reseña creada"
+        />
+        )}
     </div>
   );
 };

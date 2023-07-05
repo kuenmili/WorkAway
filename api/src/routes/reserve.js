@@ -46,6 +46,7 @@ router.get('/:id', passport.authenticate("jwt", { session: false }), async (req,
 router.post('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         const { reserveToCreate } = req.body;
+        console.log(reserveCreated)
         const reserveCreated = await cretedReserve(reserveToCreate);
         res.status(201).json(reserveCreated);
     } catch (error) {

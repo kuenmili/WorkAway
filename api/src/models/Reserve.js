@@ -14,7 +14,8 @@ const schemaReserve = new Schema({
     cowork_space: { 
         type:Schema.Types.ObjectId,
         ref: 'CoworkSpace',
-        require: true,
+        required: true,
+       
 
     },
     user: {

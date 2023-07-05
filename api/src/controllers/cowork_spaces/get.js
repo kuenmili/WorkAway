@@ -2,7 +2,7 @@ const { CoworkSpace } = require('../../models/CoworkSpace');
 
 const getAllCoworkSpaces = async () => {
   let allCoworkSpaces = await CoworkSpace.find()
-  .populate("reviews", "score")
+
 
     allCoworkSpaces.map((cowork) => {
         cowork.score = cowork.reviews.reduce((acc, review) => acc + review.score, 0) / cowork.reviews.length;
@@ -48,7 +48,14 @@ const getCoworkSpacesBySearch = async (name, score, location, services, price) =
 
 const getCoworkSpaceByID = async (id) => {
   let coworkSpaceByID = await CoworkSpace.findById(id)
-  .populate("reviews")
+  .populate({
+    path: "reviews",
+    select: "score comment",
+    populate: {
+        path: "user_id",
+        select: "first_name last_name profile_image"
+       }
+    });
 
 
     

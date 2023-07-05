@@ -139,7 +139,7 @@ function Add() {
           <h2 className="text-4xl font-bold mb-4 text-center dark:text-black">
             Agregar un nuevo espacio de trabajo
           </h2>
-          <p className="mb-6 text-center text-gray-400 ">Crear un espacio</p>
+          <p className="mb-6 text-center text-gray-400 ">Crear espacio</p>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
             {/* Input Name of space */}
             <div className="flex flex-col">
@@ -181,8 +181,6 @@ function Add() {
               </div>
             </div>
             {/* Input images */}
-            {/* Input images */}
-
             <div className="flex flex-col">
               <input
                 type="file"
