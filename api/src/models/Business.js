@@ -7,7 +7,10 @@ const schemaBusiness = new Schema({
     name:String,
     cuit:Number,
     cellphone_number:String,
-    email:String,
+    email: {
+      type: String,
+      unique: true,
+    },
     password:String,
     address:String,
     cowork_spaces: [{

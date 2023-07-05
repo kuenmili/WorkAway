@@ -5,7 +5,10 @@ const bcrypt = require("bcrypt");
 const schemaUser = new Schema({
   first_name: String,
   last_name: String,
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+  },
   password: String,
   cellphone_number: String,
   profile_image: String,
