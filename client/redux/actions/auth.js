@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+export const PUT_USER = "PUT_USER";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
 
 const dispatchLogin = (payload) => ({
     type: LOGIN,
@@ -37,6 +39,21 @@ export const login = ({ email, password }) => async (dispatch) => {
     }
 }
 
+export const putUser = (id, userData) => {
+    console.log(id);
+    return async dispatch => {
+        const json = await axios.put(`http://localhost:3001/users/${id}`,userData, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token") }`,
+            }
+        })
+        return dispatch({
+            type: PUT_USER,
+            payload: json.data,
+        })
+    }
+}
+
 export const logout = () => async (dispatch) => {
     try {
         const { data } = await axios.post("/auth/logout");
@@ -46,5 +63,20 @@ export const logout = () => async (dispatch) => {
         });
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const getUserByID = (id) => {
+    return async (dispatch) => {
+        const json = await axios.get(`http://localhost:3001/users/${id}`, {
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem("token")}`,
+            }
+        });
+
+        return dispatch({
+            type:GET_USER_BY_ID,
+            payload: json.data
+        })
     }
 }

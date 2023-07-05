@@ -4,7 +4,7 @@ import { uploadImage } from './firebase/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Link from 'next/link';
-import { putUser } from '../redux/actions/users';
+import { putUser } from '../redux/actions/auth';
 import {  useSelector, useDispatch } from 'react-redux';
 
 
@@ -84,6 +84,7 @@ const UpdateProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    console.table(data);
     dispatch(putUser(user?.id, data))
     router.push(`/users/${user.id}`)
   };
