@@ -1,96 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../components/layout';
 import { getBusinessById } from '../../redux/actions/business';
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/navigation";
-import 'swiper/css';
-import { Navigation } from "swiper";
-import { updateCoworkSpacePrice } from '../../redux/actions/coworkSpaces';
-
-
-
+import Card from '../../components/card';
 
 function Dashboard() {
- 
     const dispatch = useDispatch();
-    
     const id = useSelector((state) => state.auth.user?.id);
     const business = useSelector((state) => state.business.business);
     
-    const [activeModify, setActiveModify] = useState(false);
-    const [price, setPrice] = useState('');
-
-  
-
     useEffect(() => {
       id && dispatch(getBusinessById(id));
     }, [dispatch, id]);
 
-
-    const handleModifyPrice = () => {
-      setActiveModify(true);
-    }
-
-    const handleChangePrice = ({ target: { value } }) => {
-      value > 0 && setPrice(value);
-    }
-
-    const handleSavePrice = (id) => {
-      setActiveModify(false);
-      dispatch(updateCoworkSpacePrice(id, price));
-    }
-
-
   return (
     <Layout>
-      <h1 className='text-center text-3xl font-bold text-indigo-800 dark:text-gray-100 '>Cowork Spaces disponibles</h1>
-      <div className='ml-8'>
-        <div className="container py-12 flex ">
-          <div className="grid lg:grid-cols-3 gap-12 ">
-            {business?.cowork_spaces?.map((card) => ( 
-              <div className ="shadow-lg rounded-lg hover:scale-110 transition duration-300" key={card._id}>
-               
-                <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                    {
-                      card.images?.map((image, index) => (
-                        <SwiperSlide key={index}>
-                           <img className = "rounded-t-2xl h-80 object-cover ml-4"  
-                            width={450} 
-                            height={400} 
-                            loading='eager'
-                            src={image} 
-                            alt="" /> 
-                           </SwiperSlide>
-                      ))
-                    } 
-                    </Swiper>
-                    <div className='p-5'>
-                    <h3 className='text-3xl font-bold text-slate-700 mb-3 dark:text-white'>{card.name}</h3>
-                    <p className='text-lg font-bold text-gray-700 dark:text-white mb-1'>{card.location}</p>
-                    <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'>{card.address} </p>
-                    <p className='text-lg font-normal text-gray-600  dark:text-white '>{card.services + "."} </p> 
-                    {
-                      activeModify ? (
-                        <div>
-                          <input onChange={handleChangePrice} value={price} type="number" placeholder="Enter new price" />
-                          <button onClick={() => handleSavePrice(card._id)}>Save</button>
-                        </div>
-                        ) : (
-                          <div>
-                            <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'> ${card.price}Usd </p>
-                            <button onClick={handleModifyPrice} >Editar</button>
-                          </div>
-                      )
-                    }
-                  </div>
-                </div>
-            ))}
-          </div>
-        </div>                
-    </div>
+      <h1 className='text-center text-3xl'>CoworkSpaces</h1>
+			<div className='ml-8'>
+				<div className="container py-12 flex ">
+					<div className="grid lg:grid-cols-3 gap-12 ">
+						{
+							business?.cowork_spaces?.map((card) => ( 
+								<Card coworkSpace={card} key={card._id} />
+							))
+						}
+					</div>
+				</div>
+			</div>
     <div>
-    <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between mt-10">
+      <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between mt-10">
           <div className="mr-6">
             <h1 className="text-4xl font-semibold mb-2">Estadisticas</h1>
             
@@ -119,7 +57,7 @@ function Dashboard() {
             </div>
             <div>
               
-                <span className="block text-2xl font-bold">{business.cowork_spaces.length}</span>
+                <span className="block text-2xl font-bold">{business.cowork_spaces?.length}</span>
               <span className="block text-gray-500">Espacios de trabajo</span>
             </div>
           </div>

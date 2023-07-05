@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { createReserve } from "../redux/actions/reserves";
+import axios from "axios";
 
 export default function booking() {
     const router = useRouter();
@@ -85,7 +86,7 @@ export default function booking() {
             date_from: date_from,
             date_to: date_to,
             occupants: occupants,
-            cowork_space: cowork_space,
+            coworkspace: cowork_space._id,
         }));
 
         alert("Reserva confirmada");
@@ -117,6 +118,23 @@ export default function booking() {
         } 
     };
 
+
+    const checkout = async () => {
+        const paymentInfo = {
+          detail: coworkSpace.name,
+          amount: coworkSpace.price,
+        };
+        const response = await axios.post(
+          "http://localhost:3001/payments/create",
+          paymentInfo
+        );
+        router.push(response.data);
+      };
+    
+      const handleCheckoutClick = (e) => {
+        checkout(e);
+      };
+
     return (
         <>
             <Navbar />
@@ -130,7 +148,15 @@ export default function booking() {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    value={`Espacio a reservar: ${coworkSpace?.name} - Precio: ${coworkSpace?.price} usd /dia`}
+                                    value= {coworkSpace?.name} 
+                                    placeholder="Espacio de coworking"
+                                    onChange={handleCoworkSpaceChange}
+                                    className={`w-3/4 mx-auto bg-white border ${coworkSpaceError ? "border-red-500" : "border-indigo-300"
+                                        } rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black`}
+                                />
+                                <input
+                                    type="text"
+                                    value={`Precio: ${coworkSpace?.price} usd /dia`}
                                     placeholder="Espacio de coworking"
                                     onChange={handleCoworkSpaceChange}
                                     className={`w-3/4 mx-auto bg-white border ${coworkSpaceError ? "border-red-500" : "border-indigo-300"
@@ -139,6 +165,9 @@ export default function booking() {
                                 {coworkSpaceError && (
                                     <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>Este campo es requerido.</p>
                                 )}
+                            </div>
+                            <div>
+                                
                             </div>
                         </div>
                          <div className="mb-6">
@@ -185,6 +214,7 @@ export default function booking() {
                                 />
                                 {occupantsError && (
                                     <p className="text-red-500 mt-2" style={{ marginLeft: "92px" }}>La cantidad de ocupantes debe ser entre 1 y 20.</p>
+
                                 )}
                             </div>
                         </div>
@@ -194,7 +224,7 @@ export default function booking() {
                                 <input
                                     type="checkbox"
                                     checked={isChecked}
-                                    onChange={() => setIsChecked(!isChecked)}
+                                    onChange={handleCheckBox}
                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded ml-14"
                                 />
                                 <label
@@ -212,6 +242,7 @@ export default function booking() {
                             <button
                                 type="submit"
                                 className="w-3/4 mx-auto px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-900 focus:outline-none"
+                                onClick={handleCheckoutClick}
                             >
                                 Reservar
                             </button>
