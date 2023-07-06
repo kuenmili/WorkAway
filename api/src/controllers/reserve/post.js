@@ -14,7 +14,7 @@ const cretedReserve = async ({
   coworkspace,
   user,
 }) => {
-  
+  const cowork = await CoworkSpace.findById(coworkspace)
   const userFound = await User.findById(user);
   
   const transporter = nodemailer.createTransport({
@@ -50,7 +50,7 @@ const mailOptions = {
           <p className="text-base mb-4">Estimado ${userFound?.first_name} ${userFound?.last_name},</p>
           <p className="text-base mb-4">¡Gracias por unirte a nosotros! Te damos la bienvenida a nuestra plataforma de reservas de espacios remotos.</p>
           <p className="text-base mb-4">Esta es la informacion de su reserva de espacio en WorkAway</p>
-          <p className="text-base mb-4">Espacio: ${coworkspace}</p>
+          <p className="text-base mb-4">Espacio: ${cowork.name}</p>
           <p className="text-base mb-4">Dias reservados: Desde ${date_from} - Hasta ${date_to}</p>
           <p className="text-base mb-4">Cantidad de ocupantes reservados: ${occupants}</p>
           <p className="text-base mb-4">Si tienes alguna pregunta, no dudes en contactarnos. ¡Disfruta de tu experiencia!</p>
