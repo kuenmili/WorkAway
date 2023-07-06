@@ -4,6 +4,7 @@ import Layout from '../../components/layout';
 import { getBusinessById } from '../../redux/actions/business';
 import Card from '../../components/card';
 import Link from 'next/link';
+import { deleteCoworkSpace } from '../../redux/actions/coworkSpaces';
 
 function Dashboard() {
     const dispatch = useDispatch();
@@ -15,6 +16,11 @@ function Dashboard() {
     }, [dispatch, id]);
 
 
+    const handleDelete = (id) => {
+      dispatch(deleteCoworkSpace(id));
+    }
+
+
 
   return (
     <Layout>
@@ -22,11 +28,20 @@ function Dashboard() {
 			<div className='ml-8'>
 				<div className="container py-12 flex ">
 					<div className="grid lg:grid-cols-3 gap-12 ">
-						{
-							business?.cowork_spaces?.map((card) => ( 
-								<Card coworkSpace={card} key={card._id} />
-							))
-						}
+          {
+            business?.cowork_spaces?.map((card) => (
+              <div key={card._id}>
+              <Card coworkSpace={card} />
+
+              <button
+                onClick={() => handleDelete(card._id)}
+                className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md mt-4"
+              >
+              Eliminar
+              </button>
+          </div>
+          ))
+          }
 					</div>
 				</div>
 			</div>
