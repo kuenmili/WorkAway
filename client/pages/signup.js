@@ -266,14 +266,14 @@ export default function Signup() {
             </div>
           </form>
 
-          <div className="mt-6 flex justify-center">
+          {/* <div className="mt-6 flex justify-center">
             <button className="mr-2 bg-white hover:bg-gray-200 p-2 rounded-full">
               <FaGoogle size={24} color="#DB4437" />
             </button>
-          </div>
+          </div> */}
           <p className="mt-4 text-center text-gray-500">
             ¿Ya tienes una cuenta?{" "}
-            <a href="/login" className="text-indigo-600">
+            <a href="/business-login" className="text-indigo-600">
               Inicia Sesión
             </a>
             .

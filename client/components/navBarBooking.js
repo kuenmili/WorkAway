@@ -7,7 +7,7 @@ import DropdownMenu from "./navBarLogin";
 function NavbarBooking() {
   const links = [
     {
-      label: `Home`,
+      label: `Página Principal`,
       href: `/home`,
     },
     {
@@ -19,7 +19,7 @@ function NavbarBooking() {
       href: `/`,
     },
     {
-      label: `About`,
+      label: `Nosotros`,
       href: `/about`,
     },
   ];
