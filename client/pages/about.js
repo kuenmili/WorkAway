@@ -3,7 +3,7 @@ import Image from "next/image";
 import dalma from "../public/img/dalma.jpg";
 import ricardo from "../public/img/ricardo.jpg";
 import mili from "../public/img/mili.jpg";
-import nico from "../public/img/nico.jpg";
+import nico from "../public/img/nicolas.jpg";
 import lucio from "../public/img/lucio.jpg";
 import camilo from "../public/img/camilo.jpg";
 import Footer from "../components/footer";
