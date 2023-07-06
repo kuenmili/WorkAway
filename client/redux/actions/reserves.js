@@ -9,7 +9,7 @@ export const DELETE_RESERVE = "DELETE_RESERVE";
 
 export const getReserveById = (id) => {
     return async (dispatch) => {
-        const json = await axios.get(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/reserves/${id}`, {
+        const json = await axios.get(`https://work-away-back.vercel.app/reserves/${id}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
@@ -29,7 +29,7 @@ export const createReserve = ({
     coworkspace
 }) => {
     return async dispatch => {
-        const json = await axios.post("https://work-away-back-6zjxm846l-kuenmili.vercel.app/reserves", {
+        const json = await axios.post("https://work-away-back.vercel.app/reserves", {
             reserveToCreate: {
                 date_from,
                 date_to,
@@ -53,7 +53,7 @@ export const createReserve = ({
 
 export const updateReserve = (id, reserveData) => {
     return async dispatch => {
-        const json = await axios.put(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/reserves/${id}`, {...reserveData},  {
+        const json = await axios.put(`https://work-away-back.vercel.app/reserves/${id}`, {...reserveData},  {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

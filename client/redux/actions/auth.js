@@ -18,7 +18,7 @@ export const login = ({ email, password }) => async (dispatch) => {
     }
 
     try {
-        const json = await axios.post("https://work-away-back-6zjxm846l-kuenmili.vercel.app/auth/login", {
+        const json = await axios.post("https://work-away-back.vercel.app/auth/login", {
             email,
             password,
         });
@@ -42,7 +42,7 @@ export const login = ({ email, password }) => async (dispatch) => {
 export const putUser = (id, userData) => {
     console.log(id);
     return async dispatch => {
-        const json = await axios.put(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/users/${id}`,userData, {
+        const json = await axios.put(`https://work-away-back.vercel.app/users/${id}`,userData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
@@ -56,7 +56,7 @@ export const putUser = (id, userData) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        const { data } = await axios.post("https://work-away-back-6zjxm846l-kuenmili.vercel.app/auth/logout");
+        const { data } = await axios.post("https://work-away-back.vercel.app/auth/logout");
         return dispatch({
             type: LOGOUT,
             payload: data,
@@ -68,7 +68,7 @@ export const logout = () => async (dispatch) => {
 
 export const getUserByID = (id) => {
     return async (dispatch) => {
-        const json = await axios.get(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/users/${id}`, {
+        const json = await axios.get(`https://work-away-back.vercel.app/users/${id}`, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token")}`,
             }

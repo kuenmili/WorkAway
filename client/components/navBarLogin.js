@@ -54,7 +54,7 @@ const DropdownMenu = () => {
                 href={
                   loggedIn && isAdmin
                     ? "/dashboard/account"
-                    : `users/${user?.id}`
+                    : `/users/${user?.id}`
                 }
               >
                 {loggedIn && isAdmin ? "Dashboard" : "Perfil"}

@@ -72,7 +72,7 @@ export const createBusiness = ({  name,
 
 export const updateBusiness = (id, bussinessData) => {
     return async dispatch => {
-        const json = await axios.put(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/business/${ id }` , bussinessData, {
+        const json = await axios.put(`https://work-away-back.vercel.app/business/${ id }` , bussinessData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
