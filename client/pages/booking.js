@@ -88,7 +88,7 @@ export default function Booking() {
   }, [date_from, date_to]);
 
   const checkout = async () => {
-    const totalPayment = coworkSpace.price * selectedDays;
+    const totalPayment = coworkSpace.price * (selectedDays + 1);
     console.log(totalPayment);
     const paymentInfo = {
       detail: coworkSpace.name,
@@ -211,7 +211,7 @@ export default function Booking() {
                 )}
                 {date_to && (
                   <p className="text-indigo-600 mt-2 ml-20">
-                    Días seleccionados: {selectedDays}
+                    Días seleccionados: {selectedDays + 1}
                   </p>
                 )}
               </div>
