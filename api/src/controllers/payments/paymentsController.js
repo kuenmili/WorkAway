@@ -25,8 +25,8 @@ const createOrderController = async (req, res) => {
         brand_name: "WorkAway",
         landing_page: "LOGIN",
         user_action: "PAY_NOW",
-        return_url: `http://localhost:3000/payed?user=${user}&date_from=${date_from}&date_to=${date_to}&occupants=${occupants}&coworkspace=${coworkspace}`,
-        cancel_url: "http://localhost:3000/home",
+        return_url: `https://workaway.vercel.app/payed?user=${user}&date_from=${date_from}&date_to=${date_to}&occupants=${occupants}&coworkspace=${coworkspace}`,
+        cancel_url: "https://workaway.vercel.app/home",
       },
     };
 
