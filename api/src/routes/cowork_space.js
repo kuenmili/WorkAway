@@ -87,7 +87,7 @@ router.put('/:id/price', passport.authenticate("jwt", { session: false }), async
         const coworkSpaceModified = await modifyCoworkSpacePrice(id, price);
         res.status(202).json(coworkSpaceModified);
     } catch (error) {
-       
+        console.log("ACA ES EL ERROR", error)
         res.status(406).json(error);
     }
 });
