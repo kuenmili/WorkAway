@@ -144,7 +144,7 @@ const Detail = ({
                     ¿Qué ofrece este lugar?
                   </p>
                   <p className="text-lg font-normal text-gray-600 dark:text-white my-2">
-                    {services.join(", ")}
+                    {services}
                   </p>
                 </div>
                 <div className="flex flex-col">
