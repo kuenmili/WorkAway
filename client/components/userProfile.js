@@ -1,13 +1,16 @@
 import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import React from 'react';
+import axios from 'axios';
 
 const Profile = () => {
  
   const user = useSelector((state) => state.auth?.user)
+  const [coworkSpaces, setCoworkSpaces] = useState([]);
+  const [coworkReview, setCoworkReview] = useState([]);
   const renderStars = (score) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -22,7 +25,53 @@ const Profile = () => {
     }
     return stars;
   };
+  
+  useEffect(() => {
+    if (user?.reserve_id) {
+      const fetchCoworkSpaces = async () => {
+        try {
+          const coworkSpacesData = await Promise.all(
+            user.reserve_id.map((reserve) =>
+              axios.get(`/cowork_spaces/${reserve.cowork_space}`)
+            )
+          );
+          const coworkSpaces = coworkSpacesData.map(
+            (response) => response.data
+          );
+          setCoworkSpaces(coworkSpaces);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
+      fetchCoworkSpaces();
+    }
+  }, [user?.reserve_id]);
+
+  useEffect(() => {
+    if (user?.reviews) {
+      const fetchReviews = async () => {
+        try {
+          const coworkSpacesData = await Promise.all(
+            user.reviews.map((review) =>
+              axios.get(`/reviews/${review.id}`)
+            )
+          );
+          const coworkSpaces = coworkSpacesData.map(
+            (response) => response.data
+          );
+          setCoworkReview(coworkSpaces);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchReviews();
+    }
+  }, [user?.reviews]);
+  
+
+  console.log(user?.reserve_id, user?.reviews);
 
 
   return (
@@ -70,20 +119,19 @@ const Profile = () => {
           </Link>
         </div>
                     </div>
-                    <div className="flex-col ">
-        <div className="bg-white rounded-lg  w-auto my-5 p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
-          <div className='flex justify-center'>
-           
-          </div>
+                    <div className="flex  ">    
+          { user?.reviews && <div className='flex flex-col'>
           {
             user?.reviews?.length > 0 ? user?.reviews.map((review, index) => {
+              const cowork = coworkSpaces[index];
               return (
-                <div key={index} >
+                <div key={index} className='flex flex-col bg-white rounded-lg mr-4 w-auto my-5 p-5 max-h-48 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]'>
                   <div className="flex justify-center mb-4">
                     <FontAwesomeIcon icon={faQuoteLeft} className="text-indigo-700 mr-2 fa-lg dark:text-white" />
                      <h2 className='text'>Reseña</h2>
                   </div> 
-                  <div className='leading-9'>                           
+                  <div className='leading-9'> 
+                  <p>Espacio: {cowork?.name}</p>                          
                   <p>Comentario: {review.comment}</p>
                   <p>Puntaje: {renderStars(review.score)}</p>
                   </div>
@@ -92,43 +140,57 @@ const Profile = () => {
                     )
             }) 
             : 
-            <div className='text-center items-center'>
+            <div className='text-center bg-white rounded-lg  w-auto my-5 p-5 max-h-48 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)] mr-3 items-center'>
               <div className="flex justify-center mb-4">
                 <FontAwesomeIcon icon={faQuoteLeft} className="text-indigo-700 mr-2 fa-lg dark:text-white" />
               </div>
               <p>No se han hecho reseñas</p>
             </div>
-          }</div>
+          }
+          </div>}
 
-              <div className="bg-white rounded-lg w-auto p-8 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]">
-                        {
-                        user?.reserve_id?.length > 0 ? user?.reserve_id.map((reserve, index) => {
-                          return (
-                            <div key={index}>  
-                             <div className="flex justify-center text-xl mb-4">
-                                <FontAwesomeIcon icon={faCalendar} className="text-indigo-700 mr-2 dark:text-white" />
-                            </div> 
-                            <div className='flex justify-center'>
-                            <h2>Reserva</h2>      
-                            </div>  
-                            <div className='leading-9'>                     
-                            <p>Date: {reserve.date}</p>
-                            <p>Duration: {reserve.duration}</p>
-                            <p>Room:{reserve.room}</p>
-                            </div>
-                            {index !== user?.reserve_id.length - 1 && <FontAwesomeIcon icon={faMinus} className="text-gray-500 mx-2" />}
-                            </div>
-                        )
-                    }) 
-                  
-                    : <div className='text-center items-center'>
-                      <div className="flex justify-center text-xl mb-4">
-                                <FontAwesomeIcon icon={faCalendar} className="text-indigo-700 mr-2 dark:text-white" />
-                            </div>
-                        <p>No se han hecho reservas</p>
-                    </div>
-                    }
+          { user?.reserve_id && <div className='flex flex-col'>
+              {user?.reserve_id.length > 0 ? 
+          user.reserve_id.map((reserve, index) => {
+            const cowork = coworkSpaces[index];
+            return (
+              <div key={index} className='flex flex-col bg-white rounded-lg mr-4 w-auto my-5 p-5 max-h-48 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)]'>
+                <div className="flex justify-center text-xl mb-4">
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    className="text-indigo-700 mr-2 dark:text-white"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <h2>Reserva</h2>
+                </div>
+                <div className="leading-9">
+                  <p>Espacio: {cowork?.name}</p>
+                  <p>Desde {reserve.date_from?.split('T')[0]}</p>
+                  <p>Hasta {reserve.date_to?.split('T')[0]}</p>
+                </div>
+                {index !== user?.reserve_id.length - 1 && (
+                  <FontAwesomeIcon
+                    icon={faMinus}
+                    className="text-gray-500 mx-2"
+                  />
+                )}
+              </div>
+            );
+          })
+         : 
+          <div className="text-center bg-white rounded-lg mr-4 w-auto my-5 p-5 max-h-48 dark:bg-[#26272c] shadow-2xl shadow-[rgba(0, 0, 0, 0.16)] items-center">
+            <div className="flex justify-center text-xl mb-4">
+              <FontAwesomeIcon
+                icon={faCalendar}
+                className="text-indigo-700 mr-2 dark:text-white"
+              />
             </div>
+            <p>No se han hecho reservas</p>
+          </div>
+        }
+        </div>}
+            
       </div>
     </div>
   );
