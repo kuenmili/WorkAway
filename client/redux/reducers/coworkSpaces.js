@@ -1,0 +1,84 @@
+import {
+    GET_COWORKSPACES,
+    GET_COWORKSPACES_BY_NAME,
+    GET_COWORKSPACE,
+    ADD_COWORKSPACE,
+    UPDATE_COWORKSPACE,
+    UPDATE_COWORKSPACE_PRICE,
+    DELETE_COWORKSPACE,
+    COWORKSPACE_LOADING,
+    GET_BUSINESS_WITH_RESERVE,
+    COWORKSPACE_ERROR
+} from '../actions/coworkSpaces';
+
+const initialState = {
+    coworkSpaces: [],
+    coworkSpace: {},
+    loading: false,
+    error: null
+}
+
+export default (state = initialState, action) => {
+    switch (action.type) {
+        case GET_COWORKSPACES:
+            return {
+                ...state,
+                coworkSpaces: action.payload,
+                loading: false
+            }
+        case GET_COWORKSPACES_BY_NAME:
+            return {
+                ...state,
+                coworkSpaces: action.payload,
+                loading: false
+            }
+        case GET_COWORKSPACE:
+            return {
+                ...state,
+                coworkSpace: action.payload,
+                loading: false
+            }
+        case ADD_COWORKSPACE:
+            return {
+                ...state,
+                coworkSpaces: [action.payload, ...state.coworkSpaces],
+                loading: false
+            }
+        case UPDATE_COWORKSPACE:
+            return {
+                ...state,
+                coworkSpaces: state.coworkSpaces.map(coworkSpace => coworkSpace._id === action.payload._id ? action.payload : coworkSpace),
+                loading: false
+            }
+            case UPDATE_COWORKSPACE_PRICE:
+                return {
+                    ...state,
+                    coworkSpaces: state.coworkSpaces.map(coworkSpace => coworkSpace._id === action.payload.id ? action.payload : coworkSpace),
+                    loading: false
+                }    
+        case DELETE_COWORKSPACE:
+            return {
+                ...state,
+                coworkSpaces: state.coworkSpaces.filter(coworkSpace => coworkSpace._id !== action.payload),
+                loading: false
+            }
+        case COWORKSPACE_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+            case GET_BUSINESS_WITH_RESERVE: {
+                return {
+                    ...state,
+                    business: action.payload,
+                }
+            }
+        case COWORKSPACE_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state;
+    }
+}

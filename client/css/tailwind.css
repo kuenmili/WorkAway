@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply dark:bg-trueGray-900;
+    @apply scrollbar scrollbar-thumb-indigo-700 scrollbar-track-slate-200 scrollbar-thumb-rounded-md
+  }
+}
