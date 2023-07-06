@@ -6,7 +6,7 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { createReview } from "../redux/actions/review";
-import Modal from "../components/Modal";
+import Modal from "../components/modal";
 import { useRouter } from "next/router";
 
 const ReviewForm = () => {
