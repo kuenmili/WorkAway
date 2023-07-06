@@ -1,4 +1,4 @@
-import { GET_BUSINESS_BY_ID, CREATE_BUSINESS, UPDATE_BUSINESS, } from "../actions/business";
+import { GET_BUSINESS_BY_ID, CREATE_BUSINESS, UPDATE_BUSINESS, UPDATE_COWORKSPACE_PRICE } from "../actions/business";
 
 const InitialState = {
     business: {},
@@ -18,6 +18,15 @@ const rootReducer = (state = InitialState, action) => {
                 business: action.payload,
             }
         }
+        case UPDATE_COWORKSPACE_PRICE:
+                console.log("ACTION", action.payload)
+                return {
+                    ...state,
+                    business: {
+                        ...state.business,
+                        cowork_spaces: state.business.cowork_spaces.map(coworkSpace => coworkSpace._id === action.payload._id ? action.payload : coworkSpace)
+                    },
+                }    
         case UPDATE_BUSINESS: {
             return {
                 ...state,
