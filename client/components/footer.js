@@ -6,14 +6,14 @@ import Container from "./container";
 export default function Footer() {
   const links = [
     {
-      label: `FAQ - Frequently Asked Questions`,
+      label: `FAQ - Preguntas frecuentes`,
       href: `/about/faq`,
     },
   ];
 
   const legal = [
-    { label: "Terms", href: "/about/terms" },
-    { label: "Privacy", href: "/about/privacy" },
+    { label: "Terminos", href: "/about/terms" },
+    { label: "Privacidad", href: "/about/privacy" },
     { label: "Legal", href: "/about/legal" },
   ];
   return (
@@ -93,7 +93,7 @@ export default function Footer() {
         </div>
 
         <div className="my-10 text-sm text-center text-gray-200 dark:text-gray-400">
-          Designed And Developed By{" "}
+          Diseñado y Desarrollado por{" "}
           {
             " Nicolas Fucci - Milagros Kuen - Dalma Nicolau - Ricardo Rico - Camilo Diaz - Lucio Campos"
           }
