@@ -25,12 +25,12 @@ return (
     <form className="flex justify-center">
             <input
                 type="text"
-                className="rounded border 2 p-2 text-sm focus:ring-0 w-80 dark:text-white text-black"
+                className="rounded border 2 p-2 text-sm focus:ring-0 w-80 dark:text-black text-black"
                 placeholder="Search coworking spaces"
                 onChange={(event)=>handleInputChange(event)}
                 /> 
             <button
-                className="rounded rounded-tl-none rounded-bl-none p-3 text-sm dark:text-white text-white bg-indigo-800" 
+                className="rounded rounded-tl-none rounded-bl-none p-3 text-sm dark:text-black text-white bg-indigo-800" 
                 type="submit"
                 onClick={(event)=>handleInputSubmit(event)}
                 >     
