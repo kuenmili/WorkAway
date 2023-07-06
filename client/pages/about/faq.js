@@ -10,7 +10,7 @@ const Faq = () => {
     <div>
       <Navbar />
       <div>
-        <div className="max-w-2xl mx-auto mt-8 p-6 dark:bg-black bg-white rounded-lg shadow-2xl p-10">
+        <div className="max-w-2xl mx-auto mt-8 dark:bg-black bg-white rounded-lg shadow-2xl p-10">
           <Container className="!p-0 ">
             <h1
               className=" text-3xl font-medium text-center pt-10 pb-10

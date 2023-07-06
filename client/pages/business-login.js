@@ -134,7 +134,7 @@ const LoginBusiness = () => {
                   className="ml-72 mt-5"
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = "http://localhost:3001/auth/google";
+                    window.location.href = "https://work-away-back-6zjxm846l-kuenmili.vercel.app/auth/google";
                   }}
                 >
                   {" "}

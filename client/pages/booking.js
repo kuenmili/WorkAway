@@ -95,7 +95,7 @@ export default function Booking() {
       amount: totalPayment,
     };
     const response = await axios.post(
-      "http://localhost:3001/payments/create",
+      "/payments/create",
       {paymentInfo, coworkSpace: {
         user: userId,
         date_from: date_from,

@@ -2,8 +2,7 @@ import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image";
 import DropdownMenu from "./navBarLogin";
-import { IsDarkMode } from "./DarkSwitch";
-import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclousure, no se usa por ahora
+
 
 function NavbarBooking() {
   const links = [
