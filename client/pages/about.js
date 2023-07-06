@@ -28,7 +28,7 @@ export default function About() {
         <ThemeChanger />
       </div>
       <div class="flex flex-col lg:flex-row justify-center gap-8 mx-96  dark:bg-gray-800 rounded-md bg-gray-100 hover:scale-125 transition duration-500 hover:border-2">
-        <div class=" max-w-3xl mx-64 flex flex-col justify-center text-center p-10 rounded dark:bg-slate-800">
+        <div class=" max-w-3xl mx-64 flex flex-col justify-center text-center p-10 dark:bg-gray-800 rounded-md bg-gray-100 transition duration-500 ">
           <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">
             Nosotros
           </h1>
