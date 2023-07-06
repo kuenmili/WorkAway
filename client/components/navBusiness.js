@@ -70,7 +70,7 @@ function navbusiness() {
 
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
           <Link
-            href="/business-login"
+            href="/signup"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
             Regístrate como cliente
