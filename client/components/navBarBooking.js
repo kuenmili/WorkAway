@@ -8,7 +8,7 @@ import { Disclosure } from "@headlessui/react"; //! UI para el boton de disclous
 function NavbarBooking() {
   const links = [
     {
-      label: `Home`,
+      label: `Página Principal`,
       href: `/home`,
     },
     {
@@ -20,7 +20,7 @@ function NavbarBooking() {
       href: `/`,
     },
     {
-      label: `About`,
+      label: `Nosotros`,
       href: `/about`,
     },
   ];
