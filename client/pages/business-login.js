@@ -144,7 +144,7 @@ const LoginBusiness = () => {
                   className="mt-4 w-3/4 bg-white border border-indigo-600 hover:bg-gray-300 dark:hover:bg-gray-300 text-indigo-600 font-bold py-2 px-4 rounded-md flex items-center justify-center focus:outline-none "
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = "http://localhost:3001/auth/google";
+                    window.location.href = "https://work-away-back.vercel.app/auth/google";
                   }}
                 >
                   {" "}

@@ -10,7 +10,7 @@ export const LOGIN_BUSINESS = "LOGIN_BUSINESS";
 export const loginBusiness = () => {
     return async (dispatch) => {
         try {
-            const json = await axios.post("http://localhost:3001/business",{
+            const json = await axios.post("https://work-away-back.vercel.app/business",{
                 
             email,
             password,
@@ -29,7 +29,7 @@ export const getBusinessById = (id) => {
 
     return async (dispatch) => {
         try {
-            const json = await axios.get(`http://localhost:3001/business/${ id }`, {
+            const json = await axios.get(`https://work-away-back.vercel.app/business/${ id }`, {
                 headers: {
                     Authorization: `Bearer ${ localStorage.getItem("token") }`,
                 }
@@ -53,7 +53,7 @@ export const createBusiness = ({  name,
     password,
     address, }) => {
         return async dispatch => {
-            const json = await axios.post("http://localhost:3001/business", {
+            const json = await axios.post("https://work-away-back.vercel.app/business", {
                 businessToCreate: {
                     cuit,
                     cellphone_number,
@@ -72,7 +72,7 @@ export const createBusiness = ({  name,
 
 export const updateBusiness = (id, bussinessData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/business/${ id }` , bussinessData, {
+        const json = await axios.put(`https://work-away-back.vercel.app/business/${ id }` , bussinessData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

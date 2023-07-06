@@ -8,7 +8,7 @@ export const UPDATE_REVIEW = "UPDATE_REVIEW";
 
 export const getAllReview = () => {
     return async (dispatch) => {
-        const json = await axios.get("http://localhost:3001/reviews",{
+        const json = await axios.get("https://work-away-back-6zjxm846l-kuenmili.vercel.app/reviews",{
             
         })
         return dispatch({
@@ -25,7 +25,7 @@ export const createReview = ({
     coworkspace
 }) => {
     return async dispatch => {
-        const json = await axios.post("http://localhost:3001/reviews/post" , {
+        const json = await axios.post("https://work-away-back-6zjxm846l-kuenmili.vercel.app/reviews/post" , {
             user_id,
             score,
             comment,
@@ -44,7 +44,7 @@ export const createReview = ({
 
 export const updateReview = (id, reviewData) => {
     return async dispatch => {
-        const json = await axios.put(`http://localhost:3001/reviews/${id}`, reviewData, {
+        const json = await axios.put(`https://work-away-back-6zjxm846l-kuenmili.vercel.app/reviews/${id}`, reviewData, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }

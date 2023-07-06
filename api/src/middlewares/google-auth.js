@@ -8,7 +8,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3001/auth/google/callback",
+  callbackURL: "https://work-away-back.vercel.app/auth/google/callback",
   passReqToCallback: true,
 },
 async function(request, accessToken, refreshToken, profile, done) {

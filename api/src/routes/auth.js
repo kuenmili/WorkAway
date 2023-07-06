@@ -40,7 +40,7 @@ router.get( '/google/callback', (req, res, next) => {
         }
     
         const token = generateUserToken(user);
-        res.redirect(`http://localhost:3000/home?token=${token}`);
+        res.redirect(`https://workaway.vercel.app/home?token=${token}`);
       })(req, res, next);
 });
 

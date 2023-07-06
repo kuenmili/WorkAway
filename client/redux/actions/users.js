@@ -12,7 +12,7 @@ export const createUser = ({
     profile_image,
 }) => {
     return async dispatch => {
-        const json = await axios.post("http://localhost:3001/users/signup", {    
+        const json = await axios.post("https://work-away-back-6zjxm846l-kuenmili.vercel.app/users/signup", {    
             first_name,
             last_name,
             email,

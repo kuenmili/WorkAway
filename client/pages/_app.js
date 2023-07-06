@@ -7,7 +7,7 @@ import Script from 'next/script';
 
 const {GOOGLE_API_KEY} = process.env;
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://work-away-back.vercel.app";
 
 function MyApp({ Component, pageProps }) {
   return (
