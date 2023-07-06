@@ -38,7 +38,7 @@ const Detail = ({
     }
     return stars;
   };
-  console.log(reviews);
+
   return (
     <div className="w-screen bg-gray-100 dark:bg-gray-900">
       <Container className="mx-auto py-10 px-2 max-w-full">
@@ -160,7 +160,7 @@ const Detail = ({
                 </div>
 
                 <div className="p-4 flex justify-start items-center space-x-4 mt-8 mr-12">
-                  <Link
+                   <Link
                     href="/booking"
                     className="px-6 py-2 text-white bg-indigo-800 rounded-md"
                   >

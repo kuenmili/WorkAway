@@ -64,7 +64,7 @@ function Navbar() {
               <li className="mr-3 nav__item" key={index}>
                 <div
                   className="inline-block px-4 py-2 text-lg font-medium 
-                                text-gray-800 no-underline rounded-md dark:text-gray-200 
+                                text-gray-800 no-underline rounded-md dark:text-gray-200 dark:hover:text-black
                                 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 
                                 focus:outline-none dark:focus:bg-gray-300 hover:bg-indigo-100"
                 >
