@@ -87,7 +87,7 @@ export const getBusinessWithReserve = () => {
 
 export const addCoworkSpace = coworkSpaceToCreate => async dispatch => {
     try {
-        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {
+        const { data } = await axios.post(`${baseCoworkSpacesURL}`, {coworkSpaceToCreate}, {
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem("token") }`,
             }
