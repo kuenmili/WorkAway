@@ -5,6 +5,7 @@ export const GET_BUSINESS_BY_ID = "GET_BUSINESS_BY_ID";
 export const CREATE_BUSINESS = "CREATE_BUSINESS";
 export const UPDATE_BUSINESS = "UPDATE_BUSINESS";
 export const LOGIN_BUSINESS = "LOGIN_BUSINESS";
+export const UPDATE_COWORKSPACE_PRICE = "UPDATE_COWORKSPACE_PRICE";
 
 
 export const loginBusiness = () => {
@@ -69,6 +70,25 @@ export const createBusiness = ({  name,
 
         }
     };
+
+
+    export const updateCoworkSpacePrice = (coworkSpaceId, price) => async dispatch => {
+        try {
+          const { data } = await axios.put(`/cowork_spaces/${coworkSpaceId}/price`, {price}, {
+              headers: {
+                  Authorization: `Bearer ${ localStorage.getItem("token") }`,
+              }
+          });
+          dispatch({
+              type: UPDATE_COWORKSPACE_PRICE,
+              payload: data
+          });    
+      
+  } catch (error) {
+    console.log("ERROR: ", error);
+     
+      }
+  };
 
 export const updateBusiness = (id, bussinessData) => {
     return async dispatch => {

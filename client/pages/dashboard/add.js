@@ -108,7 +108,8 @@ function Add() {
     console.log("Información enviada:", coworkingData);
 
     dispatch(addCoworkSpace(coworkingData));
-    alert("Reserva confirmada");
+    alert("Espacio de trabajo creado!");
+    router.push('/dashboard');
   };
 
   const formatServiceOptions = () => {
