@@ -1,15 +1,17 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-import { faEnvelope, faPhone, faQuoteLeft, faCalendar, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
-import 'swiper/css/navigation';
-import 'swiper/css';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+import {
+  faQuoteLeft,
+  faMinus,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import "swiper/css/navigation";
+import "swiper/css";
 
-
-
-import Container from './container';
+import Container from "./container";
 
 const Detail = ({
   location,
@@ -20,15 +22,12 @@ const Detail = ({
   images,
   price,
   rating,
-  reviews
+  reviews,
 }) => {
-
- 
- 
   const renderStars = (score) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starClass = i <= score ? 'text-yellow-500' : 'text-gray-300';
+      const starClass = i <= score ? "text-yellow-500" : "text-gray-300";
       stars.push(
         <FontAwesomeIcon
           key={i}
@@ -39,7 +38,7 @@ const Detail = ({
     }
     return stars;
   };
-  console.log(reviews)
+  console.log(reviews);
   return (
     <div className="w-screen bg-gray-100 dark:bg-gray-900">
       <Container className="mx-auto py-10 px-2 max-w-full">
@@ -86,7 +85,8 @@ const Detail = ({
                           className="w-10 h-10 rounded-full mr-2"
                         />
                         <p className="font-semibold">
-                          {reviews.user_id.first_name} {reviews.user_id.last_name}
+                          {reviews.user_id.first_name}{" "}
+                          {reviews.user_id.last_name}
                         </p>
                       </div>
                     )}
@@ -115,14 +115,14 @@ const Detail = ({
               )}
             </div>
             <div className="flex-1">
-                  <div className="p-4 flex justify-start items-center mb-6">
-                    <Link
-                      href="/reviewForm"
-                      className="px-6 py-2 text-white bg-indigo-800 rounded-md"
-                    >
-                      Agregar reseña
-                    </Link>
-                  </div>
+              <div className="p-4 flex justify-start items-center mb-6">
+                <Link
+                  href="/reviewForm"
+                  className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                >
+                  Agregar reseña
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -160,19 +160,19 @@ const Detail = ({
                 </div>
 
                 <div className="p-4 flex justify-start items-center space-x-4 mt-8 mr-12">
-                    <Link
-                     href="/booking"
+                  <Link
+                    href="/booking"
                     className="px-6 py-2 text-white bg-indigo-800 rounded-md"
-                    >
-                       Reservar
-                    </Link>
-                    <Link
-                     href="/home"
-                     className="px-6 py-2 text-white bg-indigo-800 rounded-md"
-                    >
-                      Volver a Home
-                    </Link>
-                    </div>
+                  >
+                    Reservar
+                  </Link>
+                  <Link
+                    href="/home"
+                    className="px-6 py-2 text-white bg-indigo-800 rounded-md"
+                  >
+                    Volver a Home
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -190,7 +190,7 @@ const Rating = ({ stars }) => {
           key={idx}
           aria-hidden="true"
           className={`w-5 h-5 ${
-            star <= idx ? 'text-gray-300' : 'text-yellow-400'
+            star <= idx ? "text-gray-300" : "text-yellow-400"
           } mr-2 mb-2 mt-3`}
           fill="currentColor"
           viewBox="0 0 20 20"

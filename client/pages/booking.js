@@ -94,17 +94,17 @@ export default function Booking() {
       detail: coworkSpace.name,
       amount: totalPayment,
     };
-    const response = await axios.post(
-      "http://localhost:3001/payments/create",
-      {paymentInfo, coworkSpace: {
+    const response = await axios.post("http://localhost:3001/payments/create", {
+      paymentInfo,
+      coworkSpace: {
         user: userId,
         date_from: date_from,
         date_to: date_to,
         occupants: occupants,
         coworkspace: coworkSpace._id,
-      }}
-    );
-    
+      },
+    });
+
     router.push(response.data);
   };
 
@@ -276,4 +276,3 @@ export default function Booking() {
     </>
   );
 }
-	
