@@ -5,7 +5,7 @@ import Image from "next/image";
 function navbusiness() {
   const links = [
     {
-      label: `Home`,
+      label: `Página Principal`,
       href: `/home`,
     },
     {
@@ -17,7 +17,7 @@ function navbusiness() {
       href: `/`,
     },
     {
-      label: `About`,
+      label: `Nosotros`,
       href: `/about`,
     },
   ];
@@ -73,7 +73,7 @@ function navbusiness() {
             href="/business-login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Sign in or register
+            Regístrate como cliente
           </Link>
 
           <ThemeChanger />

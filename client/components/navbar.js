@@ -16,12 +16,12 @@ function Navbar() {
       href: `/`,
     },
     {
-      label: `Home`,
+      label: `Página Principal`,
       href: `/home`,
     },
  
     {
-      label: `About`,
+      label: `Nosotros`,
       href: `/about`,
     },
   ];
