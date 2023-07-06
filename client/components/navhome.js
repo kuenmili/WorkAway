@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Navhome() {
   const links = [
     {
-      label: `About`,
+      label: `Nosotros`,
       href: `/about`,
     },
   ];
@@ -59,7 +59,7 @@ export default function Navhome() {
             href="/login"
             className="px-6 py-2 text-white bg-indigo-800 rounded-md md:ml-5"
           >
-            Sign in or register
+            Regístrate
           </Link>
           <Link
             href="/business-login"
