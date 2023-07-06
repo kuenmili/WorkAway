@@ -136,7 +136,7 @@ function Add() {
                 placeholder="Nombre"
                 value={data.name}
                 onChange={handleInputChange}
-                className="w-full bg-white border border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-white"
+                className="w-full bg-white border  border-indigo-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600 dark:text-black"
               />
             </div>
             {/* Input about */}

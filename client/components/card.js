@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCoworkSpacePrice } from '../redux/actions/coworkSpaces';
+import { updateCoworkSpacePrice } from '../redux/actions/business';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css/navigation";
 import 'swiper/css';
@@ -52,13 +52,13 @@ const Card = ({ coworkSpace }) => {
                     activeModify ? (
                         <div>
                             <input onChange={handleChangePrice} value={price} type="number" placeholder="Enter new price" />
-                            <button onClick={() => handleSavePrice(coworkSpace._id)}>Save</button>
-                            <button onClick={() => setActiveModify(false)}>Cancel</button>
+                            <button className="mr-1 ml-1 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3 px-2" onClick={() => handleSavePrice(coworkSpace._id)}>Save</button>
+                            <button className=" ml-1 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3 px-2" onClick={() => setActiveModify(false)}>Cancel</button>
                         </div>
                     ) : (
                         <div>
                         <p className='text-lg font-normal text-gray-600 dark:text-white line-clamp-5'> ${coworkSpace.price}Usd </p>
-                        <button onClick={handleModifyPrice} >Modify</button>
+                        <button className='text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3 px-2' onClick={handleModifyPrice} >Modificar</button>
                         </div>
                     )
                 }
