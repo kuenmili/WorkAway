@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-const { LOGIN, LOGOUT, LOGIN_ERROR } = require("../actions/auth");
+const { LOGIN, LOGOUT, LOGIN_ERROR, PUT_USER, GET_USER_BY_ID } = require("../actions/auth");
 
 const initialState = {
     user: null,
@@ -39,6 +39,20 @@ const authReducer = (state = initialState, action) => {
                 isAdmin: false,
                 success: success,
             };
+        }
+        case PUT_USER: {
+            const { payload } = action;
+
+            return {
+                ...state,
+                user: payload
+            }
+        }
+        case GET_USER_BY_ID: {
+            return {
+                ...state,
+                user: action.payload
+            }
         }
         default:
             return state;
