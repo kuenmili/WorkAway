@@ -41,7 +41,14 @@
 
 </br >
 
+## **✅ Contact**
+
+### If you have any questions or suggestions related to the project, feel free to contact us at workaway.group@gmail.com or by visiting our website [Work Away website](https://workaway.vercel .application).
+
 ---
+
+
+![WorkAwayLogo](https://firebasestorage.googleapis.com/v0/b/workaway-23f70.appspot.com/o/logo.png?alt=media&token=09710848-ef34-4548-aacd-74392bcb676e)
 
 # Work Away  - Plataforma de Reservas de Espacios de Trabajo Remoto ingresando a <https://workaway.vercel.app>
 
