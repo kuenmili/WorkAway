@@ -74,7 +74,7 @@ const signupBusiness = () => {
       address: "",
     });
 
-    history.push("/dashboard");
+    history.push("/business-login");
   };
 
   return (
