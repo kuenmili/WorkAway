@@ -3,7 +3,7 @@
 
 ---
 
-# Work Away  - Plataforma de Reservas de Espacios de Trabajo Remoto ingresando a <http://localhost:8080>
+# Work Away  - Plataforma de Reservas de Espacios de Trabajo Remoto ingresando a <https://workaway.vercel.app>
 
 
 ### Work Away es una plataforma innovadora que permite a los profesionales y empresas encontrar y reservar espacios de trabajo remoto en todo el mundo. Con una amplia gama de características y tecnologías modernas, Work Away ofrece una experiencia fluida y conveniente para aquellos que buscan un entorno de trabajo productivo fuera de la oficina tradicional.
@@ -44,4 +44,4 @@
 
 ## **✅ Contacto**
 
-### Si tienes alguna pregunta o sugerencia relacionada con el proyecto, no dudes en ponerte en contacto con nosotros en workaway.group@gmail.com o visitando nuestro sitio web [sitio web de Work Away](http://workaway.com).
+### Si tienes alguna pregunta o sugerencia relacionada con el proyecto, no dudes en ponerte en contacto con nosotros en workaway.group@gmail.com o visitando nuestro sitio web [sitio web de Work Away](https://workaway.vercel.app).
