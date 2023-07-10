@@ -100,7 +100,7 @@ export default function Signup() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    router.push("/login");
+    router.push("/business-login");
   };
 
   return (
