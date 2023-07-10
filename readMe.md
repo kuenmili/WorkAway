@@ -17,19 +17,19 @@
 - 💳 Easy booking and payment: Work Away integrates PayPal as a secure and reliable payment platform. Make payments quickly and easily to secure your workspace booking.
 - 📲 Third-party authentication: We offer user authentication through Gmail. This allows users to easily sign up and access the platform using their Gmail credentials.
 - 🖼️ Image upload: Workspace owners can upload high quality images to showcase their facilities and attract interested users.
-- 🔍 Filtros y búsqueda avanzada: Utiliza nuestros filtros avanzados para refinar tu búsqueda y encontrar el espacio de trabajo perfecto. Filtra por características como Wi-Fi, estaciones de trabajo, salas de reuniones, cafeterías cercanas y más.
-- 🗺️ Integración de Google Maps: Work Away utiliza la API de Google Maps para renderizar mapas interactivos y proporcionar a los usuarios información precisa sobre la ubicación de cada espacio de trabajo.
-- ✉️ Notificaciones por correo electrónico: Mantente informado sobre las actualizaciones importantes de tu reserva y otras notificaciones relevantes a través de correo electrónico.
+- 🔍 Filters and advanced search: Use our advanced filters to refine your search and find the perfect workspace. Filter by features like Wi-Fi, workstations, meeting rooms, nearby coffee shops, and more.
+- 🗺️ Google Maps Integration: Work Away uses the Google Maps API to render interactive maps and provide users with precise information about the location of each workspace.
+- ✉️ Email notifications: Stay informed about important booking updates and other relevant notifications via email.
 
 
 </div>
  
-## Tecnologías utilizadas
+## Technologies
 
-- Node.js: Plataforma de tiempo de ejecución de JavaScript utilizada para el desarrollo del lado del servidor.
-- Express: Framework de aplicaciones web para Node.js que simplifica el desarrollo de API y aplicaciones web.
-- Next.js: Framework de React que permite la creación de aplicaciones web del lado del servidor y del lado del cliente.
-- Redux: Biblioteca de administración del estado de la aplicación para JavaScript y React.
+- Node.js: JavaScript runtime platform used for server-side development.
+- Express: Web application framework for Node.js that simplifies the development of APIs and web applications.
+- Next.js: React framework that allows the creation of server-side and client-side web applications.
+- Redux: Application state management library for JavaScript and React.
 - Tailwind CSS: Highly customizable CSS framework used to create modern, responsive interfaces.
 - MongoDB: NoSQL database used to store and retrieve data related to workspaces and reservations.
 
